@@ -1,9 +1,7 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-export default class ListQ extends PureComponent {
-  render() {
-    return (
-      <div>ListQ</div>
-    )
-  }
+export default function ListQ(){
+  return (
+    <div>ListQ</div>
+  )
 }

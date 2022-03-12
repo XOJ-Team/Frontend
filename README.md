@@ -2,32 +2,40 @@
 This's the repo of XOJ_F.
 
 # 运行项目
-在XOJ_F工作目录下使用npm install或使用yarn下载模块, 
-使用npm start启动本地web服务器
+在XOJ_F工作目录下使用yarn或npm install下载模块,
+
+使用yarn start或npm start启动本地web服务器
 
 # 代码目录结构说明
 
-## public
-存放了公开的静态资源如favicon和logo
+## /
+craco.config.js 进行主题的自定义
+@[主题-Antd文档](https://ant.design/docs/react/use-with-create-react-app-cn)
 
-## src
+## /public
+存放公开的静态资源如favicon和logo
+
+## /src
 index.js为项目入口文件
 App.js为应用入口文件
 
-### routers
+### /src/routers
 Mainrouters.js配置了主要的路由
 
-### components
+### /src/components
 包含了自定义的UI组件和布局
 
-### pages
+### /src/pages
 各个路由组件,页面
 
-### utils
-auth.js存储/改变用户的登录状态
+### /src/utils
+存放所有工具类
+
 
 # 设计规范
 react-router-dom: v6
+
+统一使用函数式声明的组件
 
 # 常见问题
 

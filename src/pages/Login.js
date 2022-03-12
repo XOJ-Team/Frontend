@@ -1,11 +1,12 @@
-import React, { PureComponent } from 'react'
+import React,{useState} from 'react'
+import {get} from '../utils/request'
 
-
-export default class Login extends PureComponent {
-  
-  render() {
-    return (
-      <div>Login</div>
-    )
-  }
+export default function Login(){
+  const [name,setName]=useState("noname")
+  return (
+    <div onClick={()=>{
+      get("/api/article/see")
+      setName("havename")
+    }}>Login</div>
+  )
 }

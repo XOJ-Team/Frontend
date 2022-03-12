@@ -1,9 +1,7 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-export default class Mainpage extends PureComponent {
-  render() {
-    return (
-      <div>Mainpage</div>
-    )
-  }
+export default function Mainpage(){
+  return (
+    <div>Mainpage</div>
+  )
 }

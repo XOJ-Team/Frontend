@@ -1,9 +1,7 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-export default class LookQ extends PureComponent {
-  render() {
-    return (
-      <div>LookQ</div>
-    )
-  }
+export default function LookQ(){
+  return (
+    <div>LookQ</div>
+  )
 }
