@@ -2,7 +2,7 @@
 This's the repo of XOJ_F.
 
 # 运行项目
-在frontend工作目录下使用npm install, npm start
+在XOJ_F工作目录下使用npm install, npm start
 
 # 代码目录结构说明
 
