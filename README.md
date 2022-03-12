@@ -9,6 +9,8 @@ This's the repo of XOJ_F.
 # 设计规范
 
 # 常见问题
+git操作问题，需要在个人设置中添加ssh public key
+由于submodule问题删除掉了frontend文件夹
 
 # Contribute
 Happy to have more contributers.
