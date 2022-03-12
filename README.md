@@ -1,21 +1,16 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
-1. We need to set up the repo \(this is a test)
+This's the repo of XOJ_F.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# 运行项目
+在frontend工作目录下使用npm install, npm start
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# 代码目录结构说明
+
+# 设计规范
+
+# 常见问题
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Happy to have more contributers.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+CPT202 Frontend Team
