@@ -37,6 +37,9 @@ react-router-dom: v6
 ## 项目结构
 由于submodule问题repo下直接放项目文件，删除掉了frontend文件夹，无伤大雅
 
+## git无法pull
+`kex_exchange_identification: Connection closed by remote host` 需要切换电脑的代理，不可以用全局模式
+
 # Contribute
 Happy to have more contributers.
 
