@@ -1,4 +1,6 @@
 import React,{useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import { findRoute } from '../routers/config';
 // UI
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -8,6 +10,7 @@ import {get,post} from '../utils/request'
 import {setToken} from '../utils/auth'
 
 export default function Login(){
+  let navigate=useNavigate()
   const onFinish = (values) => {
     console.log('Received value of form: ', values);
     // 在这之后发起登录请求
@@ -64,7 +67,10 @@ export default function Login(){
           Log in
         </Button>
         Or <a 
-        /* 点击事件Navigate跳转到注册的路由 */>register now!</a>
+        /* 点击事件Navigate跳转到注册的路由 */
+        onClick={()=>{
+          navigate(findRoute("userregister"))
+        }}>register now!</a>
       </Form.Item>
     </Form>
     </div>

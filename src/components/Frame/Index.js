@@ -2,6 +2,8 @@ import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import "./Index.css";
 import { useNavigate } from 'react-router-dom';
+// 路由寻找
+import { findRoute } from '../../routers/config';
 
 const { Header, Content, Footer } = Layout;
 

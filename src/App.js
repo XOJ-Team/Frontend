@@ -5,13 +5,13 @@ import 'antd/dist/antd.less';
 // React
 import React from 'react';
 // 路由
-import Mainrouters from './routers/Mainrouters';
+import Mainrouter from './routers/Mainrouter';
 
 // 登录状态相关
 import {isLogined} from "./utils/auth";
 
 function App() {
-    return (<Mainrouters></Mainrouters>)
+    return (<Mainrouter></Mainrouter>)
 }
 
 export default App;
