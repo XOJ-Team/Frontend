@@ -24,11 +24,11 @@
 |--|--|
 |？ /login/mail|使用邮箱和验证码登录|
 
-|请求参数|类型|示例值|说明|
-|--|--|--|--|
-|mail|String|123456@qq.com|邮箱|
-|name|String|Soon|昵称|
-|password|String|123456|密码|
+|请求参数|类型/示例值|说明|
+|--|--|--|
+|mail|String/123456@qq.com|邮箱|
+|name|String/Soon|昵称|
+|password|String/123456|密码|
 |phoneNumber|String|||
 |verificationNumber|String|||
 
