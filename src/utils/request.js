@@ -4,7 +4,7 @@ import { getToken } from './auth';
 
 
 const instance=axios.create({
-    baseURL:"http://localhost:3010",
+    baseURL:"https://autumnfish.cn",
     timeout:2000
 })
 

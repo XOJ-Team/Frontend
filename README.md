@@ -35,7 +35,7 @@ Mainrouters.js配置了主要的路由
 # 设计规范
 react-router-dom: v6
 
-统一使用函数式声明的组件
+如果无需保存state，尽可能使用函数式声明的无状态组件
 
 # 常见问题
 

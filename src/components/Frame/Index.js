@@ -8,7 +8,7 @@ const { Header, Content, Footer } = Layout;
 function Index(props){
     let navigate=useNavigate()
     const menuItems=[{
-        name:"Home",
+        name:"Main",
         targeturl:"/"
     },{
         name:"Questions",

@@ -1,0 +1,14 @@
+
+#XOJ-components-form-normal-login .login-form {
+    max-width: 300px;
+    margin:100px auto;
+  }
+  #XOJ-components-form-normal-login .login-form-forgot {
+    float: right;
+  }
+  #XOJ-components-form-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+  #XOJ-components-form-normal-login .login-form-button {
+    width: 100%;
+  }

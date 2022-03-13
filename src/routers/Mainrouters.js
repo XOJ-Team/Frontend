@@ -17,8 +17,6 @@ export default function Allrouters(){
     return (
       <Router history={createBrowserHistory()}>
         <Frame>
-          <Link to="/main">mainpage</Link><br />
-          <Link to="/questions/look">questions</Link><br />
           <Routes>
               <Route path='*' element={<Navigate to='/main' />} />
               <Route path='login' element={<Login />} />
