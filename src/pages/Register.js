@@ -32,6 +32,43 @@ export default function Register() {
       className='register-form'
     >
       <Form.Item
+        label="Email"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your email!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+      wrapperCol={{
+        offset:8,
+        span:16
+      }}
+      >
+        <Button type="primary">
+          Send 
+        </Button>
+      </Form.Item>
+
+      <Form.Item
+        label="Code"
+        name="code"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your verification code!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
         label="Username"
         name="username"
         rules={[
@@ -55,17 +92,6 @@ export default function Register() {
         ]}
       >
         <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
-        <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
       <Form.Item
