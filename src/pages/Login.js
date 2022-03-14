@@ -6,11 +6,13 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import "./Login.css"
 // utils
-import {get,post} from '../utils/request'
-import {setToken} from '../utils/auth'
+import { loginApi } from '../services/auth';
+import { getUsername } from '../utils/auth';
 
 export default function Login(){
+
   let navigate=useNavigate()
+
   const onFinish = (values) => {
     console.log('Received value of form: ', values);
     // 在这之后发起登录请求

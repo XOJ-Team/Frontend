@@ -4,7 +4,7 @@ import { getToken } from './auth';
 
 
 const instance=axios.create({
-    baseURL:"https://autumnfish.cn",
+    baseURL:"https://autumnfish.cn",//后端url
     timeout:2000
 })
 
@@ -19,7 +19,7 @@ instance.interceptors.request.use(config=>{
 	// 某些请求（比如登录（token））必须携带一些特殊的信息
 	
 	// 请求成功拦截
-    console.log("utils/request.js: 请求拦截器, 请求url"+config.url)
+    console.log("utils/request.js: 请求拦截器, 请求地址："+config.url)
     return config
 },err=>{
 	// 请求失败拦截

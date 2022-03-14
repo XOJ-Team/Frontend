@@ -21,7 +21,7 @@ function Index(props) {
         <Layout className="layout">
             <Header>
                 <div className="logo" style={{ position:'absolute', padding: "0px 20px" }}>
-                    <img src='favicon.ico' />
+                    <img src='/favicon.ico' />
                 </div>
                 <Menu
                     theme="dark"
