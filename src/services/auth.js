@@ -3,23 +3,23 @@
 import {get, post} from '../utils/request'
 
 /**
- * user login
- * return the response of server,you can add .then() to use callback function
+ * user login (email+password)
+ * you can add .then() to use callback function
  */
 export function loginApi(user){
-    return get("",user)
+    return post("/login/normal",user)
 }
 
 /**
  * send a verification code to email
  */
  export function sendCodeApi(user){
-    return get("",user)
+    // return post("/verify/",user)
 }
 
 /**
- * user register
- * return the response of server,you can add .then() to use callback function
+ * user register, login (email+code)
+ * you can add .then() to use callback function
  */
  export function registerApi(user){
     return post("/login/mail",user)
