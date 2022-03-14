@@ -13,6 +13,9 @@ export default function Login(){
 
   let navigate=useNavigate()
 
+  let [hasSendCode,sethasSendCode]=useState(false)
+  let [forgot,setforgot]=useState(false)
+
   const onFinish = (values) => {
     console.log('Received value of form: ', values);
     // 在这之后发起登录请求
@@ -37,8 +40,25 @@ export default function Login(){
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
+
+      {forgot?(<Form.Item
+          wrapperCol={{
+            offset: 0,
+            span: 16
+          }}
+        >
+          <Button type="primary" disabled={hasSendCode} onClick={(e)=>{
+            sethasSendCode(true)
+            console.log(e)
+          }}>
+            Send
+          </Button>
+          {hasSendCode?<div>a code has send to email</div>:<div></div>}
+        </Form.Item>):<div></div>}
+      
+
       <Form.Item
         name="password"
         rules={[
@@ -51,7 +71,7 @@ export default function Login(){
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder="Password"
+          placeholder={forgot?"code":"Password"}
         />
       </Form.Item>
       <Form.Item>
@@ -59,8 +79,13 @@ export default function Login(){
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
-          Forgot password
+        <a 
+        className="login-form-forgot" 
+        onClick={()=>{
+          setforgot(true)
+        }}
+        >
+          {forgot?"":"Forgot password"}
         </a>
       </Form.Item>
 
