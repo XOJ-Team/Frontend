@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb, Button } from 'antd';
 import "./Index.css";
 import { useNavigate } from 'react-router-dom';
 // 路由寻找
 import { findRoute } from '../../routers/config';
+// About me弹窗
+import About from '../../pages/About';
 
 const { Header, Content, Footer } = Layout;
 
 function Index(props) {
+
+    // aboutme的显示与否
+    let [aboutme,setaboutme]=useState(false)
+
     let navigate = useNavigate()
     const menuItems = [{
         name: "Main",
@@ -62,7 +68,15 @@ function Index(props) {
                 </div>
 
             </Content>
-            <Footer style={{ textAlign: 'center'}}>XOJ ©2022 Created by CPT202 Group B-3</Footer>
+            <Footer style={{ textAlign: 'center' }}>
+                <a onClick={() => {
+                    setaboutme(true)
+                }}>
+                    @About us
+                </a>
+                <br />
+                XOJ ©2022 Created by CPT202 Group B-3</Footer>
+            <About visible={aboutme} setvisible={(e)=>setaboutme(e)}/>
         </Layout>
     )
 }
