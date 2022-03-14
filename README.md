@@ -12,6 +12,8 @@ This's the repo of XOJ_F.
 craco.config.js 进行主题的自定义
 @[主题-Antd文档](https://ant.design/docs/react/use-with-create-react-app-cn)
 
+Api.mhtml 为接口文档，通过浏览器打开
+
 ## /public
 存放公开的静态资源如favicon和logo
 
