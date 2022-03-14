@@ -1,3 +1,5 @@
+// 需要导入localStorage以支持localStorage
+import localStorage from "localStorage"
 
 export function getToken(){
     return localStorage.getItem("token");

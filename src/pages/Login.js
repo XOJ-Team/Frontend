@@ -7,13 +7,13 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import "./Login.css"
 // utils
 import pattern,{reg} from '../utils/regexp';
-import { loginApi,registerApi } from '../services/auth';
-import { getUsername } from '../utils/auth';
+import { loginApi,registerApi,sendCodeApi } from '../services/auth';
+import { getUsername,setUsername } from '../utils/auth';
 
 export default function Login(){
-
   let navigate=useNavigate()
-
+  // 倒数60秒
+  let last60=60
   // 邮箱是否合法
   let [email,setemail]=useState("")
   let [validemail,setvalidemail]=useState(false)
@@ -25,10 +25,34 @@ export default function Login(){
   let [comment,setcomment]=useState("")
   // 验证码按钮点击事件
   const onCodeSend=(value)=>{
-    sethasSendCode(true)
-    console.log(value)
+    if(validemail){
+      sethasSendCode(true)
+      countDown()
+      sendCodeApi({
+        'mail':email
+      }).then((res)=>{
+        if(res.data.status!==1){
+          // 失败
+          setcomment("服务器错误")
+        }else{
+          // 成功
+        }
+      })
+    }
   }
-
+  // 倒计时方法
+  const countDown=()=>{
+    if (last60 === 1) {//当为0的时候，liked设置为true，button按钮显示内容为 获取验证码
+        last60=60
+        sethasSendCode(false)
+    } else {
+        last60=last60-1
+        // console.log(last60)
+        sethasSendCode(true)
+        setTimeout(() => countDown(), 1000)//每一秒调用一次
+    }
+}
+  // 表单提交事件
   const onFinish = (values) => {
     console.log('Received value of form: ', values);
     // 在这之后发起登录请求
@@ -40,7 +64,11 @@ export default function Login(){
       }).then((res)=>{
         console.log(res)
         if(res.data.status===-1){
+          // 失败
           setcomment(res.data.comment)
+        }else{
+          // 成功
+          setUsername(email)
         }
       }).catch((err)=>{
         console.log(err)
@@ -54,7 +82,11 @@ export default function Login(){
       }).then((res)=>{
         console.log(res)
         if(res.data.status===-1){
+          // 失败
           setcomment(res.data.comment)
+        }else{
+          //成功
+          setUsername(email)
         }
       }).catch((err)=>{
         setcomment("failed, check your inputs")
@@ -65,7 +97,6 @@ export default function Login(){
 
   //表单元素变化回调
   const onChange=(values)=>{
-    console.log(forgot,validemail)
     // values只包含被改变的元素
     // 只有当email有效时才显示按钮
     if(values.username!==null){
@@ -113,13 +144,16 @@ export default function Login(){
         autoComplete='off' />
       </Form.Item>
 
-      {(forgot&&validemail)?(<Form.Item
+      {(forgot)?(<Form.Item
           wrapperCol={{
             offset: 0,
             span: 16
           }}
         >
-          <Button type="primary" disabled={hasSendCode} onClick={onCodeSend}>
+          <Button 
+          type="primary" 
+          disabled={hasSendCode} 
+          onClick={onCodeSend}>
             Send
           </Button>
           {hasSendCode?<div>a code has send to email</div>:<div></div>}

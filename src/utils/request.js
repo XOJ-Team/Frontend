@@ -5,7 +5,7 @@ import { getToken } from './auth';
 
 const instance=axios.create({
     baseURL:"http://localhost:8081/",//后端url
-    timeout:2000
+    timeout:60000
 })
 
 // 添加请求拦截器
