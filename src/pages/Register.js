@@ -18,8 +18,7 @@ export default function Register() {
 
   const navigate=useNavigate();
 
-  const onSendCode = () => {
-    //console.log("Success:", values);
+  const onSendCode = (e) => {
     sethasSendCode(true);
     sendCodeApi({"mail": email}).then((res) => {
       console.log(res)
@@ -64,7 +63,6 @@ export default function Register() {
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        autoComplete="off"
         className='register-form'
       >
         <Form.Item
@@ -80,7 +78,8 @@ export default function Register() {
         >
           <Input 
             value={email}
-            onChange={setEmail}
+            onChange={(e)=>{setEmail(e.target.value)}}
+            autoComplete='off'
           />
         </Form.Item>
 

@@ -14,7 +14,7 @@ export function loginApi(user){
  * send a verification code to email
  */
  export function sendCodeApi(user){
-    // return post("/verify/",user)
+    return post("/verify/",user)
 }
 
 /**
