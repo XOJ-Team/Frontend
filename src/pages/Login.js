@@ -14,11 +14,20 @@ export default function Login(){
 
   let navigate=useNavigate()
 
+  // 邮箱是否合法
+  let [email,setemail]=useState("")
   let [validemail,setvalidemail]=useState(false)
+  // 是否点击过发送验证码按钮
   let [hasSendCode,sethasSendCode]=useState(false)
+  // false：邮箱加密码登录 true：邮箱加验证码登录
   let [forgot,setforgot]=useState(false)
-
-  const [form]=Form.useForm()
+  // 服务器错误提示
+  let [comment,setcomment]=useState("")
+  // 验证码按钮点击事件
+  const onCodeSend=(value)=>{
+    sethasSendCode(true)
+    console.log(value)
+  }
 
   const onFinish = (values) => {
     console.log('Received value of form: ', values);
@@ -30,8 +39,12 @@ export default function Login(){
         'verificationNumber':values.password
       }).then((res)=>{
         console.log(res)
+        if(res.data.status===-1){
+          setcomment(res.data.comment)
+        }
       }).catch((err)=>{
         console.log(err)
+        setcomment("failed, check your inputs")
       })
     }else{
       //邮箱加密码
@@ -40,17 +53,25 @@ export default function Login(){
         'password':values.password
       }).then((res)=>{
         console.log(res)
+        if(res.data.status===-1){
+          setcomment(res.data.comment)
+        }
       }).catch((err)=>{
+        setcomment("failed, check your inputs")
         console.log(err)
       })
     }
   };
 
-
+  //表单元素变化回调
   const onChange=(values)=>{
-    // 只有当email有效时才显示按钮可用
-    console.log(values);
-    if(reg('email').test(values.username)){
+    console.log(forgot,validemail)
+    // values只包含被改变的元素
+    // 只有当email有效时才显示按钮
+    if(values.username!==null){
+      setemail(values.username)
+    }
+    if(reg('email').test(email)){
       setvalidemail(true)
     }else{
       setvalidemail(false)
@@ -70,6 +91,11 @@ export default function Login(){
       onFinish={onFinish}
       onValuesChange={onChange}
     >
+
+      <div style={{color:'red'}}>
+        {comment}
+      </div>
+
       <Form.Item
         name="username"
         rules={[
@@ -80,7 +106,11 @@ export default function Login(){
           pattern('email')
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+        <Input 
+        prefix={
+        <UserOutlined className="site-form-item-icon" />}
+        placeholder="Email"
+        autoComplete='off' />
       </Form.Item>
 
       {(forgot&&validemail)?(<Form.Item
@@ -89,10 +119,7 @@ export default function Login(){
             span: 16
           }}
         >
-          <Button type="primary" disabled={hasSendCode} onClick={(e)=>{
-            sethasSendCode(true)
-            console.log(e)
-          }}>
+          <Button type="primary" disabled={hasSendCode} onClick={onCodeSend}>
             Send
           </Button>
           {hasSendCode?<div>a code has send to email</div>:<div></div>}
@@ -115,7 +142,10 @@ export default function Login(){
         />
       </Form.Item>
       <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
+        <Form.Item 
+        name="remember" 
+        valuePropName="checked" 
+        noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
