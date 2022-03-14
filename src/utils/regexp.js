@@ -19,11 +19,18 @@ const patternMsg = {
 }
  
 //根据使用的正则返回对应的正则和信息对象
-const pattern = (name,para='g') =>{
+export default function pattern(name,para='g'){
     return {
         pattern:new RegExp(patterns[name],para),
         message:patternMsg[name]
     }
 } 
- 
-export default pattern;
+
+/**
+ * return a regular class of a type , then you can use .test to check
+ * 
+ * for example,reg('tel')=/^1[2-9]\\d{0,}$/,
+ */
+export const reg=(name)=>{
+    return new RegExp(patterns[name],'g')
+}
