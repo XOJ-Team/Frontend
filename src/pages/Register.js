@@ -11,8 +11,25 @@ import { setUsername,getUsername } from '../utils/auth';
 
 
 export default function Register() {
-  const [hasSendCode,sethasSendCode]=useState(false)
+  const [hasSendCode,sethasSendCode]=useState(false);
+
+  //初始化邮箱（作为sendCodeApi的input）
+  const [email, setEmail] = useState("");
+
   const navigate=useNavigate();
+
+  const onSendCode = () => {
+    //console.log("Success:", values);
+    sethasSendCode(true);
+    sendCodeApi({"mail": email}).then((res) => {
+      console.log(res)
+      if(res.data.status === 1) {
+        console.log("发送成功")
+      }else{
+        console.log("发送失败")
+      }
+    }) 
+  }
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -61,7 +78,10 @@ export default function Register() {
             pattern('email')
           ]}
         >
-          <Input />
+          <Input 
+            value={email}
+            onChange={setEmail}
+          />
         </Form.Item>
 
         <Form.Item
@@ -70,10 +90,7 @@ export default function Register() {
             span: 16
           }}
         >
-          <Button type="primary" disabled={hasSendCode} onClick={(e)=>{
-            sethasSendCode(true)
-            console.log(e)
-          }}>
+          <Button type="primary" disabled={hasSendCode} onClick={onSendCode}>
             Send
           </Button>
           {hasSendCode?<div>a code has send to email</div>:<div></div>}
