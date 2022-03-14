@@ -39,6 +39,7 @@ function Index(props) {
                             }}>{item.name}</Menu.Item>;
                     })}
                     <Menu.Item
+                        key='userlogin'
                         style={{ position: 'absolute', right: '0px', padding:'0 30px'}}
                         onClick={(e)=>{
                             navigate(findRoute('userlogin'))
