@@ -51,18 +51,18 @@ function Index(props) {
 
 
             </Header>
-            <Content style={{ padding: '50px 0px' }}>
+            <Content style={{ padding: '50px 0px'}}>
                 {/* <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb> */}
-                <div className="site-layout-content">
+                <div className="site-layout-content" style={{minHeight: '735px'}}>
                     {props.children}
                 </div>
 
             </Content>
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            <Footer style={{ textAlign: 'center'}}>XOJ ©2022 Created by CPT202 Group B-3</Footer>
         </Layout>
     )
 }
