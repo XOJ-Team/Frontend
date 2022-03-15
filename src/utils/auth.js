@@ -14,12 +14,16 @@ export function isLogined(){
     return localStorage.getItem('token');
 }
 
-export function getUsername(){
-    return localStorage.getItem("username");
+/**存储用户邮箱
+ *  
+ * 
+ * */ 
+export function getUseremail(){
+    return localStorage.getItem("useremail");
 }
 
-export function setUsername(e){
-    return localStorage.setItem("username",e);
+export function setUseremail(e){
+    return localStorage.setItem("useremail",e);
     // localStorage.username=e
     // localStorage['username']=e
 }

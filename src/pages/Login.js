@@ -8,7 +8,7 @@ import "./Login.css"
 // utils
 import pattern, { reg } from '../utils/regexp';
 import { loginApi, registerApi } from '../services/auth';
-import { getUsername, setUsername } from '../utils/auth';
+import { getUseremail, setUseremail } from '../utils/auth';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
 
 export default function Login() {
@@ -23,11 +23,14 @@ export default function Login() {
 
   // 表单提交事件
   const onFinish = (values) => {
+    if(values.remember===true){
+      console.log("remember")
+    }
     // 在这之后发起登录请求
     if (useCode) {
       // 邮箱加验证码
       registerApi({
-        'mail': values.username,
+        'mail': values.email,
         'verificationNumber': values.password
       }).then((res) => {
         console.log(res)
@@ -36,7 +39,7 @@ export default function Login() {
           setcomment(res.data.comment)
         } else {
           // 成功
-          setUsername(form.getFieldValue("username"))
+          setUseremail(form.getFieldValue("email"))
         }
       }).catch((err) => {
         console.log(err)
@@ -45,7 +48,7 @@ export default function Login() {
     } else {
       //邮箱加密码
       loginApi({
-        'mail': values.username,
+        'mail': values.email,
         'password': values.password
       }).then((res) => {
         if (res.data.status === -1) {
@@ -53,7 +56,7 @@ export default function Login() {
           setcomment(res.data.comment)
         } else {
           //成功
-          setUsername(form.getFieldValue("username"))
+          setUseremail(form.getFieldValue("email"))
         }
       }).catch((err) => {
         setcomment("failed, check your inputs")
@@ -81,7 +84,7 @@ export default function Login() {
         </div>
 
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             {
               required: true,
@@ -94,11 +97,12 @@ export default function Login() {
             prefix={
               <MailOutlined className="site-form-item-icon" />}
             placeholder="Email"
+            defaultValue={getUseremail()}
           />
         </Form.Item>
 
         {(useCode) ? <SendcodeButton
-          email={form.getFieldValue("username")}
+          email={form.getFieldValue("email")}
           offset={0}
           span={16}
         /> : <div></div>}
