@@ -99,7 +99,7 @@ export default function Login(){
         <UserOutlined className="site-form-item-icon" />}
         placeholder="Email"
         onChange={(e)=>{setemail(e.target.value)}}
-        autoComplete='off' />
+        />
       </Form.Item>
 
       {(forgot)?<SendcodeButton 

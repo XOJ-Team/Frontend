@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from 'antd';
 
+/**
+ * show the pop up box
+ * @props (function) setvisible(boolean),control the close of pop up
+ * 
+ */
 export default function About(props){
 
   const handleOk = () => {

@@ -67,7 +67,6 @@ export default function Register() {
         >
           <Input 
             onChange={(e)=>{setEmail(e.target.value)}}
-            autoComplete='off'
           />
         </Form.Item>
 
