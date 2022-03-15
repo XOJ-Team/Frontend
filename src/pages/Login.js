@@ -25,7 +25,6 @@ export default function Login(){
 
   // 表单提交事件
   const onFinish = (values) => {
-    console.log('Received value of form: ', values);
     // 在这之后发起登录请求
     if(forgot){
       // 邮箱加验证码
@@ -51,7 +50,6 @@ export default function Login(){
         'mail':values.username,
         'password':values.password
       }).then((res)=>{
-        console.log(res)
         if(res.data.status===-1){
           // 失败
           setcomment(res.data.comment)
@@ -61,7 +59,6 @@ export default function Login(){
         }
       }).catch((err)=>{
         setcomment("failed, check your inputs")
-        console.log(err)
       })
     }
   };

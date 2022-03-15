@@ -21,11 +21,11 @@ instance.interceptors.request.use(config=>{
 	// 某些请求（比如登录（token））必须携带一些特殊的信息
 	
 	// 请求成功拦截
-    console.log("utils/request.js: 请求成功, 请求地址："+config.url)
+    console.log("utils/request.js: 请求成功, 请求地址: "+config.url+"\n请求内容: ",config)
     return config
 },err=>{
-	// 请求失败拦截
-    console.log("utils/request.js: 请求失败, 请求地址："+err.url)
+	// 请求错误拦截
+    console.log("utils/request.js: 请求错误, 错误内容: ",err)
     return Promise.reject(err)
 })  
 
@@ -33,11 +33,11 @@ instance.interceptors.request.use(config=>{
 instance.interceptors.response.use(res=>{
 	// res 响应结果
 	// 响应成功拦截
-    console.log("utils/request.js: 成功响应")
+    console.log("utils/request.js: 成功响应，响应内容",res)
     return res
 },err=>{
-	// 响应拦失败拦截
-    console.log("utils/request.js: 响应失败")
+	// 响应错误拦截
+    console.log("utils/request.js: 响应错误,错误内容",err)
     return Promise.reject(err)
 })
 

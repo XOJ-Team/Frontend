@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Mainpage(){
   return (
-    <div>Mainpage</div>
+    <div style={{fontSize:'100px'}}>This is Mainpage</div>
   )
 }

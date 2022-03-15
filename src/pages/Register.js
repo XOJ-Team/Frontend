@@ -28,8 +28,7 @@ export default function Register() {
       'verificationNumber':values.code,
       'phoneNumber':""
     }).then((e)=>{
-      console.log(e.status);
-      navigate(findRoute('userlogin'));
+      navigate(findRoute('mainpage'));
     })
   };
 
