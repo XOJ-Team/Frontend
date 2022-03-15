@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React, {useState,useEffect,PureComponent } from 'react'
 import { Form, Button } from 'antd';
 import { sendCodeApi } from '../../services/auth';
 import { reg } from '../../utils/regexp';
@@ -13,19 +13,23 @@ export function SendcodeButton(props) {
     let span=props.span
     // 邮箱是否有效
     let validemail = reg('email').test(email)?true:false
-    // 倒数60秒
-    let last60 = 60
     // 是否把按钮设置为已发送状态
     let [hasSendCode, sethasSendCode] = useState(false)
     // 设置按钮下面的提示
     let [comment,setcomment]=useState("a code has send to email")
+    // 设置按钮内倒计时
+    let last60=10
+
+
+    // 模拟组件卸载
+    // useEffect(()=>{})
+
+    
     // 验证码按钮点击事件
     const onCodeSend = (value) => {
         console.log("now email is ",email)
         if (validemail) {
-            
             sethasSendCode(true)
-            countDown()
             sendCodeApi({
                 'mail': email
             }).then((res) => {
@@ -40,19 +44,8 @@ export function SendcodeButton(props) {
             })
         }
     }
-    // 倒计时方法
-    const countDown = () => {
-        if (last60 === 1) {//当为0的时候，button按钮可以再次被点击
-            last60 = 60
-            sethasSendCode(false)
-            clearTimeout()
-        } else {
-            last60 = last60 - 1
-            // console.log(last60)
-            sethasSendCode(true)
-            setTimeout(() => countDown(), 1000)//每一秒调用一次
-        }
-    }
+
+
     return (
         <Form.Item
             wrapperCol={{
