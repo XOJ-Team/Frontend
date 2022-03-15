@@ -22,6 +22,7 @@ export function SendcodeButton(props) {
     // 验证码按钮点击事件
     const onCodeSend = (value) => {
         if (validemail) {
+            console.log("now email is ",email)
             sethasSendCode(true)
             countDown()
             sendCodeApi({

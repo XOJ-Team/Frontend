@@ -14,19 +14,17 @@ import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
 export default function Login(){
   let navigate=useNavigate()
 
-  // 邮箱是否合法
-  let [email,setemail]=useState("")
-  let [validemail,setvalidemail]=useState(false)
-
+  //表单对象
+  const [form]=Form.useForm()
   // false：邮箱加密码登录 true：邮箱加验证码登录
-  let [forgot,setforgot]=useState(false)
+  let [useCode,setUseCode]=useState(false)
   // 服务器错误提示
   let [comment,setcomment]=useState("")
 
   // 表单提交事件
   const onFinish = (values) => {
     // 在这之后发起登录请求
-    if(forgot){
+    if(useCode){
       // 邮箱加验证码
       registerApi({
         'mail':values.username,
@@ -38,7 +36,7 @@ export default function Login(){
           setcomment(res.data.comment)
         }else{
           // 成功
-          setUsername(email)
+          setUsername(form.getFieldValue("username"))
         }
       }).catch((err)=>{
         console.log(err)
@@ -55,7 +53,7 @@ export default function Login(){
           setcomment(res.data.comment)
         }else{
           //成功
-          setUsername(email)
+          setUsername(form.getFieldValue("username"))
         }
       }).catch((err)=>{
         setcomment("failed, check your inputs")
@@ -75,6 +73,7 @@ export default function Login(){
         remember: true,
       }}
       onFinish={onFinish}
+      form={form}
     >
 
       <div style={{color:'red'}}>
@@ -95,12 +94,11 @@ export default function Login(){
         prefix={
         <UserOutlined className="site-form-item-icon" />}
         placeholder="Email"
-        onChange={(e)=>{setemail(e.target.value)}}
         />
       </Form.Item>
 
-      {(forgot)?<SendcodeButton 
-      email={email}
+      {(useCode)?<SendcodeButton 
+      email={form.getFieldValue("username")}
       offset={0}
       span={16}
       />:<div></div>}
@@ -118,7 +116,7 @@ export default function Login(){
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder={forgot?"code":"Password"}
+          placeholder={useCode?"Code":"Password"}
         />
       </Form.Item>
       <Form.Item>
@@ -132,10 +130,14 @@ export default function Login(){
         <a 
         className="login-form-forgot" 
         onClick={()=>{
-          setforgot(true)
+          setUseCode(!useCode)
+          // 切换登录模式后清空密码框
+          form.setFieldsValue({
+            password:''
+          })
         }}
         >
-          {forgot?"":"Forgot password"}
+          {useCode?"use password":"use code"}
         </a>
       </Form.Item>
 
