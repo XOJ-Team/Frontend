@@ -40,9 +40,10 @@ export function SendcodeButton(props) {
     }
     // 倒计时方法
     const countDown = () => {
-        if (last60 === 1) {//当为0的时候，liked设置为true，button按钮显示内容为 获取验证码
+        if (last60 === 1) {//当为0的时候，button按钮可以再次被点击
             last60 = 60
             sethasSendCode(false)
+            clearTimeout()
         } else {
             last60 = last60 - 1
             // console.log(last60)

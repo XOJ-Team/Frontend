@@ -9,7 +9,7 @@ import "./Login.css"
 import pattern,{reg} from '../utils/regexp';
 import { loginApi,registerApi} from '../services/auth';
 import { getUsername,setUsername } from '../utils/auth';
-import { SendcodeButton } from '../components/emailcode/Emailcode';
+import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
 
 export default function Login(){
   let navigate=useNavigate()

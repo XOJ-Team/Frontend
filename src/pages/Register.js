@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // UI
 import './Register.css'
 import { Form, Input, Button} from 'antd';
-import { SendcodeButton } from '../components/emailcode/Emailcode';
+import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
 // utils
 import pattern from '../utils/regexp';
 import {registerApi} from '../services/auth'
