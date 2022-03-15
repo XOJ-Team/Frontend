@@ -50,6 +50,12 @@ react-router-dom: v6
 ## git无法pull
 `kex_exchange_identification: Connection closed by remote host` 需要切换电脑的代理，不可以用全局模式
 
+## Form.useForm()无法获得某一表单项
+如果结构为
+```
+<Form.Item><Input /><Form.Item>
+```
+确保以上三者之间没有空格或换行符
 # Contribute
 Happy to have more contributers.
 

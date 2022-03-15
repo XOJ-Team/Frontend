@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css'
 import { Form, Input, Button} from 'antd';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
+import { MailOutlined, LockOutlined } from '@ant-design/icons';
 // utils
 import pattern from '../utils/regexp';
 import {registerApi} from '../services/auth'
@@ -13,8 +14,14 @@ import {findRoute} from '../routers/config'
 
 export default function Register() {
 
+
   //初始化邮箱（作为sendCodeApi的input）
-  const [email, setEmail] = useState("");
+  // 使用表单对象获取邮箱
+  // const [email, setEmail] = useState("");
+
+    // 表单对象
+    const [form]=Form.useForm()
+
 
   const navigate=useNavigate();
 
@@ -52,6 +59,7 @@ export default function Register() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         className='register-form'
+        form={form}
       >
         <Form.Item
           label="Email"
@@ -65,12 +73,14 @@ export default function Register() {
           ]}
         >
           <Input 
-            onChange={(e)=>{setEmail(e.target.value)}}
+          prefix={
+            <MailOutlined className="site-form-item-icon" />}
+          placeholder="Email"
           />
         </Form.Item>
 
         <SendcodeButton 
-        email={email}
+        email={form.getFieldValue("email")}
         offset={8}
         span={16}
         />

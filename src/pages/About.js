@@ -19,7 +19,7 @@ export default function About(props){
 
   return (
     <>
-      <Modal title="Basic Modal" visible={props.visible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="About us" visible={props.visible} onOk={handleOk} onCancel={handleCancel}>
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>

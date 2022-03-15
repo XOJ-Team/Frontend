@@ -21,8 +21,9 @@ export function SendcodeButton(props) {
     let [comment,setcomment]=useState("a code has send to email")
     // 验证码按钮点击事件
     const onCodeSend = (value) => {
+        console.log("now email is ",email)
         if (validemail) {
-            console.log("now email is ",email)
+            
             sethasSendCode(true)
             countDown()
             sendCodeApi({
