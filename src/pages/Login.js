@@ -21,10 +21,13 @@ export default function Login() {
   // 服务器错误提示
   let [comment, setcomment] = useState("")
 
+
+  //TODO: 包装网络响应的then和catch
+
   // 表单提交事件
   const onFinish = (values) => {
     if(values.remember===true){
-      console.log("remember")
+      setUseremail(values.email)
     }
     // 在这之后发起登录请求
     if (useCode) {
@@ -40,6 +43,7 @@ export default function Login() {
         } else {
           // 成功
           setUseremail(form.getFieldValue("email"))
+          navigate("mainpage")
         }
       }).catch((err) => {
         console.log(err)
@@ -57,6 +61,7 @@ export default function Login() {
         } else {
           //成功
           setUseremail(form.getFieldValue("email"))
+          navigate("mainpage")
         }
       }).catch((err) => {
         setcomment("failed, check your inputs")
@@ -74,6 +79,7 @@ export default function Login() {
         className="login-form"
         initialValues={{
           remember: true,
+          email:getUseremail()
         }}
         onFinish={onFinish}
         form={form}
@@ -94,11 +100,9 @@ export default function Login() {
           ]}
         >
           <Input
-            prefix={
-              <MailOutlined className="site-form-item-icon" />}
-            placeholder="Email"
-            defaultValue={getUseremail()}
-          />
+          prefix={<MailOutlined />}
+          placeholder="Email"
+           />
         </Form.Item>
 
         {(useCode) ? <SendcodeButton

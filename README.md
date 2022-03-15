@@ -55,7 +55,7 @@ react-router-dom: v6
 ```
 <Form.Item><Input /><Form.Item>
 ```
-确保以上三者之间没有空格或换行符
+如果Input有传默认参，把Input的默认参数放到Form的initialValues里面
 # Contribute
 Happy to have more contributers.
 
