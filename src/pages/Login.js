@@ -7,51 +7,22 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import "./Login.css"
 // utils
 import pattern,{reg} from '../utils/regexp';
-import { loginApi,registerApi,sendCodeApi } from '../services/auth';
+import { loginApi,registerApi} from '../services/auth';
 import { getUsername,setUsername } from '../utils/auth';
+import { SendcodeButton } from '../components/emailcode/Emailcode';
 
 export default function Login(){
   let navigate=useNavigate()
-  // 倒数60秒
-  let last60=60
+
   // 邮箱是否合法
   let [email,setemail]=useState("")
   let [validemail,setvalidemail]=useState(false)
-  // 是否点击过发送验证码按钮
-  let [hasSendCode,sethasSendCode]=useState(false)
+
   // false：邮箱加密码登录 true：邮箱加验证码登录
   let [forgot,setforgot]=useState(false)
   // 服务器错误提示
   let [comment,setcomment]=useState("")
-  // 验证码按钮点击事件
-  const onCodeSend=(value)=>{
-    if(validemail){
-      sethasSendCode(true)
-      countDown()
-      sendCodeApi({
-        'mail':email
-      }).then((res)=>{
-        if(res.data.status!==1){
-          // 失败
-          setcomment("服务器错误")
-        }else{
-          // 成功
-        }
-      })
-    }
-  }
-  // 倒计时方法
-  const countDown=()=>{
-    if (last60 === 1) {//当为0的时候，liked设置为true，button按钮显示内容为 获取验证码
-        last60=60
-        sethasSendCode(false)
-    } else {
-        last60=last60-1
-        // console.log(last60)
-        sethasSendCode(true)
-        setTimeout(() => countDown(), 1000)//每一秒调用一次
-    }
-}
+
   // 表单提交事件
   const onFinish = (values) => {
     console.log('Received value of form: ', values);
@@ -95,19 +66,6 @@ export default function Login(){
     }
   };
 
-  //表单元素变化回调
-  const onChange=(values)=>{
-    // values只包含被改变的元素
-    // 只有当email有效时才显示按钮
-    if(values.username!==null){
-      setemail(values.username)
-    }
-    if(reg('email').test(email)){
-      setvalidemail(true)
-    }else{
-      setvalidemail(false)
-    }
-  }
 
   return (
     <div 
@@ -120,7 +78,6 @@ export default function Login(){
         remember: true,
       }}
       onFinish={onFinish}
-      onValuesChange={onChange}
     >
 
       <div style={{color:'red'}}>
@@ -141,23 +98,15 @@ export default function Login(){
         prefix={
         <UserOutlined className="site-form-item-icon" />}
         placeholder="Email"
+        onChange={(e)=>{setemail(e.target.value)}}
         autoComplete='off' />
       </Form.Item>
 
-      {(forgot)?(<Form.Item
-          wrapperCol={{
-            offset: 0,
-            span: 16
-          }}
-        >
-          <Button 
-          type="primary" 
-          disabled={hasSendCode} 
-          onClick={onCodeSend}>
-            Send
-          </Button>
-          {hasSendCode?<div>a code has send to email</div>:<div></div>}
-        </Form.Item>):<div></div>}
+      {(forgot)?<SendcodeButton 
+      email={email}
+      offset={0}
+      span={16}
+      />:<div></div>}
       
 
       <Form.Item

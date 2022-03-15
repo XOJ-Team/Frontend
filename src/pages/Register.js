@@ -1,34 +1,23 @@
-import React,{useEffect, useState} from 'react'
+import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 // UI
 import './Register.css'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button} from 'antd';
+import { SendcodeButton } from '../components/emailcode/Emailcode';
 // utils
 import pattern from '../utils/regexp';
-import {registerApi,sendCodeApi} from '../services/auth'
+import {registerApi} from '../services/auth'
 import {findRoute} from '../routers/config'
-import { setUsername,getUsername } from '../utils/auth';
+// import { setUsername,getUsername } from '../utils/auth';
 
 
 export default function Register() {
-  const [hasSendCode,sethasSendCode]=useState(false);
 
   //初始化邮箱（作为sendCodeApi的input）
   const [email, setEmail] = useState("");
 
   const navigate=useNavigate();
 
-  const onSendCode = (e) => {
-    sethasSendCode(true);
-    sendCodeApi({"mail": email}).then((res) => {
-      console.log(res)
-      if(res.data.status === 1) {
-        console.log("发送成功")
-      }else{
-        console.log("发送失败")
-      }
-    }) 
-  }
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -77,23 +66,16 @@ export default function Register() {
           ]}
         >
           <Input 
-            value={email}
             onChange={(e)=>{setEmail(e.target.value)}}
             autoComplete='off'
           />
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16
-          }}
-        >
-          <Button type="primary" disabled={hasSendCode} onClick={onSendCode}>
-            Send
-          </Button>
-          {hasSendCode?<div>a code has send to email</div>:<div></div>}
-        </Form.Item>
+        <SendcodeButton 
+        email={email}
+        offset={8}
+        span={16}
+        />
 
         <Form.Item
           label="Code"
