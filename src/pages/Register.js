@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css'
 import { Form, Input, Button} from 'antd';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { MailOutlined, LockOutlined,NumberOutlined,SmileOutlined } from '@ant-design/icons';
 // utils
 import pattern from '../utils/regexp';
 import {registerApi} from '../services/auth'
@@ -75,7 +75,7 @@ export default function Register() {
           <Input 
           prefix={
             <MailOutlined className="site-form-item-icon" />}
-          placeholder="Email"
+          
           />
         </Form.Item>
 
@@ -95,7 +95,8 @@ export default function Register() {
             },
           ]}
         >
-          <Input />
+          <Input 
+          prefix={<NumberOutlined />}/>
         </Form.Item>
 
         <Form.Item
@@ -108,7 +109,8 @@ export default function Register() {
             },
           ]}
         >
-          <Input />
+          <Input 
+          prefix={<SmileOutlined />}/>
         </Form.Item>
 
         <Form.Item
@@ -121,7 +123,8 @@ export default function Register() {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password 
+          prefix={<LockOutlined />}/>
         </Form.Item>
 
         <Form.Item

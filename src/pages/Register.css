@@ -1,4 +1,6 @@
 #XOJ-components-form-normal-register .register-form{
-    max-width: 300px;
+    width:40%;
+    max-width: 600px;
+    min-width: 200px;
     margin:100px auto;
 }
