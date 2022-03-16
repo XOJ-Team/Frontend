@@ -4,24 +4,29 @@ import {get, post} from '../utils/request'
 
 /**
  * user login (email+password)
- * you can add .then() to use callback function
+ * @param obj.mail
+ * @param obj.password
  */
-export function loginApi(user){
-    return post("/login/normal",user)
+export function loginApi(obj){
+    return post("/login/normal",obj)
 }
 
 /**
  * send a verification code to email
+ * @param obj.mail
  */
- export function sendCodeApi(user){
-    return post("/verify",user)
+ export function sendCodeApi(obj){
+    return post("/verify",obj)
 }
 
 /**
- * user register, login (email+code)
- * you can add .then() to use callback function
+ * user register and login (email+code)
+ * @param obj.mail
+ * @param obj.verificationNumber
+ * @param obj.name
+ * @param obj.password
  */
- export function registerApi(user){
-    return post("/login/mail",user)
+ export function registerApi(obj){
+    return post("/login/mail",obj)
 }
 
