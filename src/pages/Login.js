@@ -20,7 +20,8 @@ export default function Login() {
   let [useCode, setUseCode] = useState(false)
   // 服务器错误提示
   let [comment, setcomment] = useState("")
-
+// 邮箱
+let [email,setemail]=useState("")
 
   //TODO: 包装网络响应的then和catch
 
@@ -69,6 +70,11 @@ export default function Login() {
     }
   };
 
+  const onValuesChange=(e)=>{
+    if(e.email!==null){
+      setemail(e.email)
+    }
+  }
 
   return (
     <div
@@ -82,6 +88,7 @@ export default function Login() {
           email:getUseremail()
         }}
         onFinish={onFinish}
+        onValuesChange={onValuesChange}
         form={form}
       >
 
@@ -106,7 +113,7 @@ export default function Login() {
         </Form.Item>
 
         {(useCode) ? <SendcodeButton
-          email={form.getFieldValue("email")}
+          email={email}
           offset={0}
           span={16}
         /> : <div></div>}

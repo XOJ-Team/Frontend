@@ -21,10 +21,15 @@ export default function Register() {
 
     // 表单对象
     const [form]=Form.useForm()
-
+    let [email,setemail]=useState("")
 
   const navigate=useNavigate();
 
+  const onValuesChange=(e)=>{
+    if(e.email!==null){
+      setemail(e.email)
+    }
+  }
 
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -35,7 +40,8 @@ export default function Register() {
       'verificationNumber':values.code,
       'phoneNumber':""
     }).then((e)=>{
-      navigate(findRoute('mainpage'));
+      // navigate(findRoute('mainpage'));
+      console.log(e)
     })
   };
 
@@ -58,6 +64,7 @@ export default function Register() {
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        onValuesChange={onValuesChange}
         className='register-form'
         form={form}
       >
@@ -72,14 +79,13 @@ export default function Register() {
             pattern('email')
           ]}
         >
-          <Input 
-          prefix={
-            <MailOutlined className="site-form-item-icon" />}
-          />
+        <Input prefix={
+          <MailOutlined className="site-form-item-icon" />
+         } />
         </Form.Item>
 
         <SendcodeButton 
-        email={form.getFieldValue("email")}
+        email={email}
         offset={8}
         span={16}
         />

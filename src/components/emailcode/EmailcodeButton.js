@@ -4,7 +4,7 @@ import { sendCodeApi } from '../../services/auth';
 import { reg } from '../../utils/regexp';
 /**
  * this is a button to send a email varification code 
- * @props email(String) the email address
+ * @props email(String) the email address,this should be a double-binded data
  * @props offset(int),span(int) the position
  */
 export function SendcodeButton(props) {
@@ -51,15 +51,12 @@ export function SendcodeButton(props) {
             wrapperCol={{
                 offset: offset,
                 span: span
-            }}
-        >
-            <Button
+            }}>
+            {hasSendCode?<div>{comment}</div>:<Button
                 type="primary"
-                disabled={hasSendCode}
                 onClick={onCodeSend}>
                 Send
-            </Button>
-            {hasSendCode ? <div>{comment}</div> : <div></div>}
+            </Button>}
         </Form.Item>
     )
 
