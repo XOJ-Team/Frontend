@@ -32,16 +32,13 @@ export default function Register() {
   }
 
   const onFinish = (values) => {
-    console.log('Success:', values);
     registerApi({
       'mail':values.email,
       'name':values.username,
       'password':values.password,
-      'verificationNumber':values.code,
-      'phoneNumber':""
+      'verificationNumber':values.code
     }).then((e)=>{
-      // navigate(findRoute('mainpage'));
-      console.log(e)
+      navigate(findRoute('mainpage'));
     })
   };
 

@@ -3,11 +3,12 @@ import qs from 'qs';
 import { getToken } from './auth';
 
 
+
 const instance=axios.create({
     baseURL:"http://localhost:8081/",//后端url
-    timeout:60000
+    timeout:60000,
+    withCredentials:true // 允许携带cookie
 })
-
 // 添加请求拦截器
 instance.interceptors.request.use(config=>{
 	// config 请求配置

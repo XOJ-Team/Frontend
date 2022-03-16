@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Tag, Typography } from 'antd';
 import { Layout } from 'antd';
-import './ListQ.css';
+// import './ListQ.css';
 
 const { Sider, Content } = Layout;
 const { Text, Title } = Typography;
