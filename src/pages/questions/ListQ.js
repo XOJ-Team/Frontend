@@ -147,7 +147,7 @@ export default function ListQ(){
     },
     {
       key: "3",
-      question_title: '3. devide two numbers',
+      question_title: '3. divide two numbers',
       question_level: ['normal'],
       question_ac_rate: '88.00%',
       question_tags: ['Tree'],

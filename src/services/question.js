@@ -45,7 +45,7 @@ export function selctQuestionByPage(obj){
  * delete one question according to its id
  * @param obj.id(Long)
  */
-export function delQustion(obj){
+export function delQuestion(obj){
     return del("/question/delete", obj)
 }
 
