@@ -75,7 +75,6 @@ export default function Register() {
           <Input 
           prefix={
             <MailOutlined className="site-form-item-icon" />}
-          
           />
         </Form.Item>
 

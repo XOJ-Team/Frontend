@@ -55,7 +55,7 @@ react-router-dom: v6
 ```
 <Form.Item><Input /><Form.Item>
 ```
-如果Input有传默认参，把Input的默认参数放到Form的initialValues里面
+如果Input有传默认参，把Input的默认参数放到Form的initialValues里面,且注意多余的换行和空格
 # Contribute
 Happy to have more contributers.
 
