@@ -21,7 +21,7 @@ export default function Login() {
   // 服务器错误提示
   let [comment, setcomment] = useState("")
 // 邮箱
-let [email,setemail]=useState("")
+let [email,setemail]=useState(getUseremail())
 
   //TODO: 包装网络响应的then和catch
 
@@ -37,7 +37,6 @@ let [email,setemail]=useState("")
         'mail': values.email,
         'verificationNumber': values.password
       }).then((res) => {
-        console.log(res)
         if (res.data.status === -1) {
           // 失败
           setcomment(res.data.comment)
@@ -85,7 +84,7 @@ let [email,setemail]=useState("")
         className="login-form"
         initialValues={{
           remember: true,
-          email:getUseremail()
+          email:email
         }}
         onFinish={onFinish}
         onValuesChange={onValuesChange}
