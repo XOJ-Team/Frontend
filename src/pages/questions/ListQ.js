@@ -1,7 +1,12 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Table, Tag, Typography } from 'antd';
 import { Layout } from 'antd';
 // import './ListQ.css';
+
+// utils
+import { useNavigate } from 'react-router-dom';
+import {findRoute} from '../../routers/config'
+import { Auth } from '../../contexts/AuthContext';
 
 const { Sider, Content } = Layout;
 const { Text, Title } = Typography;
@@ -46,12 +51,15 @@ const { Text, Title } = Typography;
 // }
 
 export default function ListQ(){
+  // 页面跳转
+  let navigate=useNavigate()
+
   const columns = [
     {
       title: 'Question Title',
       dataIndex: 'question_title',
       key: 'question_title',
-      render: text => <a>{text}</a>,
+      render: (text) => {return (<a>{text}</a>)},
       sorter: (rowA, rowB) => rowA.key - rowB.key,
     },
     {
@@ -130,6 +138,21 @@ export default function ListQ(){
       ),
     },
   ];
+  // 鉴权以添加编辑标签
+  // TODO：登录时context再传递个用户权限，现在先用用户名代替
+  const farpropsAuth=useContext(Auth)
+  console.log(farpropsAuth.pUsername)
+  if(true){
+    columns.push({
+      title: 'Edit',
+      dataIndex: 'key',
+      key: 'key',
+      render: (k) => {return (<a onClick={()=>{navigate(findRoute('questionEdit')+'?id='+k)}}>Edit</a>)},
+      sorter: (rowA, rowB) => rowA.key - rowB.key,
+    })
+  }
+
+
   const data = [ //需要增加从后端读取数据的function
     {
       key: "1",

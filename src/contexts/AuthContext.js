@@ -6,6 +6,9 @@ import React, {createContext,useState} from 'react'
 
 /**
  * 传递pUsername,setpUsername()
+ * 
+ * let obj=useContext(Auth)
+ * obj.pUsername
  */
 export const Auth = createContext()
 

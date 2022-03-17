@@ -22,7 +22,6 @@ function handleEditorChange({ html, text }) {
 export default function EditQ(props){
     let location=useLocation()
     console.log(location)
-    console.log(props)
   return (
     <MdEditor text={'You are editing question: '} style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
   );
