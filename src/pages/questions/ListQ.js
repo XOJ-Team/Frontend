@@ -130,7 +130,7 @@ export default function ListQ(){
       ),
     },
   ];
-  const data = [ //增加从后端读取数据的function
+  const data = [ //需要增加从后端读取数据的function
     {
       key: "1",
       question_title: '1. add two numbers',
@@ -161,7 +161,8 @@ export default function ListQ(){
           bordered 
           pagination={{
             pageSize: 10,
-            position:["bottomCenter"]
+            position:["bottomCenter"],
+            showSizeChanger:true,
           }}
           />
     {/* <Layout className='questionLayout'> //使用布局分类table和tage filter  暂时没用
