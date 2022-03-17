@@ -30,3 +30,10 @@ export function loginApi(obj){
     return post("/login/mail",obj)
 }
 
+/**
+ * user login out
+ */
+export function logoutApi(){
+    return post('/logout')
+}
+
