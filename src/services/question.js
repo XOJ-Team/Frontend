@@ -6,7 +6,9 @@ import {get, post,put,del} from '../utils/request'
  * create a question
  * @param obj.name
  * @param obj.content
+ * @param obj.tags
  * @param obj.hide
+ * @param obj.questionLevel
  */
 export function createQuestion(obj){
     return post("/question/post", obj)
@@ -18,6 +20,8 @@ export function createQuestion(obj){
  * @param obj.name
  * @param obj.content
  * @param obj.hide
+ * @param obj.tags
+ * @param obj.questionLevel
  */
 export function modifyQuestion(obj){
     return put("/question/put", obj)
