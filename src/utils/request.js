@@ -47,7 +47,7 @@ instance.interceptors.response.use(res=>{
  * @param {*} url    请求地址
  * @param {*} params 请求参数
  */
-export function get(url,data){
+export function get(url,data={}){
     return instance.get(url,{params:data})
 }
 
@@ -56,7 +56,7 @@ export function get(url,data){
  * @param {*} url    请求地址
  * @param {*} data   数据
  */
-export function post(url,data){
+export function post(url,data={}){
     return instance.post(url,data)
 }
 
@@ -65,7 +65,7 @@ export function post(url,data){
  * @param {*} url    请求地址
  * @param {*} data   数据
  */
-export function put(url,data){
+export function put(url,data={}){
     return instance.put(url,data)
 }
 
@@ -73,6 +73,6 @@ export function put(url,data){
  * delete
  * @param {*} url    请求地址
  */
-export function del(url,data){
+export function del(url,data={}){
     return instance.delete(url,{params:data})
 }

@@ -29,11 +29,10 @@ export function modifyQuestion(obj){
 
 /**
  * select one question according to its id
- * @param obj.id(Long)
  * @param questionId(int)
  */
-export function selectQuestionId(obj, questionId){
-    return get("/question/" + questionId, obj)
+export function selectQuestionId(questionId){
+    return get("/question/" + questionId)
 }
 
 /**
