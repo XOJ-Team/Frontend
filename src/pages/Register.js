@@ -13,15 +13,12 @@ import {findRoute} from '../routers/config'
 
 
 export default function Register() {
-
-
+  // 表单对象
+  const [form]=Form.useForm()
   //初始化邮箱（作为sendCodeApi的input）
-  // 使用表单对象获取邮箱
-  // const [email, setEmail] = useState("");
-
-    // 表单对象
-    const [form]=Form.useForm()
-    let [email,setemail]=useState("")
+  let [email,setemail]=useState("")
+  // 用户提示
+  let [comment,setcomment]=useState("")
 
   const navigate=useNavigate();
 
@@ -37,8 +34,15 @@ export default function Register() {
       'name':values.username,
       'password':values.password,
       'verificationNumber':values.code
-    }).then((e)=>{
-      navigate(findRoute('mainpage'));
+    }).then((res)=>{
+      if(res.status===-1){
+        // 信息不对
+        setcomment(res.data.comment)
+      }else{
+        navigate(findRoute('mainpage'));
+      }
+    }).catch((err)=>{
+      setcomment("server error")
     })
   };
 
@@ -65,6 +69,10 @@ export default function Register() {
         className='register-form'
         form={form}
       >
+        <div style={{ color: 'red' }}>
+          {comment}
+        </div>
+
         <Form.Item
           label="Email"
           name="email"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { findRoute } from '../routers/config';
 // UI
@@ -10,6 +10,9 @@ import pattern, { reg } from '../utils/regexp';
 import { loginApi, registerApi } from '../services/auth';
 import { getUseremail, setUseremail } from '../utils/auth';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
+//context
+import { Auth } from '../contexts/AuthContext';
+
 
 export default function Login() {
   let navigate = useNavigate()
@@ -20,13 +23,26 @@ export default function Login() {
   let [useCode, setUseCode] = useState(false)
   // 服务器错误提示
   let [comment, setcomment] = useState("")
-// 邮箱
-let [email,setemail]=useState(getUseremail())
+  // 邮箱
+  let [email,setemail]=useState(getUseremail())
+  // 获取跨组件传来的信息
+  const farpropsAuth=useContext(Auth)
 
-  //TODO: 包装网络响应的then和catch
+  // 表单提交成功响应后
+  const successRes=(res)=>{
+    if (res.data.status === -1) {
+      // 失败
+      setcomment(res.data.comment)
+    } else {
+      // 把用户名传给frame右上角的bar
+      farpropsAuth.setpUsername(res.data.obj.name)
+      navigate("mainpage")
+    }
+  }
 
   // 表单提交事件
   const onFinish = (values) => {
+    //持久化存储email
     if(values.remember===true){
       setUseremail(values.email)
     }
@@ -36,16 +52,7 @@ let [email,setemail]=useState(getUseremail())
       registerApi({
         'mail': values.email,
         'verificationNumber': values.password
-      }).then((res) => {
-        if (res.data.status === -1) {
-          // 失败
-          setcomment(res.data.comment)
-        } else {
-          // 成功
-          setUseremail(form.getFieldValue("email"))
-          navigate("mainpage")
-        }
-      }).catch((err) => {
+      }).then((res)=>{successRes(res)}).catch((err) => {
         console.log(err)
         setcomment("failed, check your inputs")
       })
@@ -54,16 +61,7 @@ let [email,setemail]=useState(getUseremail())
       loginApi({
         'mail': values.email,
         'password': values.password
-      }).then((res) => {
-        if (res.data.status === -1) {
-          // 失败
-          setcomment(res.data.comment)
-        } else {
-          //成功
-          setUseremail(form.getFieldValue("email"))
-          navigate("mainpage")
-        }
-      }).catch((err) => {
+      }).then((res)=>{successRes(res)}).catch((err) => {
         setcomment("failed, check your inputs")
       })
     }

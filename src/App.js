@@ -6,12 +6,17 @@ import 'antd/dist/antd.less';
 import React from 'react';
 // 路由
 import Mainrouter from './routers/Mainrouter';
-
-// 登录状态相关
-import {isLogined} from "./utils/auth";
+// context
+import {AuthContext} from './contexts/AuthContext';
 
 function App() {
-    return (<Mainrouter></Mainrouter>)
+    // 登录状态相关
+
+    return (
+        <AuthContext>
+            <Mainrouter />
+        </AuthContext>
+    )
 }
 
 export default App;
