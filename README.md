@@ -1,5 +1,9 @@
 # Introduction 
-This's the repo of XOJ_F.
+This's the repo of XOJ frontend.
+
+# Api文档
+把Swagger页面搬运到了[这里](https://sanmusen.top/projectapi/Swagger.htm)
+还有其他Api请看项目的Wiki
 
 # 运行项目
 在XOJ_F工作目录下使用yarn或npm install下载模块,
