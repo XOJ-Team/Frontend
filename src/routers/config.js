@@ -5,6 +5,7 @@ import LookQ from '../pages/questions/LookQ';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Register from '../pages/Register';
+import EditQ from '../pages/questions/EditQ';
 // v6路由
 import {Navigate} from "react-router-dom";
 
@@ -43,6 +44,10 @@ export const allroutes=[
                 id:'questionOnlyOne',
                 path:'look',
                 element:<LookQ />
+            },{
+                id:'questionEdit',
+                path:'edit',
+                element:<EditQ />
             }
         ]
     },
