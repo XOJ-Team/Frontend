@@ -35,7 +35,7 @@ export default function Register() {
       'password':values.password,
       'verificationNumber':values.code
     }).then((res)=>{
-      if(res.status===-1){
+      if(res.data.status===-1){
         // 信息不对
         setcomment(res.data.comment)
       }else{
@@ -69,9 +69,16 @@ export default function Register() {
         className='register-form'
         form={form}
       >
+        <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16
+        }}>
         <div style={{ color: 'red' }}>
           {comment}
         </div>
+        </Form.Item>
+
 
         <Form.Item
           label="Email"
