@@ -69,7 +69,7 @@ export function findRoute(id){
     let result=[]
     recfindRoute("",allroutes)
     if(result.length>1){
-        throw new Error("id in routers/config should be unique")
+        console.error("id in routers/config should be unique")
     }else{
         return result[0]
     }

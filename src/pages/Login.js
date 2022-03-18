@@ -52,17 +52,22 @@ export default function Login() {
       registerApi({
         'mail': values.email,
         'verificationNumber': values.password
-      }).then((res)=>{successRes(res)}).catch((err) => {
+      }).then(
+        // 表单成功提交
+        (res)=>{successRes(res)}
+      ).catch((err) => {
         console.log(err)
-        setcomment("failed, check your inputs")
+        setcomment("failed to connect server")
       })
     } else {
       //邮箱加密码
       loginApi({
         'mail': values.email,
         'password': values.password
-      }).then((res)=>{successRes(res)}).catch((err) => {
-        setcomment("failed, check your inputs")
+      }).then(
+        (res)=>{successRes(res)}
+      ).catch((err) => {
+        setcomment("failed to connect server")
       })
     }
   };

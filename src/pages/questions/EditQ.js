@@ -1,5 +1,5 @@
 // 题目创建以及编辑页面
-// 只有拥有管理员权限才能看到这页
+// 拥有管理员权限才能看到这页,后端也实现了对请求的鉴权
 import React, { useState } from 'react';
 import * as ReactDOM from 'react-dom';
 // UI import style manually
@@ -32,7 +32,7 @@ export default function EditQ(props) {
   // Form
   const [form] = Form.useForm();
 
-  const onGenderChange = (value: string) => {
+  const onGenderChange = (value) => {
     switch (value) {
       case 'male':
         form.setFieldsValue({ note: 'Hi, man!' });
@@ -45,7 +45,7 @@ export default function EditQ(props) {
     }
   };
 
-  const onFinish = (values: any) => {
+  const onFinish = (values) => {
     console.log(values);
   };
 
@@ -69,6 +69,7 @@ export default function EditQ(props) {
   // 编辑内容的双向绑定
   let [mdword, setmdword] = useState(remindword)
   function handleEditorChange({ html, text }) {
+    // markdown编辑区改动会触发此函数
     // console.log('handleEditorChange',html, text);
     setmdword(text)
   }
