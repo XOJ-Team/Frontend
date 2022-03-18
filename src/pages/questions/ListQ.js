@@ -1,6 +1,5 @@
 import React,{useContext} from 'react';
-import { Table, Tag, Typography } from 'antd';
-import { Layout } from 'antd';
+import { Table, Tag, Typography,Layout,Button } from 'antd';
 // import './ListQ.css';
 
 // utils
@@ -178,6 +177,11 @@ export default function ListQ(){
   ];
   return (
     <div>
+      <Button
+      onClick={()=>{
+        navigate(findRoute('questionEdit'))
+      }}
+      >Add</Button>
       <Table 
           columns={columns} 
           dataSource={data} 
