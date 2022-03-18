@@ -138,10 +138,8 @@ export default function ListQ(){
     },
   ];
   // 鉴权以添加编辑标签
-  // TODO：登录时context再传递个用户权限，现在先用用户名代替
   const farpropsAuth=useContext(Auth)
-  console.log(farpropsAuth.pUsername)
-  if(true){
+  if(farpropsAuth['pAuthority']!=null){
     columns.push({
       title: 'Edit',
       dataIndex: 'key',
@@ -177,11 +175,12 @@ export default function ListQ(){
   ];
   return (
     <div>
-      <Button
+      {farpropsAuth['pAuthority']!=null?(<Button
       onClick={()=>{
         navigate(findRoute('questionEdit'))
       }}
-      >Add</Button>
+      >Add</Button>):null}
+
       <Table 
           columns={columns} 
           dataSource={data} 

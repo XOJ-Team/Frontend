@@ -34,8 +34,10 @@ export default function Login() {
       // 失败
       setcomment(res.data.comment)
     } else {
-      // 把用户名传给frame右上角的bar
+      // 把用户名传给Context
       farpropsAuth.setpUsername(res.data.obj.name)
+      // 把权限传给Context
+      farpropsAuth.setpAuthority(res.data.obj.authority)
       navigate("mainpage")
     }
   }

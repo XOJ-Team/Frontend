@@ -54,6 +54,21 @@ react-router-dom: v6
 ## git无法pull
 `kex_exchange_identification: Connection closed by remote host` 需要切换电脑的代理，不可以用全局模式
 
+## 判断参数是否存在
+
+url传参：
+```
+let location = useLocation()
+let params = qs.parse(location.search.slice(1))
+if('id' in params) 判断location里面有没有id这个参数
+```
+
+组件间传参：
+```
+const farpropsAuth=useContext(Auth)
+if(farpropsAuth['pAuthority']!=null) pAuthority肯定被传来，判断pAuthority的值是不是null
+```
+
 # Contribute
 Happy to have more contributers.
 
