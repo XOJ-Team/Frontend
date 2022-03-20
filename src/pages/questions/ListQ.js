@@ -186,9 +186,7 @@ export default function ListQ(){
           dataSource={data} 
           bordered 
           pagination={{
-            pageSize: 10,
             position:["bottomCenter"],
-            showSizeChanger:true,
           }}
           />
     {/* <Layout className='questionLayout'> //使用布局分类table和tage filter  暂时没用
