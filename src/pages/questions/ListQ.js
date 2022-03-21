@@ -139,7 +139,7 @@ export default function ListQ(){
   ];
   // 鉴权以添加编辑标签
   const farpropsAuth=useContext(Auth)
-  if(farpropsAuth['pAuthority']!=null){
+  if(farpropsAuth['pAuthority']===3){
     columns.push({
       title: 'Edit',
       dataIndex: 'key',
@@ -175,7 +175,8 @@ export default function ListQ(){
   ];
   return (
     <div>
-      {farpropsAuth['pAuthority']!=null?(<Button
+      {/* 调试需要，默认有权限 */}
+      {farpropsAuth['pAuthority']===3?(<Button
       onClick={()=>{
         navigate(findRoute('questionEdit'))
       }}
