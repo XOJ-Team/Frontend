@@ -1,6 +1,6 @@
 // 题目创建以及编辑页面
 // 拥有管理员权限才能看到这页,后端也实现了对请求的鉴权
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 // UI import style manually
 import 'react-markdown-editor-lite/lib/index.css';
@@ -36,34 +36,38 @@ export default function EditQ(props) {
   let navigate=useNavigate()
   // Form
   const [form] = Form.useForm();
+  // 编辑markdown内容的双向绑定
+  let [mdword, setmdword] = useState()
 
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
   let iscreate = 'id' in params?false:true
-  if (iscreate) {
-    // 创建新题目
-    setmdword('You are creating new question')
-  } else {
-    // 编辑已有题目
-    // 将现有信息显示
-    selectQuestionId(params['id']).then((e)=>{
-      if(e.data.status===1){
-        setmdword(e.data.obj.content)
-        form.setFieldsValue({
-          "switch": e.data.obj.isHide,
-          "title": e.data.obj.name,
-          "hard": e.data.obj.questionLevel,
-          "tags": e.data.obj.tags.split("#")
-        })
-      }else{
-        message.error("failed")
-      }
-    })
-  }
+  useEffect(()=>{
+    if (iscreate) {
+      // 新创建题目
+      message.success("you are creating new question")
+    } else {
+      // 编辑已有题目
+      // 将现有信息显示
+      selectQuestionId(params['id']).then((e)=>{
+        if(e.data.status===1){
+          setmdword(e.data.obj.content)
+          form.setFieldsValue({
+            "switch": e.data.obj.isHide,
+            "title": e.data.obj.name,
+            "hard": e.data.obj.questionLevel,
+            "tags": e.data.obj.tags.split("#")
+          })
+        }else{
+          message.error("failed")
+        }
+      })
+    }
+  },[])
+  
 
-  // 编辑内容的双向绑定
-  let [mdword, setmdword] = useState()
+
   function handleEditorChange({ html, text }) {
     // markdown编辑区改动会触发此函数
     // console.log('handleEditorChange',html, text);
@@ -82,7 +86,7 @@ export default function EditQ(props) {
             "tags": values.tags.join("#")
           }).then((e)=>{
             if(e.data.status===1){
-              message.success("success")
+              message.success("success add")
             }
           })
         }else{
@@ -93,7 +97,11 @@ export default function EditQ(props) {
             "isHide": values.switch,
             "name": values.title,
             "questionLevel": values.hard,
-            "tags": values.tags
+            "tags": values.tags.join("#")
+          }).then((e)=>{
+            if(e.data.status===1){
+              message.success("complete edit")
+            }
           })
         }
         
