@@ -4,9 +4,10 @@ import React, { useState } from 'react';
 import * as ReactDOM from 'react-dom';
 // UI import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select,Space,Radio } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 // utils
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import qs from 'qs'
@@ -29,28 +30,13 @@ const tailLayout = {
 };
 
 export default function EditQ(props) {
+  let navigate=useNavigate()
+
   // Form
   const [form] = Form.useForm();
 
-  const onGenderChange = (value) => {
-    switch (value) {
-      case 'male':
-        form.setFieldsValue({ note: 'Hi, man!' });
-        return;
-      case 'female':
-        form.setFieldsValue({ note: 'Hi, lady!' });
-        return;
-      case 'other':
-        form.setFieldsValue({ note: 'Hi there!' });
-    }
-  };
-
   const onFinish = (values) => {
     console.log(values);
-  };
-
-  const onReset = () => {
-    form.resetFields();
   };
 
   // 获取url传来的题目id
@@ -74,8 +60,6 @@ export default function EditQ(props) {
     setmdword(text)
   }
 
-
-
   return (
     <div>
     <MdEditor
@@ -83,39 +67,78 @@ export default function EditQ(props) {
       style={{ height: '500px' }}
       renderHTML={text => mdParser.render(text)}
       onChange={handleEditorChange} />
-      <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
-      <Form.Item name="title" label="Title" rules={[{ required: true }]}>
+    <Form {...layout} 
+    form={form} 
+    name="control-hooks" 
+    style={{paddingTop:'20px'}}
+    onFinish={onFinish}>
+      <Form.Item 
+      name="title" 
+      label="Title" 
+      rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="hard" label="Hard" rules={[{ required: true }]}>
-        <Select
-          placeholder="Select how hard it is"
-          onChange={onGenderChange}
-          allowClear
-        >
-          <Option value="male">easy</Option>
-          <Option value="female">medium</Option>
-          <Option value="other">hard</Option>
-        </Select>
-      </Form.Item>
       <Form.Item
-        noStyle
-        shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
+        name="hard"
+        label="Hard"
+        rules={[{ required: true, message: 'Please pick an item!' }]}
       >
-        {({ getFieldValue }) =>
-          getFieldValue('gender') === 'other' ? (
-            <Form.Item name="customizeGender" label="Customize Gender" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-          ) : null
-        }
+        <Radio.Group>
+          <Radio.Button value={1}>easy</Radio.Button>
+          <Radio.Button value={2}>medium</Radio.Button>
+          <Radio.Button value={3}>hard</Radio.Button>
+        </Radio.Group>
       </Form.Item>
+      <Form.Item 
+      name="switch"
+      label="isHide" 
+      rules={[{ required: true, message: 'Please pick an item!' }]}
+      >
+        <Radio.Group>
+          <Radio.Button value={true}>hide</Radio.Button>
+          <Radio.Button value={false}>visible</Radio.Button>
+        </Radio.Group>
+      </Form.Item>
+
+      <Form.Item 
+      label='Tags'
+      >
+      <Form.List 
+      name="tags"
+      >
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({ key, name, ...restField }) => (
+              <Space 
+              key={key} 
+              style={{ 
+                display: 'flex', 
+                marginBottom: 8 
+              }} 
+              align="baseline">
+                <Form.Item
+                  {...restField}
+                  name={[name, 'tag']}
+                  rules={[{ required: true, message: 'Missing tag name' }]}
+                >
+                  <Input placeholder="New Tag" />
+                </Form.Item>
+                <MinusCircleOutlined onClick={() => remove(name)} />
+              </Space>
+            ))}
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Add tag
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
+      </Form.Item>
+
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           Submit
-        </Button>
-        <Button htmlType="button" onClick={onReset}>
-          Reset
         </Button>
       </Form.Item>
     </Form>
