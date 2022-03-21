@@ -2,7 +2,7 @@ import React, { useEffect, useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { findRoute } from '../routers/config';
 // UI
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox ,message} from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import "./Login.css"
 // utils
@@ -21,8 +21,6 @@ export default function Login() {
   const [form] = Form.useForm()
   // false：邮箱加密码登录 true：邮箱加验证码登录
   let [useCode, setUseCode] = useState(false)
-  // 服务器错误提示
-  let [comment, setcomment] = useState("")
   // 邮箱
   let [email,setemail]=useState(getUseremail())
   // 获取跨组件传来的信息
@@ -32,7 +30,7 @@ export default function Login() {
   const successRes=(res)=>{
     if (res.data.status === -1) {
       // 失败
-      setcomment(res.data.comment)
+      message.error(res.data.comment)
     } else {
       // 把用户名传给Context
       farpropsAuth.setpUsername(res.data.obj.name)
@@ -59,7 +57,7 @@ export default function Login() {
         (res)=>{successRes(res)}
       ).catch((err) => {
         console.log(err)
-        setcomment("failed to connect server")
+        message.error("failed to connect server")
       })
     } else {
       //邮箱加密码
@@ -69,7 +67,7 @@ export default function Login() {
       }).then(
         (res)=>{successRes(res)}
       ).catch((err) => {
-        setcomment("failed to connect server")
+        message.error("failed to connect server")
       })
     }
   };
@@ -95,10 +93,6 @@ export default function Login() {
         onValuesChange={onValuesChange}
         form={form}
       >
-
-        <div style={{ color: 'red' }}>
-          {comment}
-        </div>
 
         <Form.Item
           name="email"

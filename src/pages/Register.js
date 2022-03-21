@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 // UI
 import './Register.css'
-import { Form, Input, Button} from 'antd';
+import { Form, Input, Button,message} from 'antd';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
 import { MailOutlined, LockOutlined,NumberOutlined,SmileOutlined } from '@ant-design/icons';
 // utils
@@ -17,8 +17,6 @@ export default function Register() {
   const [form]=Form.useForm()
   //初始化邮箱（作为sendCodeApi的input）
   let [email,setemail]=useState("")
-  // 用户提示
-  let [comment,setcomment]=useState("")
 
   const navigate=useNavigate();
 
@@ -37,12 +35,12 @@ export default function Register() {
     }).then((res)=>{
       if(res.data.status===-1){
         // 信息不对
-        setcomment(res.data.comment)
+        message.error(res.data.comment)
       }else{
         navigate(findRoute('mainpage'));
       }
     }).catch((err)=>{
-      setcomment("server error")
+      message.error("server error")
     })
   };
 
@@ -69,16 +67,6 @@ export default function Register() {
         className='register-form'
         form={form}
       >
-        <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16
-        }}>
-        <div style={{ color: 'red' }}>
-          {comment}
-        </div>
-        </Form.Item>
-
 
         <Form.Item
           label="Email"
