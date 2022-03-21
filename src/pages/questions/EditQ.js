@@ -11,6 +11,7 @@ import { useLocation,useNavigate } from 'react-router-dom';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import qs from 'qs'
+import { createQuestion } from '../../services/question';
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
@@ -30,14 +31,10 @@ const tailLayout = {
 };
 
 export default function EditQ(props) {
+  // 跳转
   let navigate=useNavigate()
-
   // Form
   const [form] = Form.useForm();
-
-  const onFinish = (values) => {
-    console.log(values);
-  };
 
   // 获取url传来的题目id
   let remindword = ''
@@ -60,6 +57,23 @@ export default function EditQ(props) {
     setmdword(text)
   }
 
+    // 表单提交事件
+      const onFinish = (values) => {
+        console.log(values,mdword);
+        createQuestion({
+          "content": mdword,
+          "isHide": values.switch,
+          "name": values.title,
+          "questionLevel": values.hard,
+          "tags": values.tags
+        }).then((e)=>{
+          if(e.status===1){
+            console.log("success")
+          }
+        })
+      };
+
+
   return (
     <div>
     <MdEditor
@@ -71,7 +85,9 @@ export default function EditQ(props) {
     form={form} 
     name="control-hooks" 
     style={{paddingTop:'20px'}}
-    onFinish={onFinish}>
+    onFinish={onFinish}
+    initialValues={{'tags':'default1#default2'}}
+    >
       <Form.Item 
       name="title" 
       label="Title" 
@@ -101,39 +117,12 @@ export default function EditQ(props) {
       </Form.Item>
 
       <Form.Item 
-      label='Tags'
+      name='tags'
+      label="Tags"
       >
-      <Form.List 
-      name="tags"
-      >
-        {(fields, { add, remove }) => (
-          <>
-            {fields.map(({ key, name, ...restField }) => (
-              <Space 
-              key={key} 
-              style={{ 
-                display: 'flex', 
-                marginBottom: 8 
-              }} 
-              align="baseline">
-                <Form.Item
-                  {...restField}
-                  name={[name, 'tag']}
-                  rules={[{ required: true, message: 'Missing tag name' }]}
-                >
-                  <Input placeholder="New Tag" />
-                </Form.Item>
-                <MinusCircleOutlined onClick={() => remove(name)} />
-              </Space>
-            ))}
-            <Form.Item>
-              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                Add tag
-              </Button>
-            </Form.Item>
-          </>
-        )}
-      </Form.List>
+        <Input.TextArea 
+        placeholder='dfs#bfs'
+        />
       </Form.Item>
 
       <Form.Item {...tailLayout}>

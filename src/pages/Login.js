@@ -1,6 +1,5 @@
 import React, { useEffect, useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { findRoute } from '../routers/config';
 // UI
 import { Form, Input, Button, Checkbox ,message} from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
@@ -10,6 +9,7 @@ import pattern, { reg } from '../utils/regexp';
 import { loginApi, registerApi } from '../services/auth';
 import { getUseremail, setUseremail } from '../utils/auth';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
+import { findRoute } from '../routers/config';
 //context
 import { Auth } from '../contexts/AuthContext';
 
@@ -26,17 +26,19 @@ export default function Login() {
   // 获取跨组件传来的信息
   const farpropsAuth=useContext(Auth)
 
-  // 表单提交成功响应后
+  // 表单提交成功响应后的操作
   const successRes=(res)=>{
     if (res.data.status === -1) {
       // 失败
       message.error(res.data.comment)
-    } else {
+    } else if(res.data.status === 1) {
       // 把用户名传给Context
       farpropsAuth.setpUsername(res.data.obj.name)
       // 把权限传给Context
       farpropsAuth.setpAuthority(res.data.obj.authority)
-      navigate("mainpage")
+      // 把用户id传给Context
+      farpropsAuth.setpUserid(res.data.obj.id)
+      navigate(findRoute('mainpage'))
     }
   }
 
@@ -57,7 +59,7 @@ export default function Login() {
         (res)=>{successRes(res)}
       ).catch((err) => {
         console.log(err)
-        message.error("failed to connect server")
+        message.error("failed")
       })
     } else {
       //邮箱加密码
@@ -67,7 +69,8 @@ export default function Login() {
       }).then(
         (res)=>{successRes(res)}
       ).catch((err) => {
-        message.error("failed to connect server")
+        console.log(err)
+        message.error("failed")
       })
     }
   };
