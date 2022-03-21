@@ -7,11 +7,11 @@ import {get, post,put,del} from '../utils/request'
  * @param obj.name
  * @param obj.content
  * @param obj.tags
- * @param obj.hide
+ * @param obj.isHide
  * @param obj.questionLevel
  */
 export function createQuestion(obj){
-    return post("/question/post", obj)
+    return post("/question/", obj)
 }
 
 /**
@@ -24,7 +24,7 @@ export function createQuestion(obj){
  * @param obj.questionLevel
  */
 export function modifyQuestion(obj){
-    return put("/question/put", obj)
+    return put("/question/", obj)
 }
 
 /**
@@ -49,7 +49,7 @@ export function selctQuestionByPage(obj){
  * @param obj.id(Long)
  */
 export function delQuestion(obj){
-    return del("/question/delete", obj)
+    return del("/question/", obj)
 }
 
 /**
