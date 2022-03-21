@@ -19,7 +19,7 @@ export function createQuestion(obj){
  * @param obj.id 
  * @param obj.name
  * @param obj.content
- * @param obj.hide
+ * @param obj.isHide
  * @param obj.tags
  * @param obj.questionLevel
  */

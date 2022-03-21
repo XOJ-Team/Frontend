@@ -58,7 +58,10 @@ export default function ListQ(){
       title: 'Question Title',
       dataIndex: 'question_title',
       key: 'question_title',
-      render: (text) => {return (<a>{text}</a>)},
+      render: (text) => {return (<a onClick={()=>{
+        // console.log(text.split('.')[0])
+        navigate(findRoute('questionOnlyOne')+'?id='+text.split('.')[0])
+      }}>{text}</a>)},
       sorter: (rowA, rowB) => rowA.key - rowB.key,
     },
     {
