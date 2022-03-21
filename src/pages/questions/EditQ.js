@@ -43,6 +43,8 @@ export default function EditQ(props) {
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
   let iscreate = 'id' in params?false:true
+
+  // 模拟组件挂载周期函数
   useEffect(()=>{
     if (iscreate) {
       // 新创建题目

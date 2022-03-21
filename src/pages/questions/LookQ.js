@@ -14,12 +14,14 @@ export default function LookQ() {
   const [mdword,setmdword] = useState(null)
   const [questionTitle,setquestionTitle] = useState(null)
   const [questionHard,setquestionHard] = useState(null)
-  const [tags,settags]=useState()
+  const [tags,settags]=useState("")
 
 
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
+
+  // 模拟组件挂载周期函数
   useEffect(()=>{
     if('id' in params){
       selectQuestionId(params['id']).then((e)=>{
