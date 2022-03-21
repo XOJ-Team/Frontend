@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 import * as ReactDOM from 'react-dom';
 // UI import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { Form, Input, Button, Select,Space,Radio } from 'antd';
+import { Form, Input, Button, Select,Space,Radio,message } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 // utils
 import { useLocation,useNavigate } from 'react-router-dom';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import qs from 'qs'
-import { createQuestion } from '../../services/question';
+import { createQuestion,modifyQuestion} from '../../services/question';
+import {findRoute} from '../../routers/config'
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
@@ -59,18 +60,29 @@ export default function EditQ(props) {
 
     // 表单提交事件
       const onFinish = (values) => {
-        console.log(values,mdword);
-        createQuestion({
-          "content": mdword,
-          "isHide": values.switch,
-          "name": values.title,
-          "questionLevel": values.hard,
-          "tags": values.tags
-        }).then((e)=>{
-          if(e.status===1){
-            console.log("success")
-          }
-        })
+        if(iscreate){
+          createQuestion({
+            "content": mdword,
+            "isHide": values.switch,
+            "name": values.title,
+            "questionLevel": values.hard,
+            "tags": values.tags
+          }).then((e)=>{
+            if(e.data.status===1){
+              message.success("success")
+            }
+          })
+        }else{
+          modifyQuestion({
+            "id":params['id'],
+            "content": mdword,
+            "isHide": values.switch,
+            "name": values.title,
+            "questionLevel": values.hard,
+            "tags": values.tags
+          })
+        }
+        
       };
 
 
