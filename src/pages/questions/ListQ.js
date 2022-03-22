@@ -1,4 +1,6 @@
 import React,{useContext, useState, useEffect} from 'react';
+// UI
+import {CheckOutlined} from '@ant-design/icons';
 import {Table, Tag, Typography, Layout, Button, List} from 'antd';
 // import './ListQ.css';
 
@@ -66,7 +68,9 @@ export default function ListQ(){
       console.log(res);
       let infolist=[]
       for (let each of res.data.obj.list){
+        // 拼接name以支持点击题目名跳转
         each.name=each.id+"#"+each.name
+        each.key=each.id//解决Each element in list should have a key警告
         infolist.push(each)
       }
       setData(infolist)
@@ -76,14 +80,27 @@ export default function ListQ(){
         pageNum:1,
         pageSize:10
       }).then(res => {
-      console.log(res);
-      setData(res.data.obj.list)
+        console.log(res);
+        let infolist=[]
+        for (let each of res.data.obj.list){
+          each.name=each.id+"#"+each.name
+          each.key=each.id
+          infolist.push(each)
+        }
+        setData(infolist)
       });
     }
     
-  }, []);
+  },[]);
 
   const columns = [
+    {
+      title:'Finish',
+      key:'id',
+      render: ()=>{
+        return <CheckOutlined />
+      }
+    },
     {
       title: 'Question Title',
       dataIndex: 'name',
@@ -92,7 +109,6 @@ export default function ListQ(){
         // console.log(text.split('.')[0])
         navigate(findRoute('questionOnlyOne')+'?id='+text.split('#')[0])
       }}>{text.split("#")[1]}</a>)},
-      sorter: (rowA, rowB) => rowA.key - rowB.key,
     },
     {
       title: 'Level',
@@ -146,9 +162,9 @@ export default function ListQ(){
       // onFilter: (value, record) => record.tags.indexOf(value) === 0,
       render: tags => (
         <>
-          {tags.split("#").map(tag => {
+          {tags.split("#").map((tag,index) => {
             return (
-              <Tag key={tag}>
+              <Tag key={index}>
                 {tag}
               </Tag>
             );
