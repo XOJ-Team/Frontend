@@ -59,12 +59,23 @@ export default function ListQ(){
 
   useEffect(() => {
     if(farpropsAuth['pAuthority']===3){
-      selctQuestionByPage().then(res => {
+      selctQuestionByPage({
+        pageNum:1,
+        pageSize:10
+      }).then(res => {
       console.log(res);
-      setData(res.data.obj.list)
+      let infolist=[]
+      for (let each of res.data.obj.list){
+        each.name=each.id+"#"+each.name
+        infolist.push(each)
+      }
+      setData(infolist)
     });
     }else if (farpropsAuth['pAuthority']===1 || farpropsAuth['pAuthority']===2) {
-      selectQuestionNotHidedPaging().then(res => {
+      selectQuestionNotHidedPaging({
+        pageNum:1,
+        pageSize:10
+      }).then(res => {
       console.log(res);
       setData(res.data.obj.list)
       });
@@ -79,48 +90,35 @@ export default function ListQ(){
       key: 'id',
       render: (text) => {return (<a onClick={()=>{
         // console.log(text.split('.')[0])
-        navigate(findRoute('questionOnlyOne')+'?id='+text.split('.')[0])
-      }}>{text}</a>)},
+        navigate(findRoute('questionOnlyOne')+'?id='+text.split('#')[0])
+      }}>{text.split("#")[1]}</a>)},
       sorter: (rowA, rowB) => rowA.key - rowB.key,
     },
     {
       title: 'Level',
       key: 'id',
       dataIndex: 'levelDescription',
-      filters: [
-        {
-          text: 'easy',
-          value: 'easy',
-        },
-        {
-          text: 'hard',
-          value: 'hard',
-        },
-        {
-          text: 'normal',
-          value: 'normal',
-        },
-      ],
-      onFilter: (value, record) => record.question_level.indexOf(value) === 0,
-      render: text => (
-        <>
-          {text.map(text => {
-            let type;
-            if (text === 'hard') {
-              type = 'danger';
-            } else if (text === 'easy') {
-              type = 'success';
-            } else if (text === 'normal') {
-              type = 'warning';
-            }
+      // filters: [
+      //   {
+      //     text: 'easy',
+      //     value: 'easy',
+      //   },
+      //   {
+      //     text: 'hard',
+      //     value: 'hard',
+      //   },
+      //   {
+      //     text: 'medium',
+      //     value: 'medium',
+      //   },
+      // ],
+      // onFilter: (value, record) => record.question_level.indexOf(value) === 0,
+      render: text => {
             return (
-              <Text type={type} key={text}>
+              <Text>
                 {text}
               </Text>
-            );
-          })}
-        </>
-      ),
+            )},
     },
     // {
     //   title: 'AC Rate',
@@ -148,7 +146,7 @@ export default function ListQ(){
       // onFilter: (value, record) => record.tags.indexOf(value) === 0,
       render: tags => (
         <>
-          {tags.map(tag => {
+          {tags.split("#").map(tag => {
             return (
               <Tag key={tag}>
                 {tag}
