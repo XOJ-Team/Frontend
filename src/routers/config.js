@@ -70,8 +70,11 @@ export function findRoute(id){
     recfindRoute("",allroutes)
     if(result.length>1){
         console.error("id in routers/config should be unique")
-    }else{
         return result[0]
+    }else if(result.length===1){
+        return result[0]
+    }else{
+        return ""
     }
 
     function recfindRoute(prefix,node){
