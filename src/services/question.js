@@ -41,7 +41,7 @@ export function selectQuestionId(questionId){
  * @param obj.pageNum(int)
  * @param obj.pageSize(int)
  */
-export function selctQuestionByPage(obj){
+export function selectQuestionByPage(obj){
     return get("/question/all_questions", obj)
 }
 

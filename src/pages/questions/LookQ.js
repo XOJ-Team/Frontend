@@ -84,7 +84,7 @@ export default function LookQ() {
     dangerouslySetInnerHTML={{__html:mdParser.render(mdword)}}></div>
 
     <div>testcase:</div>
-    {testcases.map((e)=>{return <div>{e.testcase}=>{e.result}</div>})}
+    {testcases.map((e)=>{return <div>{e.testcase},{e.result}</div>})}
 
     <Button 
     type='primary'
