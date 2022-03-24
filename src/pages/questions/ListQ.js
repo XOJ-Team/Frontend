@@ -57,15 +57,18 @@ export default function ListQ(){
   let navigate=useNavigate()
   //定义局部状态
   const [data, setData] = useState([])
+  // 总问题数
+  const [sumOfquestions,setsumOfquestions]=useState(0)
   const farpropsAuth=useContext(Auth)
 
+  // 生命周期-组件创建
+  // TODO: 封装then方法里的内容
   useEffect(() => {
     if(farpropsAuth['pAuthority']===3){
       selctQuestionByPage({
         pageNum:1,
         pageSize:10
       }).then(res => {
-      console.log(res);
       let infolist=[]
       for (let each of res.data.obj.list){
         // 拼接name以支持点击题目名跳转
@@ -74,13 +77,13 @@ export default function ListQ(){
         infolist.push(each)
       }
       setData(infolist)
+      setsumOfquestions(res.data.obj.total)
     });
     }else if (farpropsAuth['pAuthority']===1 || farpropsAuth['pAuthority']===2) {
       selectQuestionNotHidedPaging({
         pageNum:1,
         pageSize:10
       }).then(res => {
-        console.log(res);
         let infolist=[]
         for (let each of res.data.obj.list){
           each.name=each.id+"#"+each.name
@@ -92,6 +95,12 @@ export default function ListQ(){
     }
     
   },[]);
+
+  // TODO：用户点击页数栏，重新获取题目条目
+  const changePage=(e)=>{
+    console.log(e)
+  }
+
 
   const columns = [
     {
@@ -223,6 +232,12 @@ export default function ListQ(){
           bordered 
           pagination={{
             position:["bottomCenter"],
+            // 每页条数
+            pageSize: 10,
+            // 条目总数
+            total:sumOfquestions,
+            // 用户切换页数
+            onChange:changePage
           }}
           />
     {/* <Layout className='questionLayout'> //使用布局分类table和tage filter  暂时没用
