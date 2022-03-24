@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 // UI
 import './Register.css'
@@ -9,10 +9,13 @@ import { MailOutlined, LockOutlined,NumberOutlined,SmileOutlined } from '@ant-de
 import pattern from '../utils/regexp';
 import {registerApi} from '../services/auth'
 import {findRoute} from '../routers/config'
+import {Auth} from '../contexts/AuthContext'
 // import { setUsername,getUsername } from '../utils/auth';
 
 
 export default function Register() {
+  // 全局共享
+  let farProps=useContext(Auth)
   // 表单对象
   const [form]=Form.useForm()
   //初始化邮箱（作为sendCodeApi的input）
@@ -37,6 +40,12 @@ export default function Register() {
         // 信息不对
         message.error(res.data.comment)
       }else{
+        // 把用户名传给Context
+        farProps.setpUsername(res.data.obj.name)
+        // 把权限传给Context
+        farProps.setpAuthority(res.data.obj.authority)
+        // 把用户id传给Context
+        farProps.setpUserid(res.data.obj.id)
         navigate(findRoute('mainpage'));
       }
     }).catch((err)=>{
