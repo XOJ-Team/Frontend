@@ -1,21 +1,25 @@
 import React,{useState,useEffect} from 'react'
 import ReactDOM from 'react-dom'
 // utils
-import ReactMarkdown from 'react-markdown'
+import MarkdownIt from 'markdown-it';
+// import ReactMarkdown from 'react-markdown';
 import { useLocation,useNavigate } from 'react-router-dom';
 import qs from 'qs'
 import {findRoute} from '../../routers/config'
 import {selectQuestionId} from '../../services/question'
 import { message,PageHeader,Button,Tag } from 'antd';
+import { getTestcase } from '../../services/testcase';
 
+
+const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export default function LookQ() {
   let navigate=useNavigate()
-  const [mdword,setmdword] = useState(null)
+  const [mdword,setmdword] = useState("")
   const [questionTitle,setquestionTitle] = useState(null)
   const [questionHard,setquestionHard] = useState(null)
   const [tags,settags]=useState("")
-
+  const [testcases,settestcases]=useState([])
 
   // 获取url传来的题目id
   let location = useLocation()
@@ -24,6 +28,7 @@ export default function LookQ() {
   // 模拟组件挂载周期函数
   useEffect(()=>{
     if('id' in params){
+      // 题目信息
       selectQuestionId(params['id']).then((e)=>{
         if(e.data.status===1){
           setquestionTitle(e.data.obj.name)
@@ -32,6 +37,14 @@ export default function LookQ() {
           setmdword(e.data.obj.content)
         }else{
           message.error('error id:'+params['id'])
+        }
+      })
+      // testcase信息
+      getTestcase({
+        'questionId':params['id']
+      }).then((res)=>{
+        if(res.data.status===1){
+          settestcases(res.data.obj)
         }
       })
     }else{
@@ -48,14 +61,30 @@ export default function LookQ() {
     onBack={()=>{navigate(-1)}}
     />
 
+    <div style={{padding:"0px 50px"}}>
     <div>
-      Tags:
+      <span style={{color:'gray'}}>Tags:</span>
       {tags.split("#").map((item,index)=>{
       return <Tag key={index}>{item}</Tag>
     })}
     </div>
 
-    <ReactMarkdown children={mdword} />
+    {/* <ReactMarkdown children={mdword} /> */}
+    <div 
+    style={{
+      border:'1px solid black',
+      borderRadius:'10px',
+      padding:'0px 30px',
+      overflow:'auto',
+      // 超出长度自动换行
+      tableLayout:'fixed',
+      wordBreak:'break-all',
+      wordWrap:'break-word'
+    }}
+    dangerouslySetInnerHTML={{__html:mdParser.render(mdword)}}></div>
+
+    <div>testcase:</div>
+    {testcases.map((e)=>{return <div>{e.testcase}=>{e.result}</div>})}
 
     <Button 
     type='primary'
@@ -65,6 +94,7 @@ export default function LookQ() {
     >
       Start to write
     </Button>
+    </div>
     </div>
   )
 }
