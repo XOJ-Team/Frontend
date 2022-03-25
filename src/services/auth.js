@@ -12,6 +12,15 @@ export function loginApi(obj){
 }
 
 /**
+ * user login (email+code)
+ * @param obj.mail
+ * @param obj.verificationNumber
+ */
+export function logincodeApi(obj){
+    return post("/login/mail",obj)
+}
+
+/**
  * send a verification code to email
  * @param obj.mail
  */
@@ -20,14 +29,14 @@ export function loginApi(obj){
 }
 
 /**
- * user register and login (email+code)
+ * user register
  * @param obj.mail
  * @param obj.verificationNumber
  * @param obj.name
  * @param obj.password
  */
  export function registerApi(obj){
-    return post("/login/mail",obj)
+    return post("/register/mail",obj)
 }
 
 /**

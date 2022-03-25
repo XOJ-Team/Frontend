@@ -6,7 +6,7 @@ import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import "./Login.css"
 // utils
 import pattern, { reg } from '../utils/regexp';
-import { loginApi, registerApi } from '../services/auth';
+import { loginApi, logincodeApi } from '../services/auth';
 import { getUseremail, setUseremail } from '../utils/auth';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
 import { findRoute } from '../routers/config';
@@ -51,7 +51,7 @@ export default function Login() {
     // 在这之后发起登录请求
     if (useCode) {
       // 邮箱加验证码
-      registerApi({
+      logincodeApi({
         'mail': values.email,
         'verificationNumber': values.password
       }).then(
