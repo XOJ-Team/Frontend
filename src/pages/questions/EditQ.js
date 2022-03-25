@@ -14,6 +14,7 @@ import qs from 'qs'
 import { createQuestion,modifyQuestion,selectQuestionId,delQuestion} from '../../services/question';
 import { getTestcase,newTestcase,delTestcase,changeTestcase } from '../../services/testcase';
 import {findRoute} from '../../routers/config'
+import { showConfirm } from '../../components/confirm';
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
@@ -23,23 +24,6 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Form
 const { Option } = Select;
-
-// 确认弹窗
-const {confirm}=Modal;
-// 弹出确认框-危险操作,传入onOkfunc
-function showConfirm(onOkfunc) {
-  confirm({
-    title: 'Do you Want to delete?',
-    icon: <ExclamationCircleOutlined />,
-    okType:'danger',
-    onOk() {
-      onOkfunc()
-    },
-    onCancel() {
-      return
-    },
-  });
-}
 
 const layout = {
   labelCol: { span: 8 },
@@ -109,6 +93,8 @@ export default function EditQ(props) {
             if(e.data.status===1){
               message.success("success add")
               navigate(findRoute("questionList"))
+            }else{
+              message.error(e.data.comment)
             }
           })
         }else{
@@ -124,6 +110,8 @@ export default function EditQ(props) {
             if(e.data.status===1){
               message.success("complete edit")
               navigate(findRoute("questionList"))
+            }else{
+              message.error(e.data.comment)
             }
           })
         }
@@ -184,6 +172,7 @@ export default function EditQ(props) {
       <Form.Item 
       name='tags'
       label="Tags"
+      rules={[{ required: true, message: 'Please input tag!' }]}
       >
         <Select mode="tags" style={{ width: '100%' }} placeholder="Tags">
         </Select>
