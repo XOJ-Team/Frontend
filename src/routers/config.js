@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Register from '../pages/Register';
 import EditQ from '../pages/questions/EditQ';
+import UserPage from '../pages/userpages/UserPage';
 // v6路由
 import {Navigate} from "react-router-dom";
 
@@ -49,6 +50,16 @@ export const allroutes=[
                 path:'edit',
                 element:<EditQ />
             }
+        ]
+    },
+    {
+        path:'userpages',
+        children:[
+            {
+                id:'userpage',
+                path:'',
+                element:<UserPage />
+            },
         ]
     },
     {
