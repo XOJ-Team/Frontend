@@ -16,9 +16,9 @@ export const Auth = createContext()
 // 包装时接受children
 export function AuthContext({children}){
     // 要传递的信息
-    // 用户名
+    // 用户名,有值的话用户已登录
     const [pUsername,setpUsername]=useState(null)
-    // 用户id,有值的话用户已登录
+    // 用户id
     const [pUserid,setpUserid]=useState(null)
     // 用户权限 1普通用户2能创建比赛3管理员
     const [pAuthority,setpAuthority]=useState(3)

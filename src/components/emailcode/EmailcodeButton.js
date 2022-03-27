@@ -1,5 +1,5 @@
 import React, {useState,useEffect,PureComponent } from 'react'
-import { Form, Button } from 'antd';
+import { Form, Button,message } from 'antd';
 import { sendCodeApi } from '../../services/auth';
 import { reg } from '../../utils/regexp';
 /**
@@ -27,7 +27,11 @@ export function SendcodeButton(props) {
     
     // 验证码按钮点击事件
     const onCodeSend = (value) => {
-        console.log("now email is ",email)
+        // console.log("now email is ",email)
+        if(email === null || email===undefined || email===""){
+            message.error("please check your email or refresh the page!")
+            return
+        }
         if (validemail) {
             sethasSendCode(true)
             sendCodeApi({
