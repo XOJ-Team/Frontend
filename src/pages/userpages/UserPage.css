@@ -1,0 +1,10 @@
+.main_content,
+.main_layour,
+.main_header{
+    background-color: white;
+}
+.avatarItem{
+    position: absolute;
+    top: 40%;
+    /* left:50%; */
+}
