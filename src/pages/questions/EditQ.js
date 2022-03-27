@@ -153,9 +153,9 @@ export default function EditQ(props) {
         rules={[{ required: true, message: 'Please pick an item!' }]}
       >
         <Radio.Group>
-          <Radio.Button value={1}>easy</Radio.Button>
-          <Radio.Button value={2}>medium</Radio.Button>
-          <Radio.Button value={3}>hard</Radio.Button>
+          <Radio.Button value={0}>easy</Radio.Button>
+          <Radio.Button value={1}>medium</Radio.Button>
+          <Radio.Button value={2}>hard</Radio.Button>
         </Radio.Group>
       </Form.Item>
       <Form.Item 
