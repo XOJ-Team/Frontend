@@ -1,5 +1,6 @@
 import React, { useState,useContext } from 'react'
-import { Layout, Menu, Breadcrumb, Button } from 'antd';
+import { Layout, Menu, Dropdown, Breadcrumb, Button } from 'antd';
+import { UserOutlined, ExportOutlined } from '@ant-design/icons';
 import "./Index.css";
 import { useNavigate } from 'react-router-dom';
 // 路由寻找
@@ -28,6 +29,18 @@ function Index(props) {
         targeturl: findRoute('questionList')
     }]
     // console.log(props.history.location.pathname)
+
+    const dropdownMenu = (
+        <Menu>
+            <Menu.Item icon={<UserOutlined />}>
+                <a onClick={(e)=>{ navigate(findRoute('userpage'))}}>Profile</a>
+            </Menu.Item>
+            <Menu.Item icon={<ExportOutlined />}>
+                <a onClick={(e) => {}}>Logout</a>
+            </Menu.Item>
+        </Menu>
+    )
+
     return (
         <Layout className="layout">
             <Header>
@@ -55,7 +68,11 @@ function Index(props) {
                     >
                         {farpropsAuth.pUsername===null?(<a onClick={(e)=>{
                             navigate(findRoute('userlogin'))
-                        }}>Login/Register</a>):(<a>{farpropsAuth.pUsername}</a>)}
+                        }}>Login/Register</a>):(
+                            <Dropdown overlay={dropdownMenu} placement='bottomRight'>
+                            <a onClick={e => e.preventDefault()}>
+                            {farpropsAuth.pUsername}
+                            </a></Dropdown>)}
                     </Menu.Item>
                 </Menu>
 
