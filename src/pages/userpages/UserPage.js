@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Layout, Avatar, Divider, Typography, Row, Col, List } from 'antd';
 import { UserOutlined, TrophyOutlined, SmileOutlined } from '@ant-design/icons';
 import './UserPage.css';
+// 全局变量
+import { Auth } from '../../contexts/AuthContext';
 
 const { Header } = Layout;
 const { Title, Text } = Typography;
@@ -9,6 +11,10 @@ const { Title, Text } = Typography;
 
 
 export default function UserPage() {
+
+  // 获取跨组件传来的信息
+  const farpropsAuth=useContext(Auth)
+
     const email = "000000000@yeah.net"
     const listData = [
         '1',
@@ -25,7 +31,7 @@ export default function UserPage() {
           <Col flex={1}>
               <div className='avatarItem'>
               <Avatar className='user_avatar' size={128} icon={<UserOutlined />} />
-              <Title level={3}>WelCome to XOJ, UserName.<br/>
+              <Title level={3}>WelCome to XOJ, {farpropsAuth.pUsername}.<br/>
                     <Text type="secondary" style={{fontSize:18}}> XID: 00000 </Text>
                     </Title>
               </div>
