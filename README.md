@@ -10,10 +10,15 @@ This's the repo of XOJ frontend.
 
 # 项目部署
 
-1. 服务器需要nodejs环境，确认package.json文件内的homepage为项目的url的根目录（如：http://47.100.92.209:3003/
-2. 在XOJ_F目录下执行npm install, npm run build，随后会生成build目录
-3. - 把build目录改个名丢到Nginx里-[Nginx配合Jenkins发布React](https://www.cnblogs.com/mazhaokeng/p/9581835.html)-注意SPA配置```try_files $uri $uri/ /index.html;```
-   - 或者使用Express或Tomcat，依旧注意SPA配置，[参阅标题Serving Apps with Client-Side Routing](https://create-react-app.dev/docs/deployment/)
+1. 服务器需要nodejs环境。
+   
+   确认package.json文件内的homepage为前端项目的url的根路径,如：http://47.100.92.209:3003/。
+   
+   确认/src/utils/request里的baseURL为后端项目的url根路径。
+2. 在XOJ_F目录下执行 npm install 和 npm run build，随后会生成build目录
+3. - 直接用Node启动服务并挂在后台，```npm install express && node runserver.js```
+   - 或者把build目录改个名丢到Nginx里-[Nginx配合Jenkins发布React](https://www.cnblogs.com/mazhaokeng/p/9581835.html)-注意SPA配置```try_files $uri $uri/ /index.html;```
+   - 或者使用Tomcat，依旧注意SPA配置，[参阅Stackoverflow](https://stackoverflow.com/questions/41246261/react-routing-is-able-to-handle-different-url-path-but-tomcat-returns-404-not-av/41249464#41249464)
 
 
 # 代码目录结构说明
