@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage":"http://47.100.92.209:3003/",
+  "homepage":"http://20.222.12.161/",
   "dependencies": {
     "@babel/core": "^7.17.5",
     "@babel/plugin-transform-react-jsx": "7.17.3",

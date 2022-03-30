@@ -12,7 +12,7 @@ This's the repo of XOJ frontend.
 
 1. 服务器需要nodejs环境。
    
-   确认package.json文件内的homepage为前端项目的url的根路径,如：http://47.100.92.209:3003/。
+   确认package.json文件内的homepage为前端项目的url的根路径。
    
    确认/src/utils/request里的baseURL为后端项目的url根路径。
 2. 在XOJ_F目录下执行 npm install 和 npm run build，随后会生成build目录

@@ -10,7 +10,7 @@ app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 // 项目监听的端口
-const port=3003;
+const port=80;
 // 启动app
 app.listen(port);
 console.log(`start app on port ${port}`);
