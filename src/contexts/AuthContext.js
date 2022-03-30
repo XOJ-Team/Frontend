@@ -21,7 +21,7 @@ export function AuthContext({children}){
     // 用户id
     const [pUserid,setpUserid]=useState(null)
     // 用户权限 1普通用户2能创建比赛3管理员
-    const [pAuthority,setpAuthority]=useState(3)
+    const [pAuthority,setpAuthority]=useState(1)
 
     return (
     // 传进来的children作为子组件渲染
