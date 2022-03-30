@@ -2,13 +2,16 @@
 This's the repo of XOJ frontend.
 
 # Api文档
-把Swagger页面搬运到了[这里](https://sanmusen.top/projectapi/Swagger.htm)
-还有其他Api请看项目的Wiki
+把Swagger页面搬运到了[这里](https://sanmusen.top/projectapi/Swagger.html)
 
 # 运行项目
 在XOJ_F工作目录下使用yarn或npm install下载模块,
-
 使用yarn start或npm start启动本地web服务器
+
+# 项目部署
+1. 在XOJ_F目录下执行npm run build，随后会生成build目录
+2. [参阅Serving Apps with Client-Side Routing](https://create-react-app.dev/docs/deployment/)
+
 
 # 代码目录结构说明
 
@@ -25,11 +28,17 @@ Api.mhtml 为接口文档，通过浏览器打开
 index.js为项目入口文件
 App.js为应用入口文件
 
+### /src/contexts
+上下文变量共享组件
+
 ### /src/routers
 Mainrouters.js配置了主要的路由
 
 ### /src/components
 包含了自定义的UI组件和布局
+
+### /src/services
+封装接口
 
 ### /src/pages
 各个路由组件,页面
