@@ -16,10 +16,10 @@ steps:
     versionSpec: '14.17'
   displayName: 'Install Node.js'
 
-- displayName: 'Run yarn install and build'
-  script: |
+- script: |
     yarn install
     yarn run build
+  displayName: 'Run yarn install and build'
 
 - task: PublishPipelineArtifact@1
   inputs:
