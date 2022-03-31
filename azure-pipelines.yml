@@ -45,6 +45,7 @@ steps:
 - task: SSH@0
   inputs:
     sshEndpoint: TARGET_SERVER
-    runOptions: 'script'
+    runOptions: 'commands'
+    commands: '/home/xjtluoj/deploy.sh'
     scriptPath: '/home/xjtluoj/deploy.sh'
     failOnStdErr: true
