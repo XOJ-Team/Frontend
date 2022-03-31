@@ -30,22 +30,21 @@ steps:
     tar czvf build.tar.gz build
   displayName: 'Tarball the artifact'
 
-- task: InstallSSHKey@0
+- task: PublishPipelineArtifact@1
   inputs:
-    sshKeySecureFile: 'id_rsa.azure'
-    configUser: 'xjtluoj'
-    configPort: 22
+    targetPath: $(System.DefaultWorkingDirectory)/build.tar.gz
+    artifactName: build_tarball
 
 - task: CopyFilesOverSSH@0
   inputs:
-    sshEndpoint: '20.222.12.161'
+    sshEndpoint: TARGET_SERVER
     overwrite: true
     sourceFolder: 'build'
     targetFolder: '/home/xjtluoj/artifacts'
 
 - task: SSH@0
   inputs:
-    sshEndpoint: '20.222.12.161'
+    sshEndpoint: TARGET_SERVER
     runOptions: 'script'
     scriptPath: '/home/xjtluoj/deploy.sh'
     failOnStdErr: true
