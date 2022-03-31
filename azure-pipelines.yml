@@ -25,3 +25,25 @@ steps:
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/build
     artifactName: build
+
+- script: |
+    tar czvf build.tar.gz build
+  displayName: 'Tarball the artifact'
+
+- task: InstallSSHKey@0
+  inputs:
+    sshKeySecureFile: 'id_rsa.azure'
+
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 20.222.12.161
+    overwrite: true
+    sourceFolder: 'build'
+    targetFolder: '/home/xjtluoj/artifacts'
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 20.222.12.161
+    runOptions: 'script'
+    scriptPath: '/home/xjtluoj/deploy.sh'
+    failOnStdErr: true
