@@ -21,7 +21,7 @@ steps:
     yarn run build
   displayName: 'Run yarn install and build'
 
-- task: PublishPipelineArtifact@1
+- task: PublishPipelineArtifact@0
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/build
     artifactName: build
@@ -33,17 +33,19 @@ steps:
 - task: InstallSSHKey@0
   inputs:
     sshKeySecureFile: 'id_rsa.azure'
+    configUser: 'xjtluoj'
+    configPort: 22
 
 - task: CopyFilesOverSSH@0
   inputs:
-    sshEndpoint: 20.222.12.161
+    sshEndpoint: '20.222.12.161'
     overwrite: true
     sourceFolder: 'build'
     targetFolder: '/home/xjtluoj/artifacts'
 
 - task: SSH@0
   inputs:
-    sshEndpoint: 20.222.12.161
+    sshEndpoint: '20.222.12.161'
     runOptions: 'script'
     scriptPath: '/home/xjtluoj/deploy.sh'
     failOnStdErr: true
