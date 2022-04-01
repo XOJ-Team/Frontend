@@ -2,11 +2,12 @@
 import ListQ from '../pages/questions/ListQ';
 import MainPage from '../pages/openpage/MainPage';
 import LookQ from '../pages/questions/LookQ';
-import Login from '../pages/Login';
+import Login from '../pages/LoginRegister/Login';
 import NotFound from '../pages/NotFound';
-import Register from '../pages/Register';
+import Register from '../pages/LoginRegister/Register';
 import EditQ from '../pages/questions/EditQ';
 import UserPage from '../pages/userpages/UserPage';
+
 // v6路由
 import {Navigate} from "react-router-dom";
 

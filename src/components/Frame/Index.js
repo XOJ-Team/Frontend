@@ -27,6 +27,18 @@ function Index(props) {
     }, {
         name: "Questions",
         targeturl: findRoute('questionList')
+    },{
+        name:"Competitions",
+        targeturl:"1"
+    },{
+        name:"New records",
+        targeturl:"2"
+    },{
+        name:"Rank",
+        targeturl:"3"
+    },{
+        name:"About",
+        targeturl:"4"
     }]
     // console.log(props.history.location.pathname)
 
