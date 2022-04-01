@@ -15,6 +15,8 @@ import { createQuestion,modifyQuestion,selectQuestionId,delQuestion} from '../..
 import { getTestcase,newTestcase,delTestcase,changeTestcase } from '../../services/testcase';
 import {findRoute} from '../../routers/config'
 import { showConfirm } from '../../components/confirm';
+import DocumentTitle from 'react-document-title'//动态Title
+
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
@@ -81,6 +83,11 @@ export default function EditQ(props) {
 
     // 表单提交事件
       const onFinish = (values) => {
+        console.log(mdword)
+        if(mdword===null || mdword==="" || mdword===undefined){
+          message.error("Content can not be null!")
+          return
+        }
         if(iscreate){
           // 创建新问题
           createQuestion({
@@ -129,6 +136,7 @@ export default function EditQ(props) {
       }
 
   return (
+    <DocumentTitle title="XOJ | Edit">
     <div>
     <MdEditor
       value={mdword}
@@ -207,12 +215,13 @@ export default function EditQ(props) {
     setvisible={setIsTestcaseVisible} 
     questionId={params['id']} />
     </div>
+    </DocumentTitle>
   );
 };
 
 function Testcase(props) {
   // testcase列表
-  let [tclist,settclist]=useState([{id:1,testcase:"test wu",result:'yusen'},{id:2,testcase:"test ma",result:'teng'}])
+  let [tclist,settclist]=useState([])
   // 现在正在操作的数据类型和正在操作的testcase id
   let [theState,settheState]=useState(["create",-1])//create edit remove
   let [CaseResult,setCaseResult]=useState({case:"",result:""})
@@ -303,6 +312,7 @@ function Testcase(props) {
     }
 
     <a onClick={()=>{
+      setCaseResult({case:"",result:""})
       settheState(["create",-1])
     }}>create</a>
 

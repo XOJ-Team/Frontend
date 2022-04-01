@@ -2,8 +2,10 @@ import React, {useContext} from 'react';
 import { Layout, Avatar, Divider, Typography, Row, Col, List } from 'antd';
 import { UserOutlined, TrophyOutlined, SmileOutlined } from '@ant-design/icons';
 import './UserPage.css';
+//utils
 // 全局变量
 import { Auth } from '../../contexts/AuthContext';
+import DocumentTitle from 'react-document-title'//动态Title
 
 const { Header } = Layout;
 const { Title, Text } = Typography;
@@ -25,6 +27,7 @@ export default function UserPage() {
         '1',
     ]
   return (
+  <DocumentTitle title="XOJ|UserInfo">
   <div>
       <Row className='main_layour'>
       <Col flex={1} />
@@ -84,5 +87,6 @@ export default function UserPage() {
           <Col flex={1} />
         </Row>
   </div>
+  </DocumentTitle>
   )
 }

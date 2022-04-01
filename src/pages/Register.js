@@ -10,6 +10,7 @@ import pattern from '../utils/regexp';
 import {registerApi} from '../services/auth'
 import {findRoute} from '../routers/config'
 import {Auth} from '../contexts/AuthContext'
+import DocumentTitle from 'react-document-title'//动态Title
 // import { setUsername,getUsername } from '../utils/auth';
 
 
@@ -58,6 +59,7 @@ export default function Register() {
   };
 
   return (
+    <DocumentTitle title="XOJ | Register">
     <div id="XOJ-components-form-normal-register">
       <Form
         name="basic"
@@ -153,5 +155,6 @@ export default function Register() {
         </Form.Item>
       </Form>
     </div>
+    </DocumentTitle>
   );
 };

@@ -10,6 +10,7 @@ import { loginApi, logincodeApi } from '../services/auth';
 import { getUseremail, setUseremail } from '../utils/auth';
 import { SendcodeButton } from '../components/emailcode/EmailcodeButton';
 import { findRoute } from '../routers/config';
+import DocumentTitle from 'react-document-title'//动态Title
 //context
 import { Auth } from '../contexts/AuthContext';
 
@@ -82,6 +83,7 @@ export default function Login() {
   }
 
   return (
+    <DocumentTitle title="XOJ | Login">
     <div
       id='XOJ-components-form-normal-login'
     >
@@ -169,5 +171,6 @@ export default function Login() {
         </Form.Item>
       </Form>
     </div>
+    </DocumentTitle>
   );
 };

@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import {findRoute} from '../../routers/config'
 import { Auth } from '../../contexts/AuthContext';
 import {selectQuestionByPage, selectQuestionNotHidedPaging} from '../../services/question';
+import DocumentTitle from 'react-document-title'//动态Title
+
+
 
 const { Sider, Content } = Layout;
 const { Text, Title } = Typography;
@@ -126,7 +129,8 @@ export default function ListQ(){
   }
 
   return (
-    <div>
+    <DocumentTitle title="XOJ | Questions">
+      <div>
       {/* 调试需要，默认有权限 */}
       {farpropsAuth['pAuthority']===3?(<Button
       onClick={()=>{
@@ -148,6 +152,7 @@ export default function ListQ(){
             onChange:changePage
           }}
           />
-    </div>
+      </div>
+    </DocumentTitle>
   )
 }

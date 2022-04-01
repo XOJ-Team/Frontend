@@ -9,7 +9,7 @@ import {findRoute} from '../../routers/config'
 import {selectQuestionId} from '../../services/question'
 import { message,PageHeader,Button,Tag } from 'antd';
 import { getTestcase } from '../../services/testcase';
-
+import DocumentTitle from 'react-document-title'//动态Title
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -54,7 +54,8 @@ export default function LookQ() {
   
 
   return (
-  <div>
+  <DocumentTitle title="XOJ | Question">
+    <div>
     <PageHeader
     title={questionTitle}
     subTitle={questionHard}
@@ -84,7 +85,7 @@ export default function LookQ() {
     dangerouslySetInnerHTML={{__html:mdParser.render(mdword)}}></div>
 
     <div>testcase:</div>
-    {testcases.map((e)=>{return <div>{e.testcase},{e.result}</div>})}
+    {testcases.map((e)=>{return <div>input: {e.testcase},result: {e.result}</div>})}
 
     <Button 
     type='primary'
@@ -95,7 +96,9 @@ export default function LookQ() {
       Start to write
     </Button>
     </div>
+
     </div>
+    </DocumentTitle>
   )
 }
 
