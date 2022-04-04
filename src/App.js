@@ -1,5 +1,4 @@
 // UI
-import logo from './logo.svg';
 import './App.less';
 import 'antd/dist/antd.less';
 // React

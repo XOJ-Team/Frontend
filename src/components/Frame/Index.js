@@ -96,7 +96,7 @@ function Index(props) {
                     )}
                 </Menu>
             </Header>
-            <Content style={{ padding: '50px 0px' }}>
+            <Content style={{ padding: '0px 0px' }}>
                 {/* <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>
