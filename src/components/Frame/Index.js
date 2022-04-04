@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Layout, Menu, Dropdown, Breadcrumb, Button } from 'antd';
 import { UserOutlined, ExportOutlined } from '@ant-design/icons';
 import "./Index.css";
@@ -9,62 +9,71 @@ import { findRoute } from '../../routers/config';
 import { Auth } from '../../contexts/AuthContext';
 
 const { Header, Content, Footer } = Layout;
-
+const { SubMenu } = Menu;
 function Index(props) {
 
-    // aboutme的显示与否
-    let [aboutme,setaboutme]=useState(false)
 
     let navigate = useNavigate()
     // 获取跨组件传来的信息
-    const farpropsAuth=useContext(Auth)
-
+    const farpropsAuth = useContext(Auth)
+    //当前聚焦菜单元素
+    const [current,setcurrent]=useState('')
+    const handleClick=(e)=>{
+        setcurrent(e.key)
+    }
     const menuItems = [{
         name: "Main",
         targeturl: findRoute('mainpage')
     }, {
         name: "Questions",
         targeturl: findRoute('questionList')
-    },{
-        name:"Competitions",
-        targeturl:findRoute('competitionList')
-    },{
-        name:"New records",
-        targeturl:"2"
-    },{
-        name:"Rank",
-        targeturl:"3"
-    },{
-        name:"About",
-        targeturl:findRoute('aboutxoj')
+    }, {
+        name: "Competitions",
+        targeturl: findRoute('competitionList')
+    }, {
+        name: "New records",
+        targeturl: "2"
+    }, {
+        name: "Rank",
+        targeturl: "3"
+    }, {
+        name: "About",
+        targeturl: findRoute('aboutxoj')
     }]
-    // console.log(props.history.location.pathname)
 
-    const dropdownMenu = (
-        <Menu>
-            <Menu.Item icon={<UserOutlined />}>
-                <a onClick={(e)=>{ navigate(findRoute('userpage'))}}>Profile</a>
-            </Menu.Item>
-            <Menu.Item icon={<ExportOutlined />}>
-                <a onClick={(e) => {}}>Logout</a>
-            </Menu.Item>
-        </Menu>
-    )
+    //登录后右上角的下拉菜单
+    const DropdownMenu = function(){
+        return (
+            <SubMenu 
+            style={{position:'absolute',right:'0'}} 
+            key="SubMenu" 
+            icon={<UserOutlined />} 
+            title={farpropsAuth.pUsername}>
+                <Menu.Item key="profile" icon={<UserOutlined />}>
+                    <a onClick={(e) => { navigate(findRoute('userpage')) }}>Profile</a>
+                </Menu.Item>
+                <Menu.Item key="logout" icon={<ExportOutlined />} style={{backgroundColor:'#FF6347'}}>
+                    <a onClick={(e) => { }}>Logout</a>
+                </Menu.Item>
+            </SubMenu>
+        )
+    }
 
     return (
         <Layout className="layout">
             <Header>
-                <div className="logo" style={{ position:'absolute', padding: "0px 20px" }}>
+                <div className="logo" style={{ position: 'absolute', padding: "0px 20px" }}>
                     <img src='/favicon.ico' />
                 </div>
                 <Menu
                     theme="dark"
                     mode="horizontal"
                     defaultSelectedKeys={['1']}
-                    selectedKeys={[]}
+                    selectedKeys={[current]}
                     style={{ paddingLeft: '130px' }}
+                    onClick={handleClick}
+                    selectable={false}
                 >
-                    {() => { console.log(props.history) }}
                     {menuItems.map((item, index) => {
                         return <Menu.Item
                             key={item.targeturl}
@@ -72,29 +81,27 @@ function Index(props) {
                                 navigate(e.key)
                             }}>{item.name}</Menu.Item>;
                     })}
+                    {farpropsAuth.pUsername === null ? (
                     <Menu.Item
                         key='userlogin'
-                        style={{ position: 'absolute', right: '0px', paddingRight:'20px'}}
+                        style={{ position: 'absolute', right: '0px', paddingRight: '20px' }}
                     >
-                        {farpropsAuth.pUsername===null?(<a onClick={(e)=>{
+                        <a onClick={(e) => {
                             navigate(findRoute('userlogin'))
-                        }}>Login/Register</a>):(
-                            <Dropdown overlay={dropdownMenu} placement='bottomRight'>
-                            <a onClick={e => e.preventDefault()}>
-                            {farpropsAuth.pUsername}
-                            </a></Dropdown>)}
+                        }}>Login/Register</a>
                     </Menu.Item>
+                    ) : (
+                        <DropdownMenu/>
+                    )}
                 </Menu>
-
-
             </Header>
-            <Content style={{ padding: '50px 0px'}}>
+            <Content style={{ padding: '50px 0px' }}>
                 {/* <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb> */}
-                <div className="site-layout-content" style={{minHeight: '735px'}}>
+                <div className="site-layout-content" style={{ minHeight: '735px' }}>
                     {props.children}
                 </div>
 
