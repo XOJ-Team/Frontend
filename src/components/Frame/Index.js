@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Layout, Menu, Dropdown, Breadcrumb, Button } from 'antd';
 import { UserOutlined, ExportOutlined } from '@ant-design/icons';
 import "./Index.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 // 路由寻找
 import { findRoute } from '../../routers/config';
 // 全局变量
@@ -12,12 +12,13 @@ const { Header, Content, Footer } = Layout;
 const { SubMenu } = Menu;
 function Index(props) {
 
-
+    // 获取当前url
+    let location=useLocation()
     let navigate = useNavigate()
     // 获取跨组件传来的信息
     const farpropsAuth = useContext(Auth)
     //当前聚焦菜单元素
-    const [current,setcurrent]=useState('')
+    const [current,setcurrent]=useState(location.pathname)
     const handleClick=(e)=>{
         setcurrent(e.key)
     }
