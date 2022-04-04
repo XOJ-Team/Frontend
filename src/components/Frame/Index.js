@@ -5,8 +5,6 @@ import "./Index.css";
 import { useNavigate } from 'react-router-dom';
 // 路由寻找
 import { findRoute } from '../../routers/config';
-// About me弹窗
-import About from '../../pages/About';
 // 全局变量
 import { Auth } from '../../contexts/AuthContext';
 
@@ -29,7 +27,7 @@ function Index(props) {
         targeturl: findRoute('questionList')
     },{
         name:"Competitions",
-        targeturl:"1"
+        targeturl:findRoute('competitionList')
     },{
         name:"New records",
         targeturl:"2"
@@ -38,7 +36,7 @@ function Index(props) {
         targeturl:"3"
     },{
         name:"About",
-        targeturl:"4"
+        targeturl:findRoute('aboutxoj')
     }]
     // console.log(props.history.location.pathname)
 
@@ -103,13 +101,12 @@ function Index(props) {
             </Content>
             <Footer style={{ textAlign: 'center' }}>
                 <a onClick={() => {
-                    setaboutme(true)
+                    window.open("https://dev.azure.com/XOJ-Team/CPT202%20Team%20B-3")
                 }}>
-                    @About us
+                    power by @XOJ
                 </a>
                 <br />
                 XOJ ©2022 Created by CPT202 Group B-3</Footer>
-            <About visible={aboutme} setvisible={(e)=>setaboutme(e)}/>
         </Layout>
     )
 }
