@@ -1,7 +1,10 @@
 import React from 'react'
+import DocumentTitle from 'react-document-title'//动态Title
 
 export default function aboutus() {
   return (
-    <div>aboutus</div>
+    <DocumentTitle title='XOJ | About'>
+      <div>aboutus</div>
+    </DocumentTitle>
   )
 }

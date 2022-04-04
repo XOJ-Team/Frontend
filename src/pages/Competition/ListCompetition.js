@@ -1,7 +1,10 @@
 import React from 'react'
+import DocumentTitle from 'react-document-title'//动态Title
 
 export default function ListCompetition() {
   return (
-    <div>ListCompetition</div>
+    <DocumentTitle title='XOJ | Competitions'>
+      <div>ListCompetition</div>
+    </DocumentTitle>
   )
 }
