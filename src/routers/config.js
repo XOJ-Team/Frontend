@@ -7,23 +7,14 @@ import NotFound from '../pages/NotFound';
 import Register from '../pages/LoginRegister/Register';
 import EditQ from '../pages/questions/EditQ';
 import UserPage from '../pages/userpages/UserPage';
-
+import Aboutus from '../pages/About/Aboutus';
+import ListCompetition from '../pages/Competition/ListCompetition'
 // v6路由
 import {Navigate} from "react-router-dom";
 
 // 路由配置
-// id应当唯一
+// id应当唯一,最好不要更改id
 export const allroutes=[
-    {
-        id:'userlogin',
-        path:'login',
-        element:<Login />
-    },
-    {
-        id:'userregister',
-        path:'register',
-        element:<Register />
-    },
     {
         id:'notfound',
         path:'404',
@@ -35,7 +26,21 @@ export const allroutes=[
         element:<MainPage />
     },
     {
-        id:'questions',
+        path:'userauth',
+        children:[
+            {
+                id:'userlogin',
+                path:'login',
+                element:<Login />
+            },
+            {
+                id:'userregister',
+                path:'register',
+                element:<Register />
+            },
+        ]
+    },
+    {
         path:'questions',
         children:[
             {
@@ -54,6 +59,26 @@ export const allroutes=[
         ]
     },
     {
+        path:'about',
+        children:[
+            {
+                id:'aboutxoj',
+                path:'xoj',
+                element:<Aboutus />
+            },
+        ]
+    },
+    {
+        path:'competition',
+        children:[
+            {
+                id:'competitionList',
+                path:'',
+                element:<ListCompetition />
+            },
+        ]
+    },
+    {
         path:'userpages',
         children:[
             {
@@ -66,7 +91,7 @@ export const allroutes=[
     {
         id:'default',
         path:'*',
-        element:<Navigate to="/main" />
+        element:<Navigate to="/404" />
     },
 ]
 
