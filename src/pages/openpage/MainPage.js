@@ -1,6 +1,9 @@
 import React, { useContext } from 'react'
 //跨组件传参
 import { Auth } from '../../contexts/AuthContext'
+//utils
+import { useNavigate } from 'react-router-dom'
+import {findRoute} from '../../routers/config'
 //UI
 import DocumentTitle from 'react-document-title'//动态Title
 import Logo from '../../logo.svg'
@@ -10,6 +13,7 @@ import './MainPage.css'
 export default function Mainpage() {
   // 获取跨组件传来的参数对象
   const farpropsAuth = useContext(Auth)
+  const navigate=useNavigate()
   return (
     <DocumentTitle title="XOJ | Home">
       <div style={{fontSize:'1.5em'}}>
@@ -31,8 +35,8 @@ export default function Mainpage() {
               <div style={{fontSize:'0.9em',color:'gray'}}>make your code comfortable and joyful</div>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <Button type='primary' style={{ borderRadius: '50px', margin: '20px 20px',width:'180px',height:'70px',fontSize:'1.2em'}}>Get Start</Button>
-              <Button type='' style={{ borderRadius: '50px', margin: '20px 20px',width:'180px',height:'70px',fontSize:'1.2em'}}>About</Button>
+              <Button type='primary' className='bigbutton' onClick={()=>{navigate(findRoute('questionList'))}}>Get Start</Button>
+              <Button type='' className='bigbutton' onClick={()=>{navigate(findRoute('aboutxoj'))}}>About</Button>
             </div>
           </div>
 

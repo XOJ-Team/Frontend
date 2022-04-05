@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 import { Layout, Menu, Dropdown, Breadcrumb, Button } from 'antd';
 import { UserOutlined, ExportOutlined } from '@ant-design/icons';
 import "./Index.css";
@@ -19,9 +19,8 @@ function Index(props) {
     const farpropsAuth = useContext(Auth)
     //当前聚焦菜单元素
     const [current,setcurrent]=useState(location.pathname)
-    const handleClick=(e)=>{
-        setcurrent(e.key)
-    }
+    useEffect(()=>{setcurrent(location.pathname)},[location.pathname])
+
     const menuItems = [{
         name: "Home",
         targeturl: findRoute('mainpage')
@@ -62,18 +61,16 @@ function Index(props) {
 
     return (
         <Layout className="layout">
-            <Header>
-                <div className="logo" style={{ position: 'absolute', padding: "0px 20px" }}>
+            <Header style={{padding:'0'}}>
+                <div className="logo" style={{ position: 'absolute', padding: "0px 30px" }}>
                     <img src='/favicon.ico' />
                 </div>
                 <Menu
-                    theme="dark"
                     mode="horizontal"
-                    defaultSelectedKeys={['1']}
+                    theme='dark'
+                    defaultSelectedKeys={[current]}
                     selectedKeys={[current]}
                     style={{ paddingLeft: '130px' }}
-                    onClick={handleClick}
-                    selectable={false}
                 >
                     {menuItems.map((item, index) => {
                         return <Menu.Item

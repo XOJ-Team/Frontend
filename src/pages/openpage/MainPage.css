@@ -12,3 +12,11 @@
     -webkit-background-size: cover;
     -moz-background-size: cover;
 }
+
+.bigbutton{
+    border-radius: 50px;
+    margin: 20px 20px;
+    width: 180px;
+    height: 70px;
+    font-size: 1.2em;
+}
