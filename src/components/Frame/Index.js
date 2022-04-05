@@ -23,7 +23,7 @@ function Index(props) {
         setcurrent(e.key)
     }
     const menuItems = [{
-        name: "Main",
+        name: "Home",
         targeturl: findRoute('mainpage')
     }, {
         name: "Questions",
@@ -85,7 +85,7 @@ function Index(props) {
                     {farpropsAuth.pUsername === null ? (
                     <Menu.Item
                         key='userlogin'
-                        style={{ position: 'absolute', right: '0px', paddingRight: '20px' }}
+                        style={{ position: 'absolute', width:'150px',textAlign:'center',right: '0px', paddingRight: '20px' }}
                     >
                         <a onClick={(e) => {
                             navigate(findRoute('userlogin'))
@@ -111,7 +111,7 @@ function Index(props) {
                 <a onClick={() => {
                     window.open("https://dev.azure.com/XOJ-Team/CPT202%20Team%20B-3")
                 }}>
-                    power by @XOJ
+                    powered by @XOJ
                 </a>
                 <br />
                 XOJ ©2022 Created by CPT202 Group B-3</Footer>
