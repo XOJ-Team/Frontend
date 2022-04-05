@@ -21,6 +21,11 @@ export const allroutes=[
         element:<NotFound />
     },
     {
+        id:'rootpage',
+        path:'',
+        element:<Navigate to='/main' />
+    },
+    {
         id:'mainpage',
         path:'main',
         element:<MainPage />
