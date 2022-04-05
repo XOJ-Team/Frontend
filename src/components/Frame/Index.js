@@ -104,7 +104,7 @@ function Index(props) {
                 </div>
 
             </Content>
-            <Footer style={{ textAlign: 'center' }}>
+            <Footer style={{ textAlign: 'center',backgroundColor:'#00152f',color:'#d9d9d9'}}>
                 <a onClick={() => {
                     window.open("https://dev.azure.com/XOJ-Team/CPT202%20Team%20B-3")
                 }}>
