@@ -55,9 +55,9 @@ function Index(props) {
                     // 重置用户名
                     farpropsAuth.setpUsername(null)
                     // 重置权限
-                    farpropsAuth.setpAuthority(null)
+                    farpropsAuth.setpAuthority(1)
                     // 重置用户id
-                    farpropsAuth.setpUserid(1)
+                    farpropsAuth.setpUserid(null)
                     navigate(findRoute('mainpage'))
                 }
             }
