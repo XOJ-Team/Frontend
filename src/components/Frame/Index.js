@@ -1,8 +1,10 @@
 import React, { useState, useContext,useEffect } from 'react'
-import { Layout, Menu, Dropdown, Breadcrumb, Button } from 'antd';
+import { Layout, Menu, Dropdown, Breadcrumb, Button, message } from 'antd';
 import { UserOutlined, ExportOutlined,HomeFilled,ReconciliationFilled,DashboardFilled,SignalFilled,QuestionCircleFilled } from '@ant-design/icons';
 import "./Index.css";
 import { useNavigate,useLocation } from 'react-router-dom';
+// utils
+import { logoutApi } from '../../services/auth';
 // 路由寻找
 import { findRoute } from '../../routers/config';
 // 全局变量
@@ -43,6 +45,25 @@ function Index(props) {
         icon:<QuestionCircleFilled />
     }]
 
+    //用户登出
+    const userLogout = () => {
+        logoutApi({}).then(
+            (res) =>{
+                if (res.data.status === -1) {
+                    message.error(res.data.comment)
+                }else if(res.data.status === 1) {
+                    // 重置用户名
+                    farpropsAuth.setpUsername(null)
+                    // 重置权限
+                    farpropsAuth.setpAuthority(null)
+                    // 重置用户id
+                    farpropsAuth.setpUserid(1)
+                    navigate(findRoute('mainpage'))
+                }
+            }
+        )
+    };
+
     //登录后右上角的下拉菜单
     const DropdownMenu = function(){
         return (
@@ -52,10 +73,10 @@ function Index(props) {
             icon={<UserOutlined />} 
             title={farpropsAuth.pUsername}>
                 <Menu.Item key="profile" icon={<UserOutlined />}>
-                    <a onClick={(e) => { navigate(findRoute('userpage')) }}>Profile</a>
+                    <a onClick={() => { navigate(findRoute('userpage')) }}>Profile</a>
                 </Menu.Item>
                 <Menu.Item key="logout" icon={<ExportOutlined />} style={{backgroundColor:'#FF6347'}}>
-                    <a onClick={(e) => { }}>Logout</a>
+                    <a onClick={() => {userLogout()}}>Logout</a>
                 </Menu.Item>
             </SubMenu>
         )
