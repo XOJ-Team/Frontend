@@ -13,6 +13,8 @@ import { Auth } from '../../contexts/AuthContext';
 const { Header, Content, Footer } = Layout;
 const { SubMenu } = Menu;
 function Index(props) {
+    //当前窗口的高
+    let windowHeight = document.documentElement.clientHeight || document.body.clientHeight
 
     // 获取当前url
     let location=useLocation()
@@ -122,7 +124,9 @@ function Index(props) {
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb> */}
-                <div className="site-layout-content">
+                <div className="site-layout-content"
+                 style={{minHeight:windowHeight-130}}
+                 >
                     {props.children}
                 </div>
 

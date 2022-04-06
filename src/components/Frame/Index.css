@@ -1,5 +1,6 @@
 .site-layout-content {
-    min-height: 735px;
+    /* 改用js动态设置min-height */
+    /* min-height: 735px; */
     /* padding: 24px; */
     /* padding-top:0; */
   }
