@@ -99,7 +99,7 @@ function Index(props) {
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb> */}
-                <div className="site-layout-content" style={{ minHeight: '735px' }}>
+                <div className="site-layout-content">
                     {props.children}
                 </div>
 

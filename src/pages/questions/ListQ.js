@@ -54,7 +54,6 @@ export default function ListQ(){
         pageSize:10
       }).then(res => succesResponse(res));
     }
-    
   },[]);
 
   //  用户点击页数栏，重新获取题目条目

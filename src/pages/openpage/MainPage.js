@@ -25,16 +25,12 @@ export default function Mainpage() {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'center',paddingTop:'30px' }}>
-          <div style={{width:'50%',textAlign: 'center' }}>
-            <div>
-              <img src={Logo} style={{ height: '200px' }}></img>
-            </div>
-            <br />
+          <div style={{width:'50%',textAlign: 'center',display:'flex',flexDirection:'column',justifyContent:'center' }}>
             <div>
               <div style={{fontSize:'1.5em',fontWeight:'bolder'}}>XJTLU Online Coding Judgement</div>
               <div style={{fontSize:'0.9em',color:'gray'}}>make your code comfortable and joyful</div>
             </div>
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center',marginTop:'50px' }}>
               <Button type='primary' className='bigbutton' onClick={()=>{navigate(findRoute('questionList'))}}>Get Start</Button>
               <Button type='' className='bigbutton' onClick={()=>{navigate(findRoute('aboutxoj'))}}>About</Button>
             </div>
