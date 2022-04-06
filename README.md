@@ -60,6 +60,10 @@ react-router-dom: v6
 
 如果无需保存state，尽可能使用函数式声明的无状态组件
 
+frame内的各个page组件统一padding: 20px 40px
+
+字体大小以rem为单位
+
 # 常见问题
 
 ## git无法push
