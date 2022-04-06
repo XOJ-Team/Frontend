@@ -1,6 +1,6 @@
 import React, { useState, useContext,useEffect } from 'react'
 import { Layout, Menu, Dropdown, Breadcrumb, Button } from 'antd';
-import { UserOutlined, ExportOutlined } from '@ant-design/icons';
+import { UserOutlined, ExportOutlined,HomeFilled,ReconciliationFilled,DashboardFilled,SignalFilled,QuestionCircleFilled } from '@ant-design/icons';
 import "./Index.css";
 import { useNavigate,useLocation } from 'react-router-dom';
 // 路由寻找
@@ -23,19 +23,24 @@ function Index(props) {
 
     const menuItems = [{
         name: "Home",
-        targeturl: findRoute('mainpage')
+        targeturl: findRoute('mainpage'),
+        icon:<HomeFilled />
     }, {
         name: "Questions",
-        targeturl: findRoute('questionList')
+        targeturl: findRoute('questionList'),
+        icon:<ReconciliationFilled />
     }, {
         name: "Competitions",
-        targeturl: findRoute('competitionList')
+        targeturl: findRoute('competitionList'),
+        icon:<DashboardFilled />
     }, {
         name: "Rank",
-        targeturl: findRoute('siterank')
+        targeturl: findRoute('siterank'),
+        icon:<SignalFilled />
     }, {
         name: "About",
-        targeturl: findRoute('aboutxoj')
+        targeturl: findRoute('aboutxoj'),
+        icon:<QuestionCircleFilled />
     }]
 
     //登录后右上角的下拉菜单
@@ -74,7 +79,7 @@ function Index(props) {
                             key={item.targeturl}
                             onClick={(e) => {
                                 navigate(e.key)
-                            }}>{item.name}</Menu.Item>;
+                            }}>{item.icon} {item.name}</Menu.Item>;
                     })}
                     {farpropsAuth.pUsername === null ? (
                     <Menu.Item
