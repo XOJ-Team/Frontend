@@ -31,11 +31,8 @@ function Index(props) {
         name: "Competitions",
         targeturl: findRoute('competitionList')
     }, {
-        name: "New records",
-        targeturl: "2"
-    }, {
         name: "Rank",
-        targeturl: "3"
+        targeturl: findRoute('siterank')
     }, {
         name: "About",
         targeturl: findRoute('aboutxoj')

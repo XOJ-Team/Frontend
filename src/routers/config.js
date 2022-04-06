@@ -9,6 +9,7 @@ import EditQ from '../pages/questions/EditQ';
 import UserPage from '../pages/userpages/UserPage';
 import Aboutus from '../pages/About/Aboutus';
 import ListCompetition from '../pages/Competition/ListCompetition'
+import SiteRank from '../pages/Ranks/SiteRank';
 // v6路由
 import {Navigate} from "react-router-dom";
 
@@ -60,6 +61,16 @@ export const allroutes=[
                 id:'questionEdit',
                 path:'edit',
                 element:<EditQ />
+            }
+        ]
+    },
+    {
+        path:'rank',
+        children:[
+            {
+                id:'siterank',
+                path:'',
+                element:<SiteRank />
             }
         ]
     },
