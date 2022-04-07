@@ -99,7 +99,8 @@ export default function Register() {
 
         <SendcodeButton 
         email={email}
-        offset={10}
+        style={{textAlign:'center'}}
+        offset={0}
         span={24}
         />
 
@@ -149,8 +150,9 @@ export default function Register() {
         </Form.Item>
 
         <Form.Item
+          style={{textAlign:'center'}}
           wrapperCol={{
-            offset: 10,
+            offset: 0,
             span: 24,
           }}
         >

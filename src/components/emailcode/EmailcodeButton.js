@@ -3,7 +3,7 @@ import { Form, Button,message } from 'antd';
 import { sendCodeApi } from '../../services/auth';
 import { reg } from '../../utils/regexp';
 /**
- * this is a button to send a email varification code 
+ * this is a button to send a email varification code, must be in a Form component
  * @props email(String) the email address,this should be a double-binded data
  * @props offset(int),span(int) the position
  */
@@ -11,6 +11,7 @@ export function SendcodeButton(props) {
     let email=props.email
     let offset=props.offset
     let span=props.span
+    let style=props.style
     // 邮箱是否有效
     let validemail = reg('email').test(email)?true:false
     // 是否把按钮设置为已发送状态
@@ -52,6 +53,7 @@ export function SendcodeButton(props) {
 
     return (
         <Form.Item
+            style={style}
             wrapperCol={{
                 offset: offset,
                 span: span
@@ -61,6 +63,7 @@ export function SendcodeButton(props) {
                 onClick={onCodeSend}>
                 Send
             </Button>}
+            <div style={{clear:'both'}}></div>
         </Form.Item>
     )
 

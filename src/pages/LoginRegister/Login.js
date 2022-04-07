@@ -118,7 +118,8 @@ export default function Login() {
         {(useCode) ? <SendcodeButton
           email={email}
           offset={0}
-          span={16}
+          span={24}
+          style={{textAlign:'center'}}
         /> : <div></div>}
 
 
