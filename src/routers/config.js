@@ -127,7 +127,7 @@ export function findRoute(id){
     }else if(result.length===1){
         return result[0]
     }else{
-        return ""
+        return "/"
     }
 
     function recfindRoute(prefix,node){
