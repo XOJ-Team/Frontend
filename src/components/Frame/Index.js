@@ -125,7 +125,7 @@ function Index(props) {
                         <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb> */}
                 <div className="site-layout-content"
-                 style={{minHeight:windowHeight-130}}
+                 style={{minHeight:windowHeight-130,overflow:'hidden'}}
                  >
                     {props.children}
                 </div>
