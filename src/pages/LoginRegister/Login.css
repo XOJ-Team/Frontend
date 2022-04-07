@@ -1,7 +1,21 @@
-
+#XOJ-components-form-normal-login {
+  max-width: 400px;
+  margin:10rem auto;
+}
+#XOJ-components-form-normal-login .title{
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 1rem;
+  font-weight: bolder;
+  color: #b55fcf;
+}
 #XOJ-components-form-normal-login .login-form {
-    max-width: 300px;
-    margin:100px auto;
+    padding:20px;
+    /* margin:50% auto; */
+    border-radius: 42px;
+    background: #ededed;
+    box-shadow:  15px 15px 31px #acacac,
+             0px 0px 31px #ffffff;
   }
   #XOJ-components-form-normal-login .login-form-forgot {
     float: right;

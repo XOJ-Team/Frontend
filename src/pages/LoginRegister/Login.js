@@ -98,7 +98,7 @@ export default function Login() {
         onValuesChange={onValuesChange}
         form={form}
       >
-
+        <div className='title'>Login</div>
         <Form.Item
           name="email"
           rules={[

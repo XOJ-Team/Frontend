@@ -64,10 +64,10 @@ export default function Register() {
       <Form
         name="basic"
         labelCol={{
-          span: 8,
+          span: 0,
         }}
         wrapperCol={{
-          span: 16,
+          span: 24,
         }}
         initialValues={{
           remember: true,
@@ -78,7 +78,7 @@ export default function Register() {
         className='register-form'
         form={form}
       >
-
+      <div className='title'>Register</div>
         <Form.Item
           label="Email"
           name="email"
@@ -90,15 +90,17 @@ export default function Register() {
             pattern('email')
           ]}
         >
-        <Input prefix={
+        <Input 
+        placeholder="Email"
+        prefix={
           <MailOutlined className="site-form-item-icon" />
          } />
         </Form.Item>
 
         <SendcodeButton 
         email={email}
-        offset={8}
-        span={16}
+        offset={10}
+        span={24}
         />
 
         <Form.Item
@@ -112,6 +114,7 @@ export default function Register() {
           ]}
         >
           <Input 
+          placeholder="Verifivation Code"
           prefix={<NumberOutlined />}/>
         </Form.Item>
 
@@ -126,6 +129,7 @@ export default function Register() {
           ]}
         >
           <Input 
+          placeholder="Username"
           prefix={<SmileOutlined />}/>
         </Form.Item>
 
@@ -140,13 +144,14 @@ export default function Register() {
           ]}
         >
           <Input.Password 
+          placeholder="Password"
           prefix={<LockOutlined />}/>
         </Form.Item>
 
         <Form.Item
           wrapperCol={{
-            offset: 8,
-            span: 16,
+            offset: 10,
+            span: 24,
           }}
         >
           <Button type="primary" htmlType="submit">

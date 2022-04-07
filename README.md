@@ -62,7 +62,7 @@ react-router-dom: v6
 
 frame内的各个page组件统一padding: 20px 40px
 
-字体大小以rem为单位
+普通字体大小以px为单位，恒等字体大小以rem为单位
 
 # 常见问题
 
