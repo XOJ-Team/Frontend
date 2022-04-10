@@ -111,7 +111,7 @@ function Index(props) {
                     >
                         <a onClick={(e) => {
                             navigate(findRoute('userlogin'))
-                        }}>Login/Register</a>
+                        }}>Login / Register</a>
                     </Menu.Item>
                     ) : (
                         <DropdownMenu/>

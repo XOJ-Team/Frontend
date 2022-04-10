@@ -156,7 +156,7 @@ export default function Login() {
               })
             }}
           >
-            {useCode ? "use password" : "use code"}
+            {useCode ? "with password" : "with verifivcation code"}
           </a>
         </Form.Item>
 

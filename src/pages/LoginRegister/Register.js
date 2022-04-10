@@ -162,7 +162,7 @@ export default function Register() {
         </Form.Item>
 
         <Form.Item style={{marginBottom:'0'}}>
-          Have account? <a onClick={()=>navigate(findRoute('userlogin'))}>Log in here</a>
+          Have accounts? <a onClick={()=>navigate(findRoute('userlogin'))}>Log in here</a>
         </Form.Item>
       </Form>
     </div>
