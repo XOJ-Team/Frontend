@@ -21,10 +21,11 @@ export default function UserPage() {
       res => {
         if (res.data.status===1){
           setEmail(res.data.obj.mail)
-          const oldQLND = { ...questionLevelNumData }
+          const oldQLND = [ ...questionLevelNumData ]
           oldQLND[0].context = res.data.obj.easyNumber
           oldQLND[1].context = res.data.obj.mediumNumber
           oldQLND[2].context = res.data.obj.hardNumber
+          console.log(oldQLND)
           setQuestionLevelNumData(oldQLND)
           setAvatarUrl(res.data.obj.profilePhoto)
           setRanking(res.data.obj.ranking)
@@ -37,7 +38,7 @@ export default function UserPage() {
 
 
   const [userSelfDescribe, setuserSelfDescribe] = useState(
-    'This is an self introduction editing by yourself.',
+    'This is an self introduction editing by yourself.'
   );
   // 获取跨组件传来的信息
   const farpropsAuth = useContext(Auth)
