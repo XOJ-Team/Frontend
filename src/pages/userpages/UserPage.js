@@ -74,7 +74,7 @@ export default function UserPage() {
   ]);
   return (
     <DocumentTitle title="XOJ|UserInfo">
-      <div>
+      <div style={{margin:'20px 40px'}}>
         <Header className='headerAbove'></Header>
         <Row className='main_layour'>
           <Col flex={0.5} />
@@ -146,6 +146,7 @@ export default function UserPage() {
               header={<div><CheckSquareOutlined />&nbsp;<b>Recent AC</b></div>}
               bordered
               dataSource={questionlistData}
+              style={{marginBottom:'24px'}}
               renderItem={item => <List.Item>{item}</List.Item>}
             />
           </Col>
