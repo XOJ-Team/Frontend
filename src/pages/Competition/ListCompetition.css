@@ -1,0 +1,8 @@
+/* 头像左外边距 */
+#competitionlist .ant-list-item-meta-avatar{
+    margin: 20px 16px;
+}
+ /* edit按钮右外边距 */
+#competitionlist .ant-list-item-action{
+    margin:0 24px;
+}
