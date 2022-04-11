@@ -8,6 +8,7 @@ import Register from '../pages/LoginRegister/Register';
 import EditQ from '../pages/questions/EditQ';
 import UserPage from '../pages/userpages/UserPage';
 import Aboutus from '../pages/About/Aboutus';
+import ViewCompetition from '../pages/Competition/ViewCompetition'
 import ListCompetition from '../pages/Competition/ListCompetition'
 import SiteRank from '../pages/Ranks/SiteRank';
 // v6路由
@@ -92,6 +93,11 @@ export const allroutes=[
                 path:'',
                 element:<ListCompetition />
             },
+            {
+                id:'onecompetition',
+                path:'view',
+                element:<ViewCompetition />
+            }
         ]
     },
     {

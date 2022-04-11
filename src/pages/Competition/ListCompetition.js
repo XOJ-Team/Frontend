@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import DocumentTitle from 'react-document-title'//动态Title
+// UI
 import { Pagination, Button,Divider,Typography,message, List, Avatar } from 'antd';
 import './ListCompetition.css'
+// utils
+import { useNavigate } from 'react-router-dom';
+import { findRoute } from '../../routers/config';
 
 const {Title,Paragraph}=Typography;
 
 export default function ListCompetition() {
+  const navigate=useNavigate()
+
   const [totalitems, settotalitems] = useState(0)
   const [complist, setcomlist] = useState([{ title: 'Competition A' }, { title: 'Competition B' },{ title: 'Competition C' }])
   return (
@@ -20,7 +26,7 @@ export default function ListCompetition() {
             >
               <List.Item.Meta
                 avatar={<Avatar size={40} src="https://joeschmoe.io/api/v1/random" />}
-                title={<a id='123' onClick={(e)=>{console.log(e.target.id)}}>{item.title}</a>}
+                title={<a id='123' onClick={(e)=>{navigate(findRoute('onecompetition')+'?id='+e.target.id)}}>{item.title}</a>}
                 description={(<div><Paragraph ellipsis={{rows:1}}>brief introduction</Paragraph><div>start at 12:00 2022/02/22</div></div>)}
               />
             </List.Item>
