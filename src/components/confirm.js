@@ -6,7 +6,10 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 // 确认弹窗
 const {confirm}=Modal;
-// 弹出确认框-危险操作,传入onOkfunc
+/**
+ * 弹出红色的确认删除的二次确认弹窗
+ * @param onOkfunc 点击确认后的回调函数
+ */
 export function showConfirm(onOkfunc) {
     confirm({
       title: 'Do you Want to delete?',
