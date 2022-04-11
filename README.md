@@ -60,7 +60,7 @@ react-router-dom: v6
 
 如果无需保存state，尽可能使用函数式声明的无状态组件
 
-frame内的各个page组件统一padding: 20px 40px
+frame内的各个page组件统一margin: 20px 40px，与导航栏隔开距离
 
 普通字体大小以px为单位，恒等字体大小以rem为单位
 
