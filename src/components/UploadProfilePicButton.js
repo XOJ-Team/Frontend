@@ -60,6 +60,7 @@ export default function UploadProfilePic(props){
         withCredentials={true}
         beforeUpload={beforeUpload}
         onChange={handleChange}
+        style={props.style}
       >
         {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : <div>
         {loading ? <LoadingOutlined /> : <PlusOutlined />}
