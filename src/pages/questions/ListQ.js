@@ -25,6 +25,10 @@ export default function ListQ(){
   const [sumOfquestions,setsumOfquestions]=useState(0)
   const farpropsAuth=useContext(Auth)
 
+  // 困难标签的颜色
+  const whichcolor={'easy':'green','medium':'orange','hard':'red'}
+
+
   // 封装then方法里的内容
   let succesResponse = (res) => {
     let infolist=[]
@@ -95,9 +99,9 @@ export default function ListQ(){
       dataIndex: 'levelDescription',
       render: text => {
             return (
-              <Text>
+              <Tag color={whichcolor[text]}>
                 {text}
-              </Text>
+              </Tag>
             )},
     },
     {

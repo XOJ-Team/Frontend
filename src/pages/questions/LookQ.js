@@ -21,6 +21,10 @@ export default function LookQ() {
   const [tags,settags]=useState("")
   const [testcases,settestcases]=useState([])
 
+  // 困难标签的颜色
+  const whichcolor={'easy':'green','medium':'orange','hard':'red'}
+
+
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
@@ -58,11 +62,10 @@ export default function LookQ() {
     <div>
     <PageHeader
     title={questionTitle}
-    subTitle={questionHard}
     onBack={()=>{navigate(-1)}}
     />
-
     <div style={{padding:"0px 50px"}}>
+    <Tag color={whichcolor[questionHard]}>{questionHard}</Tag>
     <div>
       <span style={{color:'gray'}}>Tags:</span>
       {tags.split("#").map((item,index)=>{
