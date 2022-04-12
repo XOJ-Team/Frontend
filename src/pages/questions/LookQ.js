@@ -63,9 +63,10 @@ export default function LookQ() {
   return (
   <DocumentTitle title="XOJ | Question">
     <Row 
+    className='main_context'
     gutter={26}
     >
-      <Col span={16} offset={1}>
+      <Col className='question_descrip' span={16} offset={1}>
     <PageHeader
     title={params['id']+". "+questionTitle}
     onBack={()=>{navigate(-1)}}
@@ -121,7 +122,8 @@ export default function LookQ() {
     <Divider />
     </PageHeader>
     </Col>
-    <Col span={5}>
+    <Col></Col>
+    <Col className='question_info' span={5}>
     {/* <div>
       <div>Difficulty: <Tag color={whichcolor[questionHard]}>{questionHard}</Tag></div>
       <span style={{color:'gray'}}>Tags:</span>
