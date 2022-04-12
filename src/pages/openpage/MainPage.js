@@ -18,7 +18,7 @@ export default function Mainpage() {
   const navigate = useNavigate()
   return (
     <DocumentTitle title="XOJ | Home">
-      <div style={{ fontSize: '1.2rem' }}>
+      <div id="homepage" style={{ fontSize: '1.2rem' }}>
         <div>
           <Carousel autoplay fade autoplaySpeed={9000}>
             {/* <div>
