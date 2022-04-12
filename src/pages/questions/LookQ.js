@@ -17,7 +17,7 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 export default function LookQ() {
   let navigate=useNavigate()
   const [mdword,setmdword] = useState("")
-  const [questionTitle,setquestionTitle] = useState(null)
+  const [questionTitle,setquestionTitle] = useState("")
   const [questionHard,setquestionHard] = useState("")
   const [tags,settags]=useState("")
   const [testcases,settestcases]=useState([])
