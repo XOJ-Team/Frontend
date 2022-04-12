@@ -111,9 +111,9 @@ function Index(props) {
                         key='userlogin'
                         style={{ position: 'absolute', width:'150px',textAlign:'center',right: '0px', paddingRight: '20px' }}
                     >
-                        <a onClick={(e) => {
+                        <div onClick={(e) => {
                             navigate(findRoute('userlogin'))
-                        }}>Login / Register</a>
+                        }}>Login / Register</div>
                     </Menu.Item>
                     ) : (
                         <DropdownMenu/>
