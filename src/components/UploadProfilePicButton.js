@@ -33,8 +33,8 @@ function beforeUpload(file) {
  * @param props.size
  */
 export default function UploadProfilePic(props){
+  console.log("now url : "+props.photourl)
   const [loading,setloading]=useState(false)
-  const [imageUrl,setimageUrl]=useState(props.photourl)
   function handleChange(info){
     if (info.file.status === 'uploading') {
       setloading(true)
@@ -45,7 +45,6 @@ export default function UploadProfilePic(props){
       getBase64(info.file.originFileObj, (url) =>
         {
         setloading(false)
-        setimageUrl(url)
         props.setphotourl(url)
         }
       );
@@ -65,7 +64,7 @@ export default function UploadProfilePic(props){
         onChange={handleChange}
         style={{...props.style,width:props.size+"px", height:props.size+"px"}}
       >
-        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : <div>
+        {props.photourl ? <img src={props.photourl} alt="avatar" style={{ width: '100%' }} /> : <div>
         {loading ? <LoadingOutlined /> : <PlusOutlined />}
         <div style={{ marginTop: 8}}>Upload</div>
       </div>}
