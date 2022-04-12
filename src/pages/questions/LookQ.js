@@ -18,7 +18,7 @@ export default function LookQ() {
   let navigate=useNavigate()
   const [mdword,setmdword] = useState("")
   const [questionTitle,setquestionTitle] = useState(null)
-  const [questionHard,setquestionHard] = useState(null)
+  const [questionHard,setquestionHard] = useState("")
   const [tags,settags]=useState("")
   const [testcases,settestcases]=useState([])
   const [creatorName,setcreatorName]=useState("")
