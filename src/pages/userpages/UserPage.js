@@ -3,6 +3,7 @@ import { Layout, Avatar, Divider, Typography, Row, Col, List, Card, Tooltip, Pro
 import { UserOutlined, TrophyOutlined, SmileOutlined, CheckCircleOutlined, CheckSquareOutlined } from '@ant-design/icons';
 import './UserPage.css';
 //utils
+import UploadProfilePicButton from '../../components/UploadProfilePicButton'
 // 全局变量
 import { Auth } from '../../contexts/AuthContext';
 import DocumentTitle from 'react-document-title'//动态Title
@@ -73,6 +74,7 @@ export default function UserPage() {
     '156.questionID',
     '5.questionID',
   ]);
+
   return (
     <DocumentTitle title="XOJ|UserInfo">
       <div style={{margin:'20px 40px'}}>
@@ -81,7 +83,7 @@ export default function UserPage() {
           <Col flex={0.5} />
           <Col flex={1}>
             <div className='avatarItem'>
-              <Avatar className='user_avatar' src = {avatarUrl} size={128}/>
+              <UploadProfilePicButton className='user_avatar' photourl = {avatarUrl} setphotourl = {setAvatarUrl} size = {128}/>
               <Title level={3}>Welcome to XOJ, {farpropsAuth.pUsername}.<br />
                 <Text type="secondary" style={{ fontSize: 18 }}> XID: {farpropsAuth.pUserid} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {email}</Text>

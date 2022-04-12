@@ -29,6 +29,8 @@ function beforeUpload(file) {
  * 图片上传，获得图片的url
  * @param props.photourl 图片的url
  * @param props.setphotourl 更改图片的url的回调
+ * @param props.className
+ * @param props.size
  */
 export default function UploadProfilePic(props){
   const [loading,setloading]=useState(false)
@@ -54,18 +56,18 @@ export default function UploadProfilePic(props){
       <Upload
         name="smfile"
         listType="picture-card"
-        className="avatar-uploader"
+        className={"avatar-uploader"+" "+props.className}
         showUploadList={false}
         action='http://localhost:8081/user/image'
         method='post'
         withCredentials={true}
         beforeUpload={beforeUpload}
         onChange={handleChange}
-        style={props.style}
+        style={{...props.style,width:props.size+"px", height:props.size+"px"}}
       >
         {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : <div>
         {loading ? <LoadingOutlined /> : <PlusOutlined />}
-        <div style={{ marginTop: 8 }}>Upload</div>
+        <div style={{ marginTop: 8}}>Upload</div>
       </div>}
       </Upload>
     );
