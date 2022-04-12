@@ -65,7 +65,7 @@ export default function UserPage() {
     }
   ]);
 
-  const [avatarUrl, setAvatarUrl] = useState("https://pic.imgdb.cn/item/624ec937239250f7c511aa66.jpg");
+  const [avatarUrl, setAvatarUrl] = useState("");
 
   const [questionlistData, setQuestionListData] = useState([
     '1. questionID',

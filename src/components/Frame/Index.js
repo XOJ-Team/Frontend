@@ -77,10 +77,10 @@ function Index(props) {
             icon={<UserOutlined />} 
             title={farpropsAuth.pUsername}>
                 <Menu.Item key="profile" icon={<UserOutlined />}>
-                    <div onClick={() => { navigate(findRoute('userpage')) }}>Profile</div>
+                    <a onClick={() => { navigate(findRoute('userpage')) }}>Profile</a>
                 </Menu.Item>
                 <Menu.Item key="logout" icon={<ExportOutlined />} style={{backgroundColor:'#FF6347'}}>
-                    <div onClick={() => {userLogout()}}>Logout</div>
+                    <a onClick={() => {userLogout()}}>Logout</a>
                 </Menu.Item>
             </SubMenu>
         )
