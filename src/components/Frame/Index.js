@@ -9,6 +9,8 @@ import { logoutApi } from '../../services/auth';
 import { findRoute } from '../../routers/config';
 // 全局变量
 import { Auth } from '../../contexts/AuthContext';
+// 使用国际化语言包
+import { FormattedMessage } from "react-intl";
 
 const { Header, Content, Footer } = Layout;
 const { SubMenu } = Menu;
@@ -26,23 +28,23 @@ function Index(props) {
     useEffect(()=>{setcurrent(location.pathname)},[location.pathname])
 
     const menuItems = [{
-        name: "Home",
+        name: "topHome",
         targeturl: findRoute('mainpage'),
         icon:<HomeFilled />
     }, {
-        name: "Questions",
+        name: "topQuestions",
         targeturl: findRoute('questionList'),
         icon:<ReconciliationFilled />
     }, {
-        name: "Competitions",
+        name: "topCompetitions",
         targeturl: findRoute('competitionList'),
         icon:<DashboardFilled />
     }, {
-        name: "Rank",
+        name: "topRank",
         targeturl: findRoute('siterank'),
         icon:<SignalFilled />
     }, {
-        name: "About",
+        name: "topAbout",
         targeturl: findRoute('aboutxoj'),
         icon:<QuestionCircleFilled />
     }]
@@ -102,7 +104,7 @@ function Index(props) {
                             key={item.targeturl}
                             onClick={(e) => {
                                 navigate(e.key)
-                            }}>{item.icon} {item.name}</Menu.Item>;
+                            }}>{item.icon} <FormattedMessage id={item.name} /></Menu.Item>;
                     })}
                     {farpropsAuth.pUsername === null ? (
                     <Menu.Item
