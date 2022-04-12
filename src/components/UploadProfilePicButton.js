@@ -6,11 +6,6 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 //utils
 import { uploadUserPhoto } from '../services/userInfo';
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -26,14 +21,11 @@ function beforeUpload(file) {
 }
 
 /**
- * 图片上传，获得图片的url
+ * 图片上传，获得图片的url,样式修改要修改其下的.ant-upload-select-picture-card
  * @param props.photourl 图片的url
  * @param props.setphotourl 更改图片的url的回调
- * @param props.className
- * @param props.size
  */
 export default function UploadProfilePic(props) {
-  console.log("now url : " + props.photourl)
   const [loading, setloading] = useState(false)
   function handleChange(info) {
     if (info.file.status === 'uploading') {
@@ -42,11 +34,10 @@ export default function UploadProfilePic(props) {
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
+      if(info.file.response){
         setloading(false)
-        props.setphotourl(url)
+        props.setphotourl(info.file.response.obj)
       }
-      );
     }
   };
 
@@ -54,24 +45,24 @@ export default function UploadProfilePic(props) {
     <Upload
       name="smfile"
       listType="picture-card"
-      className={"avatar-uploader" + " " + props.className}
+      className={"avatar-uploader"}
       showUploadList={false}
-      action='http://localhost:8081/user/image'
+      action={uploadUserPhoto}
       method='post'
       withCredentials={true}
       beforeUpload={beforeUpload}
       onChange={handleChange}
-      style={{ ...props.style, width: props.size + "px", height: props.size + "px" }}
     >
       {loading ? <LoadingOutlined /> : (
         <div>
-          {
-            props.photourl ? <img src={props.photourl} alt="avatar" style={{ width: '100%' }} /> : (
+          {props.photourl ? <img 
+          src={props.photourl} 
+          alt="avatar"  
+          style={{width:'100%'}} /> : (
             <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}>Upload</div>
-            </div>)
-          }
+            </div>)}
         </div>
       )}
     </Upload>

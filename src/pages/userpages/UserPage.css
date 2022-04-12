@@ -9,3 +9,10 @@
     top: 40%;
     /* left:50%; */
 }
+/* 头像的样式 */
+.avatarItem .ant-upload-select-picture-card{
+    overflow: hidden;
+    border-radius: 50px;
+    width:100px;
+    height:100px;
+}

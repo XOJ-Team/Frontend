@@ -31,3 +31,6 @@ export function getUserInfo(obj){
 export function modifyUserInfo(obj){
     return post("/user/modify", obj)
 }
+
+
+export const uploadUserPhoto='http://localhost:8081/user/image'

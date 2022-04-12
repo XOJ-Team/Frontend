@@ -26,7 +26,7 @@ export default function UserPage() {
           oldQLND[0].context = res.data.obj.easyNumber
           oldQLND[1].context = res.data.obj.mediumNumber
           oldQLND[2].context = res.data.obj.hardNumber
-          console.log(oldQLND)
+          // console.log(oldQLND)
           setQuestionLevelNumData(oldQLND)
           setAvatarUrl(res.data.obj.profilePhoto)
           setRanking(res.data.obj.ranking)
@@ -38,15 +38,13 @@ export default function UserPage() {
 
 
 
-  const [userSelfDescribe, setuserSelfDescribe] = useState(
-    'This is an self introduction editing by yourself.'
-  );
+  const [userSelfDescribe, setuserSelfDescribe] = useState('');
   // 获取跨组件传来的信息
   const farpropsAuth = useContext(Auth)
   const [ranking, setRanking] = useState(0);
   const [score, setScore] = useState(0);
 
-  const [email, setEmail] = useState("000000000@yeah.net");
+  const [email, setEmail] = useState("");
   const [questionLevelNumData, setQuestionLevelNumData] = useState([
     {
       title: 'EASY',
@@ -83,7 +81,7 @@ export default function UserPage() {
           <Col flex={0.5} />
           <Col flex={1}>
             <div className='avatarItem'>
-              <UploadProfilePicButton className='user_avatar' photourl = {avatarUrl} setphotourl = {setAvatarUrl} size = {128}/>
+              <UploadProfilePicButton photourl={avatarUrl} setphotourl={setAvatarUrl}/>
               <Title level={3}>Welcome to XOJ, {farpropsAuth.pUsername}.<br />
                 <Text type="secondary" style={{ fontSize: 18 }}> XID: {farpropsAuth.pUserid} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {email}</Text>
