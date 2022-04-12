@@ -97,7 +97,7 @@ function Index(props) {
                     theme='dark'
                     defaultSelectedKeys={[current]}
                     selectedKeys={[current]}
-                    style={{ paddingLeft: '130px' }}
+                    style={{ paddingLeft: '130px',backgroundColor:farpropsAuth.XJTLUNAVY }}
                 >
                     {menuItems.map((item, index) => {
                         return <Menu.Item
@@ -133,14 +133,15 @@ function Index(props) {
                 </div>
 
             </Content>
-            <Footer style={{ textAlign: 'center',backgroundColor:'#00152f',color:'#d9d9d9'}}>
+            <Footer style={{ textAlign: 'center',backgroundColor:farpropsAuth.XJTLUNAVY,color:'rgb(217, 217, 217)'}}>
                 <a onClick={() => {
                     window.open("https://dev.azure.com/XOJ-Team/CPT202%20Team%20B-3")
                 }}>
                     powered by @XOJ
                 </a>
                 <br />
-                XOJ ©2022 Created by CPT202 Group B-3</Footer>
+                XOJ ©2022 Created by CPT202 Group B-3
+            </Footer>
         </Layout>
     )
 }

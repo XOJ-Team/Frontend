@@ -1,7 +1,7 @@
 import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 // UI
-import './Register.css'
+import './Register.less'
 import { Form, Input, Button,message} from 'antd';
 import { SendcodeButton } from '../../components/emailcode/EmailcodeButton';
 import { MailOutlined, LockOutlined,NumberOutlined,SmileOutlined } from '@ant-design/icons';

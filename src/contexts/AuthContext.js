@@ -22,14 +22,17 @@ export function AuthContext({children}){
     const [pUserid,setpUserid]=useState(null)
     // 用户权限 1普通用户2能创建比赛3管理员
     const [pAuthority,setpAuthority]=useState(1)
-
+    // 色调
+    const XJTLUNAVY="#010544"
+    const XJTLUPURPLE="#CE57C1"
     return (
     // 传进来的children作为子组件渲染
     // value里放传递的信息和回调
     <Auth.Provider value={{
         pUsername,setpUsername,
         pAuthority,setpAuthority,
-        pUserid,setpUserid
+        pUserid,setpUserid,
+        XJTLUNAVY,XJTLUPURPLE
         }}>
         {children}
     </Auth.Provider>

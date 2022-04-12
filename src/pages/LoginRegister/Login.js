@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // UI
 import { Form, Input, Button, Checkbox ,message} from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import "./Login.css"
+import "./Login.less"
 // utils
 import pattern, { reg } from '../../utils/regexp';
 import { loginApi, logincodeApi } from '../../services/auth';
