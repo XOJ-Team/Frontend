@@ -1,0 +1,20 @@
+@import '~antd/dist/antd.css';
+
+
+[class~='ant-row'] {
+    /* background-color:rgba(255,255,255,0.6); */
+    padding: 20px 10px;
+}
+[class~='ant-col'] {
+  background: transparent;
+  border: 0;
+}
+[class~='ant-col'] > div {
+  height: 100%;
+  /* line-height: 120px; */
+  border-radius: 4px;
+  background-color:rgba(255,255,255,0.6);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.1);
+}
