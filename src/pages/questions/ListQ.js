@@ -1,7 +1,7 @@
 import React,{useContext, useState, useEffect} from 'react';
 // UI
 import {CheckOutlined} from '@ant-design/icons';
-import {Table, Tag, Typography, Layout, Button, List} from 'antd';
+import {Table, Tag, Typography, Layout, Button, List, message,Switch} from 'antd';
 // import './ListQ.css';
 
 // utils
@@ -23,7 +23,11 @@ export default function ListQ(){
   const [data, setData] = useState([])
   // 总问题数
   const [sumOfquestions,setsumOfquestions]=useState(0)
+  // 是否显示tags
+  const [showtag,setshowtag]=useState(false)
+  // 全局传参
   const farpropsAuth=useContext(Auth)
+
 
   // 困难标签的颜色
   const whichcolor={'easy':'green','medium':'orange','hard':'red'}
@@ -42,6 +46,10 @@ export default function ListQ(){
       setsumOfquestions(res.data.obj.total)
   }
 
+  //封装error响应
+  const failedResponse=(res)=>{
+    message.error("Network error")
+  }
 
   // 生命周期-组件创建
   useEffect(() => {
@@ -49,14 +57,12 @@ export default function ListQ(){
       selectQuestionByPage({
         pageNum:1,
         pageSize:10
-      }).then(
-        res => succesResponse(res)
-    );
+      }).then(succesResponse).catch(failedResponse);
     }else if (farpropsAuth['pAuthority']===1 || farpropsAuth['pAuthority']===2) {
       selectQuestionNotHidedPaging({
         pageNum:1,
         pageSize:10
-      }).then(res => succesResponse(res));
+      }).then(succesResponse).catch(failedResponse);
     }
   },[]);
 
@@ -80,6 +86,7 @@ export default function ListQ(){
     {
       title:'Finish',
       key:'id',
+      width:10,
       render: ()=>{
         return <CheckOutlined />
       }
@@ -97,6 +104,7 @@ export default function ListQ(){
       title: 'Level',
       key: 'id',
       dataIndex: 'levelDescription',
+      width:100,
       render: text => {
             return (
               <Tag color={whichcolor[text]}>
@@ -104,7 +112,10 @@ export default function ListQ(){
               </Tag>
             )},
     },
-    {
+  ];
+  // 是否显示Tags
+  if(showtag){
+    columns.push({
       title: 'Tags',
       key: 'id',
       dataIndex: 'tags',
@@ -119,14 +130,15 @@ export default function ListQ(){
           })}
         </>
       ),
-    },
-  ];
+    },)
+  }
   // 鉴权以添加编辑标签
   if(farpropsAuth['pAuthority']===3){
     columns.push({
       title: 'Edit',
       dataIndex: 'id',
       key: 'id',
+      width:100,
       render: (k) => {return (<a onClick={()=>{navigate(findRoute('questionEdit')+'?id='+k)}}>Edit</a>)},
     })
   }
@@ -134,13 +146,29 @@ export default function ListQ(){
   return (
     <DocumentTitle title="XOJ | Questions">
       <div className='componentbox'>
-      {/* 调试需要，默认有权限 */}
-      {farpropsAuth['pAuthority']===3?(<Button
-      onClick={()=>{
-        navigate(findRoute('questionEdit'))
-      }}
-      >Add</Button>):null}
+      <Title level={2}>Questions</Title>
+      <div id='optionsbox'>
+        {farpropsAuth['pAuthority']===3?(
+        <Button
+        onClick={()=>{
+          navigate(findRoute('questionEdit'))
+        }}
+        >
+          Add
+        </Button>
+        ):null}
 
+        <Switch 
+        checkedChildren="Tags" 
+        unCheckedChildren="Tags" 
+        checked={showtag}
+        onClick={()=>{setshowtag(!showtag)
+        }} 
+        style={{float:'right'}}
+        >
+          show/hide tags
+        </Switch>
+      </div>
       <Table 
           columns={columns} 
           dataSource={data} 
