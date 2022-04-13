@@ -17,11 +17,12 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    yarn config set network-timeout 300000
     yarn install
     yarn run build
   displayName: 'Run yarn install and build'
 
-- task: PublishPipelineArtifact@0
+- task: PublishPipelineArtifact@1
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)/build
     artifactName: build
