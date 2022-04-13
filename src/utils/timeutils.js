@@ -5,13 +5,33 @@ import moment from 'moment'
 const format='YYYY-MM-DD HH:mm:ss'
 
 /**
- * parse time String, return {years,months,date,hours,minutes,seconds}
- * @param timestr yyyy-MM-dd HH:mm:ss
- * @return years,months,date,hours,minutes,seconds
+ * return now time in moment Object
  */
-export function parseTime(timestr){
-    const targettime=moment(timestr,format)
-    return targettime.toObject()
+ export function nowTimemoment(){
+    return moment()
+}
+
+/**
+ * parse time String, return moment Object. {years,months,date,hours,minutes,seconds}
+ * @param timestr in format yyyy-MM-dd HH:mm:ss
+ * @return Object moment
+ */
+export function Timemoment(timestr){
+    return moment(timestr,format)
+}
+
+/**
+ * return now time in str in format yyyy-MM-dd HH:mm:ss
+ */
+export function nowTimeformat(){
+    return moment().format(format)
+}
+
+/**
+ * change moment object to str using format yyyy-MM-dd HH:mm:ss
+ */
+export function Timeformat(momenttime){
+    return momenttime.format(format)
 }
 
 /**

@@ -1,3 +1,5 @@
+// v6路由
+import {Navigate} from "react-router-dom";
 // 记录所有路由配置
 import ListQ from '../pages/questions/ListQ';
 import MainPage from '../pages/openpage/MainPage';
@@ -11,8 +13,7 @@ import Aboutus from '../pages/About/Aboutus';
 import ViewCompetition from '../pages/Competition/ViewCompetition'
 import ListCompetition from '../pages/Competition/ListCompetition'
 import SiteRank from '../pages/Ranks/SiteRank';
-// v6路由
-import {Navigate} from "react-router-dom";
+import EditCompetition from '../pages/Competition/EditCompetition';
 
 // 路由配置
 // id应当唯一,最好不要更改id
@@ -92,6 +93,11 @@ export const allroutes=[
                 id:'onecompetition',
                 path:'view',
                 element:<ViewCompetition />
+            },
+            {
+                id:'editcompetition',
+                path:'edit',
+                element:<EditCompetition />
             }
         ]
     },
