@@ -133,7 +133,7 @@ export default function ListQ(){
 
   return (
     <DocumentTitle title="XOJ | Questions">
-      <div style={{padding:'20px 40px'}}>
+      <div className='componentbox'>
       {/* 调试需要，默认有权限 */}
       {farpropsAuth['pAuthority']===3?(<Button
       onClick={()=>{
