@@ -31,7 +31,7 @@ export default function Login() {
   const successRes=(res)=>{
     if (res.data.status === -1) {
       // 失败
-      message.error(res.data.comment)
+      message.error("check your account!")
     } else if(res.data.status === 1) {
       // 把用户名传给Context
       farpropsAuth.setpUsername(res.data.obj.name)
