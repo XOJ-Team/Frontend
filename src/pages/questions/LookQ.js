@@ -153,9 +153,11 @@ export default function LookQ() {
           return (<Tag style={showtags?{margin:"5px 5px",color:'rgba(0,0,0,1)'}:{margin:"5px 5px",color:'rgba(0,0,0,0)'}} key={index}>{item}</Tag>)
           })} */}
           {/* 隐藏整个标签框，位置保留 */}
+          <span style={showtags?{}:{visibility:'hidden'}}>
           {tags.split("#").map((item,index)=>{
-          return (<Tag style={showtags?{margin:"5px 5px",color:'rgba(0,0,0,1)'}:{margin:"5px 5px",visibility:'hidden'}} key={index}>{item}</Tag>)
+          return (<Tag style={{margin:"5px 5px"}} key={index}>{item}</Tag>)
           })}
+          </span>
         </div>
       </List.Item>
     </List>
