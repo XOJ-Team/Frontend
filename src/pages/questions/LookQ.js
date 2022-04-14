@@ -7,10 +7,12 @@ import { useLocation,useNavigate } from 'react-router-dom';
 import qs from 'qs'
 import {findRoute} from '../../routers/config'
 import {selectQuestionId} from '../../services/question'
-import { message,PageHeader,Button,Tag, Row, Col, Divider, List, Typography, Card } from 'antd';
 import { getTestcase } from '../../services/testcase';
+// UI
 import DocumentTitle from 'react-document-title'//动态Title
 import './LookQ.css';
+import { message,PageHeader,Button,Tag, Row, Col, Divider, List, Typography, Card } from 'antd';
+import {EyeOutlined,EyeInvisibleOutlined} from '@ant-design/icons';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -141,13 +143,19 @@ export default function LookQ() {
       <List.Item><div>Difficulty: <Typography.Text type={whichcolor[questionHard]}>{questionHard.toUpperCase()}</Typography.Text></div></List.Item>
       <List.Item>
         <div>
-          Tags: <br/>
-          {showtags?
-          <>{tags.split("#").map((item,index)=>{
-          return <Tag style={{margin:"5px 5px 10px 5px"}} key={index}>{item}</Tag>})}</>
-          :
-          <a onClick={()=>{setshowtags(true)}}>showtags</a>
-          }
+          Tags:
+          <span style={{marginLeft:'5px'}}>
+          {showtags?<EyeInvisibleOutlined onClick={()=>{setshowtags(false)}}/>:<EyeOutlined onClick={()=>{setshowtags(true)}}/>}
+          </span>
+          <br/>
+          {/* 只隐藏文字不隐藏标签框 */}
+          {/* {tags.split("#").map((item,index)=>{
+          return (<Tag style={showtags?{margin:"5px 5px",color:'rgba(0,0,0,1)'}:{margin:"5px 5px",color:'rgba(0,0,0,0)'}} key={index}>{item}</Tag>)
+          })} */}
+          {/* 隐藏整个标签框，位置保留 */}
+          {tags.split("#").map((item,index)=>{
+          return (<Tag style={showtags?{margin:"5px 5px",color:'rgba(0,0,0,1)'}:{margin:"5px 5px",visibility:'hidden'}} key={index}>{item}</Tag>)
+          })}
         </div>
       </List.Item>
     </List>

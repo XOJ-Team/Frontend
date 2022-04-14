@@ -120,17 +120,26 @@ export default function ListQ(){
       render: data=>{
         return <div>{data}</div>
       }
-    }
-  ];
-  // 是否显示Tags
-  if(showtag){
-    columns.push({
+    },
+    {
+      title:'AC rate',
+      key:'id',
+      dataIndex:'rate',
+      width:100,
+      render: data=>{
+        return <div>{data}</div>
+      }
+    },
+    {
       title: 'Tags',
       key: 'id',
       dataIndex: 'tags',
+      width:300,
       render: tags => (
         <>
-          {tags.split("#").map((tag,index) => {
+        {showtag?
+        <>
+        {tags.split("#").map((tag,index) => {
             return (
               <Tag key={index}>
                 {tag}
@@ -138,9 +147,13 @@ export default function ListQ(){
             );
           })}
         </>
+        :
+        <div style={{color:'gray'}}>-</div>
+        }
+        </>
       ),
-    },)
-  }
+    }
+  ];
   // 鉴权以添加编辑标签
   if(farpropsAuth['pAuthority']===3){
     columns.push({
