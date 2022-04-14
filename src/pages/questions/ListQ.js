@@ -112,6 +112,15 @@ export default function ListQ(){
               </Tag>
             )},
     },
+    {
+      title:'Total',
+      key:'id',
+      dataIndex:'total',
+      width:100,
+      render: data=>{
+        return <div>{data}</div>
+      }
+    }
   ];
   // 是否显示Tags
   if(showtag){

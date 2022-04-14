@@ -23,6 +23,7 @@ export default function LookQ() {
   const [testcases,settestcases]=useState([])
   const [creatorName,setcreatorName]=useState("")
 
+  const [showtags,setshowtags]=useState(false)
   // 困难标签的颜色
   // const whichcolor={'easy':'green','medium':'orange','hard':'red'}
   const whichcolor={'easy':'success','medium':'warning','hard':'danger'}
@@ -138,10 +139,16 @@ export default function LookQ() {
       <List.Item>Question ID: {params['id']}</List.Item>
       <List.Item>Created By: <a>{creatorName}</a></List.Item>
       <List.Item><div>Difficulty: <Typography.Text type={whichcolor[questionHard]}>{questionHard.toUpperCase()}</Typography.Text></div></List.Item>
-      <List.Item><div>Tags: <br/>
-      {tags.split("#").map((item,index)=>{
-      return <Tag style={{margin:"5px 5px 10px 5px"}} key={index}>{item}</Tag>
-    })}</div>
+      <List.Item>
+        <div>
+          Tags: <br/>
+          {showtags?
+          <>{tags.split("#").map((item,index)=>{
+          return <Tag style={{margin:"5px 5px 10px 5px"}} key={index}>{item}</Tag>})}</>
+          :
+          <a onClick={()=>{setshowtags(true)}}>showtags</a>
+          }
+        </div>
       </List.Item>
     </List>
     </Col>

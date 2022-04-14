@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 // UI import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { Form, Input, Button, Select,Space,Radio,message,Modal } from 'antd';
+import { Form, Input, Button, Select,Space,Radio,message,Modal, InputNumber } from 'antd';
 import { MinusCircleOutlined, PlusOutlined,ExclamationCircleOutlined } from '@ant-design/icons';
 // utils
 import { useLocation,useNavigate } from 'react-router-dom';
@@ -64,7 +64,9 @@ export default function EditQ(props) {
             "switch": e.data.obj.isHide,
             "title": e.data.obj.name,
             "hard": e.data.obj.questionLevel,
-            "tags": e.data.obj.tags.split("#")
+            "tags": e.data.obj.tags.split("#"),
+            "timelimit":e.data.obj.timeLimit,
+            "memorylimit":e.data.obj.memoryLimit
           })
         }else{
           message.error("failed")
@@ -95,7 +97,9 @@ export default function EditQ(props) {
             "isHide": values.switch,
             "name": values.title,
             "questionLevel": values.hard,
-            "tags": values.tags.join("#")
+            "tags": values.tags.join("#"),
+            "timeLimit":values.timelimit,
+            "memoryLimit":values.memorylimit
           }).then((e)=>{
             if(e.data.status===1){
               message.success("success add")
@@ -112,7 +116,9 @@ export default function EditQ(props) {
             "isHide": values.switch,
             "name": values.title,
             "questionLevel": values.hard,
-            "tags": values.tags.join("#")
+            "tags": values.tags.join("#"),
+            "timeLimit":values.timelimit,
+            "memoryLimit":values.memorylimit
           }).then((e)=>{
             if(e.data.status===1){
               message.success("complete edit")
@@ -184,6 +190,21 @@ export default function EditQ(props) {
       >
         <Select mode="tags" style={{ width: '100%' }} placeholder="Tags">
         </Select>
+      </Form.Item>
+
+
+      <Form.Item 
+      name="timelimit" 
+      label="time limit" 
+      rules={[{ required: true,message: 'Please input timelimit!'  }]}>
+        <InputNumber/>
+      </Form.Item>
+
+      <Form.Item 
+      name="memorylimit" 
+      label="memory limit" 
+      rules={[{ required: true,message: 'Please input memorylimit!'  }]}>
+        <InputNumber/>
       </Form.Item>
 
       <Form.Item {...tailLayout}>
