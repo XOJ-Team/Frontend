@@ -5,8 +5,9 @@ This's the repo of XOJ frontend.
 把Swagger页面搬运到了[这里](https://sanmusen.top/projectapi/Swagger.html)
 
 # 运行项目
+必须：安装Node.js, 安装yarn
 在XOJ_F工作目录下使用yarn或npm install下载模块,
-使用yarn start或npm start启动本地web服务器
+使用yarn start或npm start启动项目
 
 # 项目部署
 

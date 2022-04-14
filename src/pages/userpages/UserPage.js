@@ -73,17 +73,20 @@ export default function UserPage() {
     '5.questionID',
   ]);
 
+  const authoritylist={1:'user',2:'super user',3:'manager'}
+
   return (
-    <DocumentTitle title="XOJ|UserInfo">
+    <DocumentTitle title="XOJ | UserInfo">
       <div style={{margin:'20px 40px'}}>
         <Header className='headerAbove'></Header>
         <Row className='main_layour'>
           <Col flex={0.5} />
-          <Col flex={1}>
+          <Col flex={1} >
             <div className='avatarItem'>
               <UploadProfilePicButton photourl={avatarUrl} setphotourl={setAvatarUrl}/>
               <Title level={3}>Welcome to XOJ, {farpropsAuth.pUsername}.<br />
                 <Text type="secondary" style={{ fontSize: 18 }}> XID: {farpropsAuth.pUserid} </Text><br />
+                <Text type='secondary' style={{fontSize:18}}> Authority:{authoritylist[farpropsAuth.pAuthority]} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {email}</Text>
               </Title>
               <Paragraph
