@@ -19,7 +19,7 @@ const { Text, Title } = Typography;
 export default function ListQ(){
   // 页面跳转
   let navigate=useNavigate()
-  //定义局部状态
+  // 题目的信息
   const [data, setData] = useState([])
   // 总问题数
   const [sumOfquestions,setsumOfquestions]=useState(0)
@@ -27,23 +27,25 @@ export default function ListQ(){
   const [showtag,setshowtag]=useState(false)
   // 全局传参
   const farpropsAuth=useContext(Auth)
-
+  // 用户已经AC的题目列表
+  const [listFinished,setlistFinished]=useState([])
 
   // 困难标签的颜色
   const whichcolor={'easy':'green','medium':'orange','hard':'red'}
 
 
-  // 封装then方法里的内容
+  // 封装题目信息获取then方法里的内容
   let succesResponse = (res) => {
     let infolist=[]
-      for (let each of res.data.obj.list){
+      for (let each of res.data.obj.questionsPage.list){
         // 拼接name以支持点击题目名跳转
         each.name=each.id+"#"+each.name
         each.key=each.id//解决Each element in list should have a key警告
         infolist.push(each)
       }
       setData(infolist)
-      setsumOfquestions(res.data.obj.total)
+      setsumOfquestions(res.data.obj.questionsPage.total)
+      setlistFinished(res.data.obj.questionIds)
   }
 
   //封装error响应
@@ -64,6 +66,8 @@ export default function ListQ(){
         pageSize:10
       }).then(succesResponse).catch(failedResponse);
     }
+
+
   },[]);
 
   //  用户点击页数栏，重新获取题目条目
@@ -72,12 +76,12 @@ export default function ListQ(){
       selectQuestionByPage({
         pageNum:page,
         pageSize:10
-      }).then(res => succesResponse(res));
+      }).then(succesResponse);
     }else if (farpropsAuth['pAuthority']===1 || farpropsAuth['pAuthority']===2) {
       selectQuestionNotHidedPaging({
         pageNum:page,
         pageSize:10
-      }).then(res => succesResponse(res));
+      }).then(succesResponse);
     }
   }
 
@@ -85,10 +89,15 @@ export default function ListQ(){
   const columns = [
     {
       title:'Finish',
+      dataIndex:'id',
       key:'id',
       width:10,
-      render: ()=>{
-        return <CheckOutlined />
+      render: (idd)=>{
+        if(listFinished.includes(idd)){
+          return <CheckOutlined style={{color:'green'}} />
+        }else{
+          return <div></div>
+        }
       }
     },
     {
@@ -104,7 +113,7 @@ export default function ListQ(){
       title: 'Level',
       key: 'id',
       dataIndex: 'levelDescription',
-      width:100,
+      width:150,
       render: text => {
             return (
               <Tag color={whichcolor[text]}>
@@ -116,7 +125,7 @@ export default function ListQ(){
       title:'Total',
       key:'id',
       dataIndex:'total',
-      width:100,
+      width:150,
       render: data=>{
         return <div>{data}</div>
       }
@@ -125,7 +134,7 @@ export default function ListQ(){
       title:'AC rate',
       key:'id',
       dataIndex:'rate',
-      width:100,
+      width:150,
       render: data=>{
         return <div>{data}</div>
       }
