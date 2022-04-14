@@ -58,8 +58,16 @@ export function judgeTime(timestr){
  * 
  * @param startstr
  * @param endstr
- * @return true if startstr<=nowtime<=endstr
+ * @return -1:time period is passed,0:nowtime is during period,1:time period is in future
  */
 export function duringTime(startstr,endstr){
-    return judgeTime(startstr)<=0 && judgeTime(endstr)>=0
+    const start=judgeTime(startstr)
+    const end=judgeTime(endstr)
+    if(end<0){
+        return -1
+    }else if(start<=0&&end>=0){
+        return 0
+    }else{
+        return 1
+    }
 }

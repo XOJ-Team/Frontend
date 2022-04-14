@@ -4,13 +4,15 @@ import DocumentTitle from 'react-document-title'//动态Title
 import { useLocation, useNavigate } from 'react-router-dom'
 import qs from 'qs'
 // UI
-import { Form, Input, Button, Checkbox, DatePicker, Space, message } from 'antd';
+import { Form, Input, Button, DatePicker, Space, message } from 'antd';
 // 服务类接口
-import { createcomp, getcomp } from '../../services/competition';
+import { createcomp, getcomp, deletecomp } from '../../services/competition';
 // 路由寻找
 import { findRoute } from '../../routers/config'
 // 日期工具类
 import { Timemoment, nowTimemoment, Timeformat, nowTimeformat } from '../../utils/timeutils'
+// 窗口工具类
+import { showConfirm } from '../../components/confirm';
 
 
 
@@ -32,7 +34,7 @@ export default function EditCompetition() {
                 form.setFieldsValue({
                     name: res.data.obj.name,
                     introduction: res.data.obj.briefIntroduction,
-                    time:[Timemoment(res.data.obj.startTime),Timemoment(res.data.obj.endTime)]
+                    time: [Timemoment(res.data.obj.startTime), Timemoment(res.data.obj.endTime)]
                 })
             })
         }
@@ -59,11 +61,10 @@ export default function EditCompetition() {
             }).then(successres).catch(failedres)
         }
     };
-
     // 封装响应事件
     const successres = (res) => {
         // console.log(res)
-        if (res.status === 1) {
+        if (res.data.status === 1) {
             message.success("success submit")
             navigate(findRoute('competitionList'))
         }
@@ -74,6 +75,13 @@ export default function EditCompetition() {
     const failedres = (err) => {
         console.log(err)
         message.error("server failed")
+    }
+
+    const deleteThisComp = () => {
+        deletecomp({ 'id': params['id'] }).then(() => {
+            message.warn("a competition has been deleted")
+            navigate(findRoute('competitionList'))
+        }).catch(failedres)
     }
 
     // 日期选择 完成
@@ -155,6 +163,24 @@ export default function EditCompetition() {
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
+                    </Form.Item>
+
+                    <Form.Item
+                        wrapperCol={{
+                            offset: 4,
+                            span: 16,
+                        }}
+                    >
+                        {'id' in params ? (<><Button>View question link</Button><Button
+                            type='primary'
+                            danger
+                            style={{ marginLeft: "50px" }}
+                            onClick={() => {
+                                showConfirm(deleteThisComp)
+                            }}
+                        >
+                            Delete
+                        </Button></>) : (null)}
                     </Form.Item>
                 </Form>
             </div>
