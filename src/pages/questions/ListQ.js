@@ -45,7 +45,7 @@ export default function ListQ(){
       }
       setData(infolist)
       setsumOfquestions(res.data.obj.questionsPage.total)
-      setlistFinished(res.data.obj.questionIds)
+      if(res.data.obj.questionIds){setlistFinished(res.data.obj.questionIds)}
   }
 
   //封装error响应
