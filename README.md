@@ -85,10 +85,16 @@ let params = qs.parse(location.search.slice(1))
 if('id' in params) 判断location里面有没有id这个参数
 ```
 
-组件间传参：
+全局组件传参：
 ```
 const farpropsAuth=useContext(Auth)
 if(farpropsAuth['pAuthority']!=null) pAuthority肯定被传来，判断pAuthority的值是不是null
+```
+
+组件传参
+```
+if(props.size===undefined) 是否存在属性size
+if(props.size===null) 属性size存在，但为null
 ```
 
 # Contribute
