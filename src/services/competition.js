@@ -52,7 +52,8 @@ export function getcomp(compeitionId){
  * link a question to a competition
  * @param obj.questionId
  * @param obj.compeitionId
- * @param obj.score score of this question in this comp 
+ * @param obj.questionName
+ * @param obj.score 先不填score of this question in this comp 
  */ 
 export function addQtocomp(obj){
     return post('/question_competition/',obj)
@@ -67,9 +68,18 @@ export function showQofcomp(obj){
 }
 
 /**
- * remove one question link to a competition
- * @param obj.id 
+ * modify question in competition
+ * @param obj.id question-link id
+ * @param obj.score
  */
-// export function removeQofcomp(obj){
-//     return del('/question_competition',obj)
-// }
+export function modifyQofcomp(obj){
+    return put('/question_competition',obj)
+}
+
+/**
+ * remove one question link to a competition
+ * @param obj.id question-link id
+ */
+export function removeQofcomp(obj){
+    return del('/question_competition',obj)
+}
