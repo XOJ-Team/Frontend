@@ -9,6 +9,7 @@ import { Modal } from 'antd';
  * @param props.visible the visible of this box
  * @param props.title the title of pop up
  * @param props.content the content of pop up
+ * @param props.width the width of pop up 
  */
 export default function Popup(props){
 
@@ -24,6 +25,7 @@ export default function Popup(props){
   return (
     <>
     {props.visible?(<Modal 
+    width={props.width}
     title={props.title} 
     visible={props.visible} 
     onOk={handleOk} 

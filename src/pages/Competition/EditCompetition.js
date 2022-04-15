@@ -203,6 +203,7 @@ export default function EditCompetition() {
                 </Form>
 
                 <Popup 
+                width={'100%'}
                 visible={qlinkvisible} 
                 setvisible={setqlinkvisible}
                 title="question link"
@@ -218,7 +219,7 @@ export default function EditCompetition() {
 
 function QuestionLinkPop(propsq){
 
-
+    console.log(propsq.sss===undefined)
     // question link
     const [qlinklist,setqlinklist]=useState([])
     // 当前状态,[创建new/删除del/修改mod,question的id,分数]
