@@ -197,14 +197,14 @@ export default function EditQ(props) {
       name="timelimit" 
       label="time limit" 
       rules={[{ required: true,message: 'Please input timelimit!'  }]}>
-        <InputNumber/>
+        <InputNumber min={0}/>
       </Form.Item>
 
       <Form.Item 
       name="memorylimit" 
       label="memory limit" 
       rules={[{ required: true,message: 'Please input memorylimit!'  }]}>
-        <InputNumber/>
+        <InputNumber min={0}/>
       </Form.Item>
 
       <Form.Item {...tailLayout}>
@@ -342,12 +342,14 @@ function Testcase(props) {
     Test case:
     <Input
     placeholder='a test case'
+    disabled={theState[0]==='remove'}
     value={CaseResult.case}
     onChange={(e)=>{setCaseResult({case:e.target.value,result:CaseResult.result})}}
     />
     Result:
     <Input
     placeholder='result for test case'
+    disabled={theState[0]==='remove'}
     value={CaseResult.result}
     onChange={(e)=>{setCaseResult({case:CaseResult.case,result:e.target.value})}}
     />
