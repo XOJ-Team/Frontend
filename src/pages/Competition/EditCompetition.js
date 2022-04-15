@@ -6,7 +6,7 @@ import qs from 'qs'
 // UI
 import { Form, Input, Button, DatePicker, Space, message, InputNumber } from 'antd';
 // 服务类接口
-import { createcomp, getcomp, deletecomp,addQtocomp,showQofcomp } from '../../services/competition';
+import { createcomp, getcomp, deletecomp,addQtocomp,showQofcomp, updatecomp } from '../../services/competition';
 // 路由寻找
 import { findRoute } from '../../routers/config'
 // 日期工具类
@@ -47,12 +47,18 @@ export default function EditCompetition() {
 
     // 表单提交
     const onFinish = (values) => {
-        console.log('Success:', {
-            ...values, 'startTime': Timeformat(values.time[0]),
-            'endTime': Timeformat(values.time[1])
-        });
+        // console.log('Success:', {
+        //     ...values, 'startTime': Timeformat(values.time[0]),
+        //     'endTime': Timeformat(values.time[1])
+        // });
         if ('id' in params) {
-            // edit
+            updatecomp({
+                'id':params['id'],
+                'name': values.name,
+                'briefIntroduction': values.introduction,
+                'startTime': Timeformat(values.time[0]),
+                'endTime': Timeformat(values.time[1])
+            }).then(successres).catch(failedres)
         } else {
             // create
             createcomp({
@@ -79,7 +85,7 @@ export default function EditCompetition() {
         message.error("server failed")
     }
 
-    // 关闭再打开，达到刷新的效果
+    // 关闭再打开，达到刷新question link的效果
     const reopenLink=()=>{
         setqlinkvisible(false)
         setqlinkvisible(true)
