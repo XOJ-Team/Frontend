@@ -41,12 +41,11 @@ steps:
     sshEndpoint: TARGET_SERVER
     overwrite: true
     sourceFolder: 'build'
-    targetFolder: '/home/xjtluoj/artifacts'
+    targetFolder: '/home/xjtluoj/.ci_build_frontend/artifacts'
 
 - task: SSH@0
   inputs:
     sshEndpoint: TARGET_SERVER
     runOptions: 'commands'
-    commands: '/home/xjtluoj/deploy.sh'
-    scriptPath: '/home/xjtluoj/deploy.sh'
+    commands: '/home/xjtluoj/.ci_build_frontend/deploy.sh'
     failOnStdErr: true
