@@ -15,12 +15,16 @@ export default function ViewCompetition() {
 
   // competition的信息
   const [compinfo,setcompinfo]=useState({})
+  // question links 的信息
+  const [qlinkinfo,setqlinkinfo]=useState([])
   // 组件创建，下载竞赛信息
   useEffect(()=>{
     if('id' in params){
       getcomp(params['id']).then((res)=>{
         if(res.data.status===1){
-          setcompinfo(res.data.obj)
+          setcompinfo(res.data.obj.competitionModel)
+          // console.log(res.data.obj.links)
+          setqlinkinfo(res.data.obj.links)
         }else{
           message.error("error")
         }
@@ -33,10 +37,19 @@ export default function ViewCompetition() {
   return (
     <DocumentTitle title="XOJ | Competition">
         <div className='componentbox'>
-          ViewCompetition {params['id']}
-          {Object.keys(compinfo).map((each,index)=>{
-            return <div>{each}:{compinfo[each]}</div>
+          ViewCompetition id: {params['id']}
+          <br />
+          ViewCompetition name :{compinfo['name']}
+          <br />
+          ViewCompetition start Time :{compinfo['startTime']}
+          <br />
+          ViewCompetition end Time :{compinfo['endTime']}
+          <br />
+          Link Questions:
+          {qlinkinfo.map((each)=>{
+            return <div key={each.id}>question id: {each.questionId},name:{each.questionName}</div>
           })}
+
         </div>
     </DocumentTitle>
   )

@@ -6,16 +6,17 @@ import qs from 'qs'
 // UI
 import { Form, Input, Button, DatePicker, Space, message, InputNumber } from 'antd';
 // 服务类接口
-import { createcomp, getcomp, deletecomp,addQtocomp,showQofcomp, updatecomp } from '../../services/competition';
+import { createcomp, getcomp, deletecomp, updatecomp } from '../../services/competition';
 // 路由寻找
 import { findRoute } from '../../routers/config'
 // 日期工具类
 import { Timemoment, nowTimemoment, Timeformat, nowTimeformat } from '../../utils/timeutils'
 // 窗口工具类
 import { showConfirm } from '../../components/confirm';
-// 
+// 弹出窗口
 import Popup from '../../components/Popup'
-
+// question link组件
+import QuestionLinkPop from './QuestionLinkPop';
 
 export default function EditCompetition() {
 
@@ -33,10 +34,11 @@ export default function EditCompetition() {
         if ('id' in params) {
             console.log("you are editing id=", params['id'])
             getcomp(params['id']).then((res) => {
+                const infoOfit=res.data.obj.competitionModel
                 form.setFieldsValue({
-                    name: res.data.obj.name,
-                    introduction: res.data.obj.briefIntroduction,
-                    time: [Timemoment(res.data.obj.startTime), Timemoment(res.data.obj.endTime)]
+                    name: infoOfit.name,
+                    introduction: infoOfit.briefIntroduction,
+                    time: [Timemoment(infoOfit.startTime), Timemoment(infoOfit.endTime)]
                 })
             })
         }
@@ -203,7 +205,7 @@ export default function EditCompetition() {
                 </Form>
 
                 <Popup 
-                width={'100%'}
+                width={'1300px'}
                 visible={qlinkvisible} 
                 setvisible={setqlinkvisible}
                 title="question link"
@@ -217,87 +219,3 @@ export default function EditCompetition() {
     )
 }
 
-function QuestionLinkPop(propsq){
-
-    console.log(propsq.sss===undefined)
-    // question link
-    const [qlinklist,setqlinklist]=useState([])
-    // 当前状态,[创建new/删除del/修改mod,question的id,分数]
-    const [newordel,setnewordel]=useState({'state':'new','qid':1,'score':1,'qname':""})
-
-    const sentencemap={
-        'new':'you are linking new question to competition',
-        'del':'you are delete linking',
-        'mod':'you are modify question score'
-    }
-
-
-    // 同步question Link
-    useEffect(()=>{
-        showQofcomp({'competitionId':propsq.compId}).then((res)=>{
-            setqlinklist(res.data.obj)
-        })
-    },[])
-
-    // 提交事件
-    const submitquestionlink=()=>{
-        if(newordel['state']==="new"){
-            addQtocomp({'questionId':newordel['qid'],'competitionId':propsq.compId,'score':newordel['score']}).then((res)=>{
-                message.success("new question link to competition")
-                propsq.reopen()
-            })
-        }else if(newordel['state']==="del"){
-            console.log("del quesiton link")
-        }else if(newordel['state']==='mod'){
-            console.log("modify")
-        }
-        
-    }
-
-    return (
-        <div>
-            <div>
-                <a onClick={()=>{
-                    setnewordel({...newordel,'state':'new','qid':null,'qname':"",'score':null})
-                }}>create</a>
-                {qlinklist.map((each,index)=>{return (
-                <div key={index}>
-                    {each.name}
-                    <a onClick={()=>{
-                        setnewordel({...newordel,'state':'mod','qid':each.id,'qname':each.name})
-                        }}> edit </a>
-                    <a onClick={()=>{
-                        setnewordel({...newordel,'state':'del','qid':each.id,'qname':each.name})
-                        message.warn("click submit to delete")
-                        }}> delete </a>
-                </div>
-                )})}
-            </div>
-            <br />
-            {/* 输入框区域 */}
-            question name:{newordel['qname']}
-            <br />
-            question id:<InputNumber 
-            min={1}
-            disabled={newordel['state']==='del'||newordel['state']==='mod'}
-            value={newordel['qid']} 
-            onChange={(e)=>{
-                setnewordel({...newordel,'qid':e})
-            }} 
-            placeholder='question id' />
-            <br />
-
-            score:<InputNumber 
-            min={1}
-            disabled={newordel['state']==='del'}
-            value={newordel['score']} 
-            onChange={(e)=>{setnewordel({...newordel,'score':e})}} 
-            placeholder='score of this question' />
-            <br />
-            {sentencemap[newordel['state']]}
-            <br />
-            <Button type={newordel['state']==='del'?'danger':''} onClick={submitquestionlink}>Submit</Button>
-        </div>
-        
-    )
-}

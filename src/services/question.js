@@ -88,3 +88,11 @@ export function showQuestionId(obj){
  export function hideQuestionId(obj){
     return put("/question/hide", obj)
 }
+
+/**
+ * search a question (id/name)
+ * @param obj.text
+ */
+export function searchQuestion(obj){
+    return get('/question/search',obj)
+}
