@@ -52,7 +52,7 @@ export function getcomp(compeitionId){
  * link a question to a competition
  * @param obj.questionId
  * @param obj.compeitionId
- * @param score score of this question in this comp 
+ * @param obj.score score of this question in this comp 
  */ 
 export function addQtocomp(obj){
     return post('/question_competition/',obj)

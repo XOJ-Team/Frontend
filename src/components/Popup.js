@@ -3,6 +3,8 @@ import { Modal } from 'antd';
 
 /**
  * show the pop up box, 展示弹窗，传入动态参数visible来控制显示与否
+ * 使用时直接常显该组件，并向内容组件传入setvisible方法，即可让内容组件控制它本身的显示。
+ * 内容组件会触发生命周期
  * @param props.setvisible control the visible of pop up
  * @param props.visible the visible of this box
  * @param props.title the title of pop up
@@ -21,9 +23,14 @@ export default function Popup(props){
 
   return (
     <>
-      <Modal title={props.title} visible={props.visible} onOk={handleOk} onCancel={handleCancel}>
+    {props.visible?(<Modal 
+    title={props.title} 
+    visible={props.visible} 
+    onOk={handleOk} 
+    onCancel={handleCancel}>
         {props.content}
-      </Modal>
+      </Modal>):null}
+      
     </>
   );
 };
