@@ -159,7 +159,7 @@ export default function EditQ(props) {
       name="title" 
       label="Title" 
       rules={[{ required: true }]}>
-        <Input />
+        <Input showCount maxLength={20}/>
       </Form.Item>
       <Form.Item
         name="hard"
