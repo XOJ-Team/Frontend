@@ -19,15 +19,15 @@ export default function Register() {
   let farProps=useContext(Auth)
   // 表单对象
   const [form]=Form.useForm()
-  //初始化邮箱（作为sendCodeApi的input）
-  let [email,setemail]=useState("")
 
   const navigate=useNavigate();
 
   const onValuesChange=(e)=>{
-    if(e.email!==null){
-      setemail(e.email)
-    }
+
+  }
+
+  const getemail=(e)=>{
+    return form.getFieldValue('email')
   }
 
   const onFinish = (values) => {
@@ -98,7 +98,7 @@ export default function Register() {
         </Form.Item>
 
         <SendcodeButton 
-        email={email}
+        getemail={getemail}
         style={{textAlign:'center'}}
         offset={0}
         span={24}
