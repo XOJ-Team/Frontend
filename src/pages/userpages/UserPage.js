@@ -8,6 +8,7 @@ import UploadProfilePicButton from '../../components/UploadProfilePicButton'
 import { Auth } from '../../contexts/AuthContext';
 import DocumentTitle from 'react-document-title'//动态Title
 import { getUserInfo } from '../../services/userInfo';
+import { showUserRecord } from '../../services/submitRecord';
 
 const { Header } = Layout;
 const { Title, Text, Paragraph } = Typography;
@@ -16,13 +17,20 @@ const { Title, Text, Paragraph } = Typography;
 
 export default function UserPage() {
   useEffect(() => {
+    showUserRecord().then(
+      res => {
+        setQuestionListData([res.data.obj.map((e) => {return e.questionName})])
+      }
+    )
+  })
+
+  useEffect(() => {
     getUserInfo({
       id: farpropsAuth.pUserid
     }).then(
       res => {
         if (res.data.status===1){
           setEmail(res.data.obj.mail)
-          setQuestionListData([res.data.obj.map((e) => {return e.questionName})])
           const oldQLND = [ ...questionLevelNumData ]
           oldQLND[0].context = res.data.obj.easyNumber
           oldQLND[1].context = res.data.obj.mediumNumber
