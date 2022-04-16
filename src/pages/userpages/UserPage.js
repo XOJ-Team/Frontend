@@ -22,9 +22,7 @@ export default function UserPage() {
         setQuestionListData([res.data.obj.map((e) => {return e.questionName})])
       }
     )
-  })
 
-  useEffect(() => {
     getUserInfo({
       id: farpropsAuth.pUserid
     }).then(
