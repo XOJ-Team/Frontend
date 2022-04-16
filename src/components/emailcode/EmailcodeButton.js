@@ -20,7 +20,7 @@ export function SendcodeButton(props) {
     let [comment,setcomment]=useState("a code has send to email")
     // 设置按钮内倒计时
     let last60=10
-
+    console.log("now email in Button is: ",props.email)
 
     // 模拟组件卸载
     // useEffect(()=>{})

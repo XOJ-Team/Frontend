@@ -78,6 +78,7 @@ export default function Login() {
 
   const onValuesChange=(e)=>{
     if(e.email!==null){
+      console.log("email changed in form: ",e.email)
       setemail(e.email)
     }
   }
