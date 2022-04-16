@@ -11,7 +11,7 @@ const urlpool={
 }
 
 // 获取现在的请求地址
-const getnowBackendUrl=()=>{
+export const getnowBackendUrl=()=>{
     return urlpool[whichcase()]
 }
 
