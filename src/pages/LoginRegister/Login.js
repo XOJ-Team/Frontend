@@ -7,7 +7,7 @@ import "./Login.less"
 // utils
 import pattern, { reg } from '../../utils/regexp';
 import { loginApi, logincodeApi } from '../../services/auth';
-import { getUseremail, setUseremail } from '../../utils/auth';
+import { getUseremail, setUseremail,delUseremail } from '../../utils/auth';
 import { SendcodeButton } from '../../components/emailcode/EmailcodeButton';
 import { findRoute } from '../../routers/config';
 import DocumentTitle from 'react-document-title'//动态Title
@@ -51,6 +51,8 @@ export default function Login() {
     //持久化存储email
     if(values.remember===true){
       setUseremail(values.email)
+    }else{
+      delUseremail()
     }
     // 在这之后发起登录请求
     if (useCode) {
