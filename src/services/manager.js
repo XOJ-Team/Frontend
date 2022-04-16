@@ -41,9 +41,8 @@ export function insertManagerUser(obj){
 }
 
 /**
- * get user infomation
- *
+ * get now session's user infomation
  */
-export function getUserInfoManager(obj){
-    return get("/manager/user", obj)
+export function getUserInfoManager(){
+    return get("/manager/user")
 }

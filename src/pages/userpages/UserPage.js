@@ -30,11 +30,10 @@ export default function UserPage() {
     showUserRecord({
       userId:inputUserid
     }).then(
-      res => {
-        setuserInfo({...userInfo,
-          questionlistData:[res.data.obj.map((e)=>{return e.questionName})],
-        })
-        // setQuestionListData([res.data.obj.map((e) => {return e.questionName})])
+      resa => {
+        setquestionlistData([resa.data.obj.map((e)=>{return {
+          name:e.questionName
+        }})])
       }
     )
     getUserInfo({
@@ -54,18 +53,6 @@ export default function UserPage() {
             mediumNumber:resdata.mediumNumber,
             hardNumber:resdata.hardNumber
           })
-          // setEmail(res.data.obj.mail)
-          // const oldQLND = [ ...questionLevelNumData ]
-          // oldQLND[0].context = res.data.obj.easyNumber
-          // oldQLND[1].context = res.data.obj.mediumNumber
-          // oldQLND[2].context = res.data.obj.hardNumber
-          // // console.log(oldQLND)
-          // setQuestionLevelNumData(oldQLND)
-          // setAvatarUrl(res.data.obj.profilePhoto)
-          // setRanking(res.data.obj.ranking)
-          // setScore(res.data.obj.score)
-          // setuserSelfDescribe(res.data.obj.intro)
-          // setSolvedProblems(res.data.obj.solvedNumber)
         }
       }
     )
@@ -90,37 +77,15 @@ export default function UserPage() {
     score:0,
     solvedProblems:0,
     avatarUrl:"",
-    questionlistData:[],
     email:"",
     userSelfDescribe:"",
     easyNumber:0,
     mediumNumber:0,
     hardNumber:0
   })
-  // const [ranking, setRanking] = useState(0);
-  // const [score, setScore] = useState(0);
-  // const [solvedProblems, setSolvedProblems] = useState(0);
-  // const [avatarUrl, setAvatarUrl] = useState("");
-  // const [questionlistData, setQuestionListData] = useState([]);
-  // const [email, setEmail] = useState("");
-  // const [userSelfDescribe, setuserSelfDescribe] = useState('');
-  // const [questionLevelNumData, setQuestionLevelNumData] = useState([
-  //   {
-  //     title: 'EASY',
-  //     context: easyNumber,
-  //     color: 'green'
-  //   },
-  //   {
-  //     title: 'MEDIUM',
-  //     context: mediumNumber,
-  //     color: '#ffc306'
-  //   },
-  //   {
-  //     title: 'HARD',
-  //     context: hardNumber,
-  //     color: 'red'
-  //   }
-  // ]);
+  
+  // 用户最近提交记录
+  const [questionlistData,setQuestionlistData]=useState([])
 
 
   return (
@@ -208,9 +173,9 @@ export default function UserPage() {
             <List
               header={<div><CheckSquareOutlined />&nbsp;<b>Recent AC</b></div>}
               bordered
-              dataSource={userInfo.questionlistData}
+              dataSource={questionlistData}
               style={{marginBottom:'24px'}}
-              renderItem={item => <List.Item>{item}</List.Item>}
+              renderItem={item => <List.Item>{item.name}</List.Item>}
             />
           </Col>
           <Col flex={1} />
