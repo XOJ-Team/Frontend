@@ -18,12 +18,9 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export default function LookQ() {
   let navigate=useNavigate()
-  const [mdword,setmdword] = useState("")
-  const [questionTitle,setquestionTitle] = useState("")
-  const [questionHard,setquestionHard] = useState("")
-  const [tags,settags]=useState("")
+
+  const [questionInfo,setquestionInfo]=useState({name:'',levelDescription:'',tags:"",content:'',creatorName:''})
   const [testcases,settestcases]=useState([])
-  const [creatorName,setcreatorName]=useState("")
 
   const [showtags,setshowtags]=useState(false)
   // 困难标签的颜色
@@ -41,11 +38,7 @@ export default function LookQ() {
       // 题目信息
       selectQuestionId(params['id']).then((e)=>{
         if(e.data.status===1){
-          setquestionTitle(e.data.obj.name)
-          setquestionHard(e.data.obj.levelDescription)
-          settags(e.data.obj.tags)
-          setmdword(e.data.obj.content)
-          setcreatorName(e.data.obj.creatorName)
+          setquestionInfo(e.data.obj)
         }else{
           message.error('error id:'+params['id'])
         }
@@ -71,7 +64,7 @@ export default function LookQ() {
     >
       <Col className='question_descrip' span={16} offset={1}>
     <PageHeader
-    title={params['id']+". "+questionTitle}
+    title={params['id']+". "+questionInfo.name}
     onBack={()=>{navigate(-1)}}
     style={{
       padding:"10px 0px 30px 30px",
@@ -90,7 +83,7 @@ export default function LookQ() {
       wordBreak:'break-all',
       wordWrap:'break-word'
     }}
-    dangerouslySetInnerHTML={{__html:mdParser.render(mdword)}}></div>
+    dangerouslySetInnerHTML={{__html:mdParser.render(questionInfo.content)}}></div>
     <div style={{
       textAlign:'center',
       padding:'10px',
@@ -139,8 +132,10 @@ export default function LookQ() {
     itemLayout="horizontal"
     >
       <List.Item>Question ID: {params['id']}</List.Item>
-      <List.Item>Created By: <a>{creatorName}</a></List.Item>
-      <List.Item><div>Difficulty: <Typography.Text type={whichcolor[questionHard]}>{questionHard.toUpperCase()}</Typography.Text></div></List.Item>
+      <List.Item>Created By: <a>{questionInfo.creatorName}</a></List.Item>
+      <List.Item><div>Difficulty: <Typography.Text type={whichcolor[questionInfo.levelDescription]}>{questionInfo.levelDescription.toUpperCase()}</Typography.Text></div></List.Item>
+      <List.Item>Time Limit: {questionInfo.timeLimit}</List.Item>
+      <List.Item>Memory Limit: {questionInfo.memoryLimit}</List.Item>
       <List.Item>
         <div>
           Tags:
@@ -154,7 +149,7 @@ export default function LookQ() {
           })} */}
           {/* 隐藏整个标签框，位置保留 */}
           <span style={showtags?{}:{visibility:'hidden'}}>
-          {tags.split("#").map((item,index)=>{
+          {questionInfo.tags.split("#").map((item,index)=>{
           return (<Tag style={{margin:"5px 5px"}} key={index}>{item}</Tag>)
           })}
           </span>

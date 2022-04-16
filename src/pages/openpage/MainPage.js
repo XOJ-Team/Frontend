@@ -41,7 +41,7 @@ export default function Mainpage() {
           {/* minHeight控制外层flex高度 */}
           <div style={{ width: '50%', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <div>
-              <div style={{ fontSize: '2rem', fontWeight: 'bolder' }}>XJTLU Online Judgement</div>
+              <div style={{ fontSize: '2rem', fontWeight: 'bolder' }}>XJTLU Online Judge System</div>
               <div style={{ fontSize: '1rem', color: 'gray' }}>make your code comfortable and joyful</div>
             </div>
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
