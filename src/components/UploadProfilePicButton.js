@@ -27,6 +27,9 @@ function beforeUpload(file) {
  */
 export default function UploadProfilePic(props) {
   const [loading, setloading] = useState(false)
+
+  console.log("now photo url is:", props.photourl)
+
   function handleChange(info) {
     if (info.file.status === 'uploading') {
       setloading(true)
@@ -37,6 +40,7 @@ export default function UploadProfilePic(props) {
       if(info.file.response){
         setloading(false)
         props.setphotourl(info.file.response.obj)
+        console.log("photo url has set to: ",info.file.response)
       }
     }
   };
