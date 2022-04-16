@@ -1,11 +1,17 @@
 import axios from 'axios';
 import qs from 'qs';
 import { getToken } from './auth';
+import whichcase from './environment';
 
-
+const urlpool={
+    // 本地后端
+    'dev':'http://localhost:8081/',
+    // 服务器后端
+    'product':'https://api.xoj.codes/'
+}
 
 const instance=axios.create({
-    baseURL:"http://localhost:8081/",//后端url
+    baseURL:urlpool[whichcase()],//根据不同的环境选择不同的url来请求
     timeout:60000,
     withCredentials:true // 允许携带cookie
 })
