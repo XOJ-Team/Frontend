@@ -10,8 +10,13 @@ const urlpool={
     'product':'https://api.xoj.codes/'
 }
 
+// 获取现在的请求地址
+const getnowBackendUrl=()=>{
+    return urlpool[whichcase()]
+}
+
 const instance=axios.create({
-    baseURL:urlpool[whichcase()],//根据不同的环境选择不同的url来请求
+    baseURL:getnowBackendUrl(),//根据不同的环境选择不同的url来请求
     timeout:60000,
     withCredentials:true // 允许携带cookie
 })

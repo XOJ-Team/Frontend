@@ -1,4 +1,4 @@
-import {get, post, put, del} from '../utils/request'
+import {get, post, put, del,getnowBackendUrl} from '../utils/request'
 
 /**
  * delete account
@@ -33,4 +33,12 @@ export function modifyUserInfo(obj){
 }
 
 
-export const uploadUserPhoto='http://localhost:8081/user/image'
+export const uploadUserPhotourl=getnowBackendUrl()+'user/image'
+
+/**
+ * user upload Avator
+ * @param obj.smfile(binary)
+ */
+export function uploadUserPhotoApi(obj){
+    return post("/user/image",obj)
+}

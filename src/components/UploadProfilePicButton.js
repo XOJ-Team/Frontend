@@ -4,7 +4,7 @@ import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 //utils
-import { uploadUserPhoto } from '../services/userInfo';
+import { uploadUserPhotourl } from '../services/userInfo';
 
 
 function beforeUpload(file) {
@@ -47,7 +47,7 @@ export default function UploadProfilePic(props) {
       listType="picture-card"
       className={"avatar-uploader"}
       showUploadList={false}
-      action={uploadUserPhoto}
+      action={uploadUserPhotourl}
       method='post'
       withCredentials={true}
       beforeUpload={beforeUpload}
