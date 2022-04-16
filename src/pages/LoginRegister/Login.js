@@ -22,10 +22,13 @@ export default function Login() {
   const [form] = Form.useForm()
   // false：邮箱加密码登录 true：邮箱加验证码登录
   let [useCode, setUseCode] = useState(false)
-  // 邮箱
-  let [email,setemail]=useState(getUseremail())
   // 获取跨组件传来的信息
   const farpropsAuth=useContext(Auth)
+
+  // 获取最新email的回调
+  const getupdatedemail=()=>{
+    return form.getFieldValue('email')
+  }
 
   // 表单提交成功响应后的操作
   const successRes=(res)=>{
@@ -76,11 +79,9 @@ export default function Login() {
     }
   };
 
+  // e只包含变化了的函数
   const onValuesChange=(e)=>{
-    if(e.email!==null){
-      console.log("email changed in form: ",e.email)
-      setemail(e.email)
-    }
+    console.log(e)
   }
 
   return (
@@ -93,7 +94,7 @@ export default function Login() {
         className="login-form"
         initialValues={{
           remember: true,
-          email:email
+          email:getUseremail()
         }}
         onFinish={onFinish}
         onValuesChange={onValuesChange}
@@ -117,7 +118,7 @@ export default function Login() {
         </Form.Item>
 
         {(useCode) ? <SendcodeButton
-          email={email}
+          getemail={getupdatedemail}
           offset={0}
           span={24}
           style={{textAlign:'center'}}
