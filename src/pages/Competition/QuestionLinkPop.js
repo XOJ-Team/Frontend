@@ -105,8 +105,8 @@ export default function QuestionLinkPop(props){
                         message.success(`success remove Q: <${questionName}> from competition`)
                     }else{
                         message.error(res.data.comment)
-                        props.reopen()
                     }
+                    props.reopen()
                 }).catch(()=>{
                     message.error("Server error")
                     props.reopen()
@@ -129,8 +129,8 @@ export default function QuestionLinkPop(props){
                         message.success(`success add Q: <${questionName}> to competition`)
                     }else{
                         message.error(res.data.comment)
-                        props.reopen()
                     }
+                    props.reopen()
                 }).catch(()=>{
                     message.error("Server error")
                     props.reopen()

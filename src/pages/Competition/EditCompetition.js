@@ -77,6 +77,8 @@ export default function EditCompetition() {
         if (res.data.status === 1) {
             message.success("success submit")
             navigate(findRoute('competitionList'))
+        }else{
+            message.error(res.data.comment)
         }
 
 
