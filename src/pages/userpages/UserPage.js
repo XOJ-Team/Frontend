@@ -8,6 +8,7 @@ import UploadProfilePicButton from '../../components/UploadProfilePicButton'
 import { Auth } from '../../contexts/AuthContext';
 import DocumentTitle from 'react-document-title'//动态Title
 import { getUserInfo } from '../../services/userInfo';
+import { showUserRecord } from '../../services/submitRecord';
 
 const { Header } = Layout;
 const { Title, Text, Paragraph } = Typography;
@@ -15,6 +16,14 @@ const { Title, Text, Paragraph } = Typography;
 
 
 export default function UserPage() {
+  useEffect(() => {
+    showUserRecord().then(
+      res => {
+        setQuestionListData([res.data.obj.map((e) => {return e.questionName})])
+      }
+    )
+  })
+
   useEffect(() => {
     getUserInfo({
       id: farpropsAuth.pUserid
@@ -31,18 +40,19 @@ export default function UserPage() {
           setAvatarUrl(res.data.obj.profilePhoto)
           setRanking(res.data.obj.ranking)
           setScore(res.data.obj.score)
+          setuserSelfDescribe(res.data.obj.intro)
+          setSolvedProblems(res.data.obj.solvedNumber)
         }
       }
     )
   }, []);
-
-
 
   const [userSelfDescribe, setuserSelfDescribe] = useState('');
   // 获取跨组件传来的信息
   const farpropsAuth = useContext(Auth)
   const [ranking, setRanking] = useState(0);
   const [score, setScore] = useState(0);
+  const [solvedProblems, setSolvedProblems] = useState(0);
 
   const [email, setEmail] = useState("");
   const [questionLevelNumData, setQuestionLevelNumData] = useState([
@@ -65,13 +75,7 @@ export default function UserPage() {
 
   const [avatarUrl, setAvatarUrl] = useState("");
 
-  const [questionlistData, setQuestionListData] = useState([
-    '1. questionID',
-    '556.qustionID',
-    '123.questionID',
-    '156.questionID',
-    '5.questionID',
-  ]);
+  const [questionlistData, setQuestionListData] = useState([]);
 
   const authoritylist={1:'user',2:'super user',3:'manager'}
 
@@ -84,7 +88,7 @@ export default function UserPage() {
           <Col flex={1} >
             <div className='avatarItem'>
               <UploadProfilePicButton photourl={avatarUrl} setphotourl={setAvatarUrl}/>
-              <Title level={3}>Welcome to XOJ, {farpropsAuth.pUsername}.<br />
+              <Title level={3}>{farpropsAuth.pUsername}<br />
                 <Text type="secondary" style={{ fontSize: 18 }}> XID: {farpropsAuth.pUserid} </Text><br />
                 <Text type='secondary' style={{fontSize:18}}> Authority:{authoritylist[farpropsAuth.pAuthority]} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {email}</Text>
@@ -123,15 +127,10 @@ export default function UserPage() {
             <Title level={3} align='center' ><CheckCircleOutlined style={{ color: '#99dc50' }} />&nbsp; Solved Problems<br /></Title>
 
             <Row>
-              <Col flex={1} align='center'>
-                <Tooltip title="24 solved / 26 to do">
-                  <Progress percent={((10 + 10 + 4) / (10 + 10 + 4 + 26)) * 100} type="circle" strokeColor={{
-                    '0%': '#99dc50',
-                    '100%': '#9aee3e',
-                  }}
-                    format={percent => `${percent} Solved`}
-                  />
-                </Tooltip>
+              <Col>
+                <Text>
+                  Solved: {solvedProblems}
+                </Text>
               </Col>
               <Col flex={3} align='center'>
                 <List
