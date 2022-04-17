@@ -13,7 +13,7 @@ export function delAccount(obj){
  * @param obj.id(str)
  */
 export function getUserInfo(obj){
-    return post("/user/info", obj)
+    return post("/user/info?id="+obj.id,{})
 }
 
 /**
