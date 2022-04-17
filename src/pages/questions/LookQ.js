@@ -69,7 +69,7 @@ export default function LookQ() {
     style={{
       padding:"10px 0px 30px 30px",
     }}
-    >
+    />
     <div style={{padding:"0px 10px"}}>
     {/* <ReactMarkdown children={mdword} /> */}
     <Divider orientation="left">Question Description</Divider>
@@ -122,7 +122,6 @@ export default function LookQ() {
       </Card.Grid></div>})}
     </div>
     <Divider />
-    </PageHeader>
     </Col>
     <Col></Col>
     <Col className='question_info' span={5}>

@@ -4,7 +4,7 @@ import DocumentTitle from 'react-document-title'//动态Title
 import { useLocation, useNavigate } from 'react-router-dom'
 import qs from 'qs'
 // UI
-import { Form, Input, Button, DatePicker, Space, message, InputNumber } from 'antd';
+import { Form, Input, Button, DatePicker, Space, message, InputNumber,PageHeader } from 'antd';
 // 服务类接口
 import { createcomp, getcomp, deletecomp, updatecomp } from '../../services/competition';
 // 路由寻找
@@ -28,13 +28,13 @@ export default function EditCompetition() {
     // 跳转
     const navigate = useNavigate()
     // question link 弹出窗口的显示与否
-    const [qlinkvisible,setqlinkvisible]=useState(false)
+    const [qlinkvisible, setqlinkvisible] = useState(false)
     // 组件创建，下载竞赛信息
     useEffect(() => {
         if ('id' in params) {
             console.log("you are editing id=", params['id'])
             getcomp(params['id']).then((res) => {
-                const infoOfit=res.data.obj.competitionModel
+                const infoOfit = res.data.obj.competitionModel
                 form.setFieldsValue({
                     name: infoOfit.name,
                     introduction: infoOfit.briefIntroduction,
@@ -55,7 +55,7 @@ export default function EditCompetition() {
         // });
         if ('id' in params) {
             updatecomp({
-                'id':params['id'],
+                'id': params['id'],
                 'name': values.name,
                 'briefIntroduction': values.introduction,
                 'startTime': Timeformat(values.time[0]),
@@ -77,7 +77,7 @@ export default function EditCompetition() {
         if (res.data.status === 1) {
             message.success("success submit")
             navigate(findRoute('competitionList'))
-        }else{
+        } else {
             message.error(res.data.comment)
         }
 
@@ -90,7 +90,7 @@ export default function EditCompetition() {
     }
 
     // 关闭再打开，达到刷新question link的效果
-    const reopenLink=()=>{
+    const reopenLink = () => {
         setqlinkvisible(false)
         setqlinkvisible(true)
     }
@@ -110,6 +110,13 @@ export default function EditCompetition() {
     return (
         <DocumentTitle title="XOJ | EditCompetition">
             <div className='componentbox'>
+                <PageHeader
+                    title={'Edit competition: ' + params['id']}
+                    onBack={() => { navigate(-1) }}
+                    style={{
+                        padding: "10px 0px 30px 30px",
+                    }}
+                />
                 <Form
                     name="basic"
                     labelCol={{
@@ -190,30 +197,30 @@ export default function EditCompetition() {
                         }}
                     >
                         {'id' in params ? (<>
-                        <Button onClick={()=>{
-                            setqlinkvisible(true)
-                        }}>View question link</Button>
-                        <Button
-                            type='primary'
-                            danger
-                            style={{ marginLeft: "50px" }}
-                            onClick={() => {
-                                showConfirm(deleteThisComp)
-                            }}
-                        >
-                            Delete
-                        </Button></>) : (null)}
+                            <Button onClick={() => {
+                                setqlinkvisible(true)
+                            }}>View question link</Button>
+                            <Button
+                                type='primary'
+                                danger
+                                style={{ marginLeft: "50px" }}
+                                onClick={() => {
+                                    showConfirm(deleteThisComp)
+                                }}
+                            >
+                                Delete
+                            </Button></>) : (null)}
                     </Form.Item>
                 </Form>
 
-                <Popup 
-                width={'1300px'}
-                visible={qlinkvisible} 
-                setvisible={setqlinkvisible}
-                title="question link"
-                content={<QuestionLinkPop 
-                    compId={'id' in params?params['id']:""} 
-                    reopen={reopenLink}
+                <Popup
+                    width={'1300px'}
+                    visible={qlinkvisible}
+                    setvisible={setqlinkvisible}
+                    title="question link"
+                    content={<QuestionLinkPop
+                        compId={'id' in params ? params['id'] : ""}
+                        reopen={reopenLink}
                     />}
                 ></Popup>
             </div>
