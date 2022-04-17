@@ -111,8 +111,14 @@ export default function LookQ() {
           wordBreak:'break-all',
           wordWrap:'break-word',
           backgroundColor:'rgba(1,5,68,0.1)',
-          borderRadius:'15px' }}>
-      <p><b>Input:</b><br/>{e.testcase}<br/><b>Result:</b><br/>{e.result}</p>
+          borderRadius:'15px',
+          whiteSpace: 'pre-wrap' }}>
+      <p>
+        <b>Input:</b><br/>
+        {e.testcase}<br/>
+        <b>Result:</b><br/>
+        {e.result}
+      </p>
       </Card.Grid></div>})}
     </div>
     <Divider />
