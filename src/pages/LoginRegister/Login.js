@@ -36,12 +36,12 @@ export default function Login() {
       // 失败
       message.error("check your account!")
     } else if(res.data.status === 1) {
-      // 把用户名传给Context
-      farpropsAuth.setpUsername(res.data.obj.name)
-      // 把权限传给Context
-      farpropsAuth.setpAuthority(res.data.obj.authority)
-      // 把用户id传给Context
-      farpropsAuth.setpUserid(res.data.obj.id)
+      // 同步用户信息
+      farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
+        pUsername:res.data.obj.name,
+        pUserid:res.data.obj.id,
+        pAuthority:res.data.obj.authority
+      })
       navigate(findRoute('mainpage'))
     }
   }

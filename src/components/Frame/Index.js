@@ -56,12 +56,12 @@ function Index(props) {
                 if (res.data.status === -1) {
                     message.error(res.data.comment)
                 }else if(res.data.status === 1) {
-                    // 重置用户名
-                    farpropsAuth.setpUsername(null)
-                    // 重置权限
-                    farpropsAuth.setpAuthority(1)
-                    // 重置用户id
-                    farpropsAuth.setpUserid(null)
+                    //重置用户名,权限,用户id
+                    farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
+                        pUserid:null,
+                        pUsername:null,
+                        pAuthority:1
+                    })
                     navigate(findRoute('mainpage'))
                 }
             }
