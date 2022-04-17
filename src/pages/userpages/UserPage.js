@@ -97,7 +97,7 @@ export default function UserPage() {
         <Header className='headerAbove'></Header>
         <Row className='main_layour'>
           <Col flex={0.5} />
-          <Col flex={1} >
+          <Col flex={1} style={{minWidth:'300px'}}>
             <div className='avatarItem'>
               <UploadProfilePicButton photourl={userInfo.avatarUrl} setphotourl={(data)=>{setuserInfo({...userInfo,avatarUrl:data})}}/>
               <Title level={3}>{farpropsAuth.pUsername}<br />
@@ -115,7 +115,9 @@ export default function UserPage() {
               {/* </Paragraph> */}
             </div>
           </Col>
+          <Col flex={0.5} />
           <Divider type="vertical" style={{ height: '600px', }} />
+          <Col flex={1} />
           <Col flex={4} className='main_content'>
             <Header className='main_header'>
               <Row justify="space-around">
@@ -136,17 +138,12 @@ export default function UserPage() {
             </Header>
             <Divider />
 
-            <Title level={3} align='center' ><CheckCircleOutlined style={{ color: '#99dc50' }} />&nbsp; Solved Problems<br /></Title>
+            <Title level={3} align='center' ><CheckCircleOutlined style={{ color: '#99dc50' }} />&nbsp; Solved Problems:{userInfo.solvedProblems}<br /></Title>
 
-            <Row>
-              <Col>
-                <Text>
-                  Solved: {userInfo.solvedProblems}
-                </Text>
-              </Col>
+            <Row >
               <Col flex={3} align='center'>
                 <List
-                  grid={{ gutter: 16, column: 4 }}
+                  grid={{ gutter: 16, column: 3 }}
                   dataSource={[
                     {
                       title: 'EASY',
