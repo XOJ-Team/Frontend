@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { message, Transfer } from 'antd';
+import { message, Transfer,Input } from 'antd';
 import { addQtocomp,removeQofcomp,showQofcomp } from '../../services/competition';
 import { searchQuestion } from '../../services/question';
 
@@ -150,28 +150,30 @@ export default function QuestionLinkPop(props){
     }
 
     // 处理搜索
-    const handleSearch=(dir,value)=>{
+    const handleSearch=(value)=>{
         if(value===undefined||value===null||value===""){
             setsearchq([])
             return
         }
-        if(dir==="left"){
-            leftsearch(value)
-        }
-        console.log('search',dir,value)
+        leftsearch(value)
+        console.log('search',value)
     }
 
     return (
         <div>
         好丑，下个sprint改改样式，功能应该差不多了，左边是搜索题库中的所有题目，右边是已经在这个竞赛里的题目
+        <div>
+            <Input onChange={(e)=>{
+                handleSearch(e.target.value)
+            }} style={{width:'180px'}} />
+        </div>
+        
         <Transfer
         oneWay={true}
         dataSource={mergelist(incompq,searchq)}
-        showSearch
         showSelectAll={false}
         targetKeys={targetKeys}
         onChange={handleChange}
-        onSearch={handleSearch}
         render={(item) => {
                 return item.name
         }}
