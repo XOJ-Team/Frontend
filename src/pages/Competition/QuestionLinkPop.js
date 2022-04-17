@@ -174,7 +174,7 @@ export default function QuestionLinkPop(props){
         targetKeys={targetKeys}
         onChange={handleChange}
         render={(item) => {
-                return item.name
+                return item.id+'. '+item.name
         }}
         titles={['search','include']}
         operations={['add','']}
