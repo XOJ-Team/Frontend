@@ -31,6 +31,9 @@ export default function UserPage() {
   const farpropsAuth = useContext(Auth)
   // 用户信息
   const [userInfo,setuserInfo]=useState({
+    name:"",
+    id:0,
+    authority:1,
     ranking:0,
     score:0,
     solvedProblems:0,
@@ -63,6 +66,9 @@ export default function UserPage() {
         if (res.data.status===1){
           const resdata=res.data.obj
           setuserInfo({...userInfo,
+            name:resdata.name,
+            id:resdata.id,
+            authority:resdata.authority,
             ranking:resdata.ranking,
             score:resdata.score,
             solvedProblems:resdata.solvedNumber,
@@ -100,9 +106,9 @@ export default function UserPage() {
           <Col flex={1} style={{minWidth:'300px'}}>
             <div className='avatarItem'>
               <UploadProfilePicButton photourl={userInfo.avatarUrl} setphotourl={(data)=>{setuserInfo({...userInfo,avatarUrl:data})}}/>
-              <Title level={3}>{farpropsAuth.pUsername}<br />
-                <Text type="secondary" style={{ fontSize: 14 }}> XID: {farpropsAuth.pUserid} </Text><br />
-                <Text type='secondary' style={{fontSize:14}}> Authority: {authoritylist[farpropsAuth.pAuthority].toUpperCase()} </Text><br />
+              <Title level={3}>{userInfo.name}<br />
+                <Text type="secondary" style={{ fontSize: 14 }}> XID: {userInfo.id} </Text><br />
+                <Text type='secondary' style={{fontSize:14}}> Authority: {authoritylist[userInfo.authority].toUpperCase()} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {userInfo.email}</Text>
               </Title>
               {/* <Paragraph
