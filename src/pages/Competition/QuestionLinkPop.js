@@ -161,7 +161,7 @@ export default function QuestionLinkPop(props){
 
     return (
         <div>
-        好丑，下个sprint改改样式，功能应该差不多了，左边是搜索题库中的所有题目，右边是已经在这个竞赛里的题目
+        Search Left and Select to Right
         <div>
             <Input onChange={(e)=>{
                 handleSearch(e.target.value)
