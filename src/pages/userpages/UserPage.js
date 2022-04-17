@@ -101,8 +101,8 @@ export default function UserPage() {
             <div className='avatarItem'>
               <UploadProfilePicButton photourl={userInfo.avatarUrl} setphotourl={(data)=>{setuserInfo({...userInfo,avatarUrl:data})}}/>
               <Title level={3}>{farpropsAuth.pUsername}<br />
-                <Text type="secondary" style={{ fontSize: 18 }}> XID: {farpropsAuth.pUserid} </Text><br />
-                <Text type='secondary' style={{fontSize:18}}> Authority:{authoritylist[farpropsAuth.pAuthority]} </Text><br />
+                <Text type="secondary" style={{ fontSize: 14 }}> XID: {farpropsAuth.pUserid} </Text><br />
+                <Text type='secondary' style={{fontSize:14}}> Authority: {authoritylist[farpropsAuth.pAuthority].toUpperCase()} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {userInfo.email}</Text>
               </Title>
               {/* <Paragraph
@@ -138,7 +138,7 @@ export default function UserPage() {
             </Header>
             <Divider />
 
-            <Title level={3} align='center' ><CheckCircleOutlined style={{ color: '#99dc50' }} />&nbsp; Solved Problems:{userInfo.solvedProblems}<br /></Title>
+            <Title level={3} align='center' ><CheckCircleOutlined style={{ color: '#99dc50' }} />&nbsp; Solved Problems: {userInfo.solvedProblems}<br /></Title>
 
             <Row >
               <Col flex={3} align='center'>
@@ -163,7 +163,12 @@ export default function UserPage() {
                   ]}
                   renderItem={item => (
                     <List.Item>
-                      <Card title={item.title} headStyle={{ color: item.color }}>{item.context}</Card>
+                      <Card
+                      title={item.title}
+                      headStyle={{ color: item.color }}
+                      bodyStyle={{fontSize: 18}}
+                      hoverable="true"
+                      ><b>{item.context}</b></Card>
                     </List.Item>
                   )}
                 />
