@@ -1,6 +1,5 @@
 import axios from 'axios';
 import qs from 'qs';
-import { getToken } from './auth';
 import whichcase from './environment';
 
 const urlpool={
@@ -23,14 +22,6 @@ const instance=axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(config=>{
 	// config 请求配置
-    // 跨域头
-    config.headers['Access-Control-Allow-Origin']='*'
-	if(false){
-        // 符合某些前缀时，使用token
-        config.headers['Authorization']='Bearer '+getToken();
-    }
-	// 发送网络请求时，在界面显示一个请求的同步动画
-	// 某些请求（比如登录（token））必须携带一些特殊的信息
 	
 	// 请求成功拦截
     console.log("utils/request.js: 请求成功, 请求地址: "+config.url+"\n请求内容: ",config)
