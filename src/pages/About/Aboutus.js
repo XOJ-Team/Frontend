@@ -28,7 +28,6 @@ const compilerIntro=[{
 }]
 
 const resultexplain=[
-  '先把青岛OJ给搬过来了:',
   'Pending & Judging : You solution will be judged soon, please wait for result.',
   "Compile Error : Failed to compile your source code. Click on the link to see compiler's output.",
   'Accepted : Congratulations. Your solution is correct.',

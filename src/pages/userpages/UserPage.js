@@ -25,13 +25,33 @@ export default function UserPage() {
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
 
+
+  const authoritylist={1:'user',2:'super user',3:'manager'}
+  // 获取跨组件传来的信息
+  const farpropsAuth = useContext(Auth)
+  // 用户信息
+  const [userInfo,setuserInfo]=useState({
+    ranking:0,
+    score:0,
+    solvedProblems:0,
+    avatarUrl:"",
+    email:"",
+    userSelfDescribe:"",
+    easyNumber:0,
+    mediumNumber:0,
+    hardNumber:0
+  })
+  
+  // 用户最近提交记录
+  const [questionlistData,setQuestionlistData]=useState([])
+
   // 同步数据
   const compcreate=(inputUserid)=>{
     showUserRecord({
       userId:inputUserid
     }).then(
       resa => {
-        setquestionlistData([resa.data.obj.map((e)=>{return {
+        setQuestionlistData([resa.data.obj.map((e)=>{return {
           name:e.questionName
         }})])
       }
@@ -68,24 +88,7 @@ export default function UserPage() {
   }, []);
 
 
-  const authoritylist={1:'user',2:'super user',3:'manager'}
-  // 获取跨组件传来的信息
-  const farpropsAuth = useContext(Auth)
-  // 用户信息
-  const [userInfo,setuserInfo]=useState({
-    ranking:0,
-    score:0,
-    solvedProblems:0,
-    avatarUrl:"",
-    email:"",
-    userSelfDescribe:"",
-    easyNumber:0,
-    mediumNumber:0,
-    hardNumber:0
-  })
-  
-  // 用户最近提交记录
-  const [questionlistData,setQuestionlistData]=useState([])
+
 
 
   return (
