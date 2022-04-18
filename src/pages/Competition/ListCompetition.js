@@ -16,7 +16,7 @@ const { Title, Paragraph } = Typography;
 const mapstatus={
   '-1':{'text':'Ended','status':'error'},
   '0':{'text':'During','status':'warning'},
-  '1':{'text':'Underway','status':'success'}
+  '1':{'text':'Future','status':'success'}
 }
 
 export default function ListCompetition() {
