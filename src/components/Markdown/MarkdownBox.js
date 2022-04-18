@@ -14,7 +14,9 @@ export const mdParser = new MarkdownIt({
     linkify: true,
     typographer: true,
     highlight: function (str, lang) {
-        return hljs.highlightAuto(str,lang).value
+        if(lang!==""){
+            return hljs.highlightAuto(str).value
+        }
     }
 })
 /**
@@ -23,6 +25,7 @@ export const mdParser = new MarkdownIt({
 export default function MarkdownBox(props) {
     return (
         <div
+            className='mdbox'
             style={{
                 borderRadius: '10px',
                 padding: '0px 20px 0px 30px',

@@ -84,7 +84,7 @@ export default function EditQ(props) {
 
   // 表单提交事件
   const onFinish = (values) => {
-    console.log(mdword)
+    // console.log(mdword)
     if (mdword === null || mdword === "" || mdword === undefined) {
       message.error("Content can not be null!")
       return
