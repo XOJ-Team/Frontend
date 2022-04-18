@@ -31,13 +31,16 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
 /* 滚动条 */
 body::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
+/* 滚动条轨道 */
 body::-webkit-scrollbar-track {
   background-color: rgb(255, 255, 255);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+/* 滚动条滑块 */
 body::-webkit-scrollbar-thumb {
   background-color: #858585;
   -webkit-border-radius: 5px;
