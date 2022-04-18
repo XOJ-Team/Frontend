@@ -86,7 +86,7 @@ export default function LookQ() {
         Start to write
       </Button>
     </div>
-    {testcases.length>0?<Divider orientation="left">Test Case Example</Divider>:null}
+    {testcases.length>0?<Divider orientation="left">Test Case</Divider>:null}
     {testcases.map((e)=>{return <div style={{
       padding:'0px 30px',
       }}>

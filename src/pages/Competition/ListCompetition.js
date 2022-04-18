@@ -71,7 +71,10 @@ export default function ListCompetition() {
                 })()}
             >
               <List.Item.Meta
-                avatar={<Avatar size={40} src="https://joeschmoe.io/api/v1/random" />}
+                avatar={<Avatar 
+                  style={{width:'50px',height:'51px'}}
+                  shape="square" 
+                  src="https://static.leetcode-cn.com/cn-legacy-assets/images/LeetCode_Cup.png" />}
                 title={<a id='123' onClick={() => { navigate(findRoute('onecompetition') + '?id=' + item.id) }}>{item.name}</a>}
                 description={(<div><Paragraph ellipsis={{ rows: 1 }}>{item.briefIntroduction}</Paragraph><div>{item.startTime}-{item.endTime}</div></div>)}
               />

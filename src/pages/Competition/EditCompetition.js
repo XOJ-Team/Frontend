@@ -142,7 +142,7 @@ export default function EditCompetition() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input showCount maxLength={80}/>
                     </Form.Item>
 
                     <Form.Item
@@ -155,7 +155,7 @@ export default function EditCompetition() {
                             },
                         ]}
                     >
-                        <Input.TextArea />
+                        <Input.TextArea showCount maxLength={200}/>
                     </Form.Item>
 
                     <Form.Item
