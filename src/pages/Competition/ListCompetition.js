@@ -74,7 +74,7 @@ export default function ListCompetition() {
                 avatar={<Avatar 
                   style={{width:'50px',height:'51px'}}
                   shape="square" 
-                  src="https://static.leetcode-cn.com/cn-legacy-assets/images/LeetCode_Cup.png" />}
+                  src="https://s2.loli.net/2022/04/18/amMWX8hCVkFpHyz.png" />}
                 title={<a id='123' onClick={() => { navigate(findRoute('onecompetition') + '?id=' + item.id) }}>{item.name}</a>}
                 description={(<div><Paragraph ellipsis={{ rows: 1 }}>{item.briefIntroduction}</Paragraph><div>{item.startTime}-{item.endTime}</div></div>)}
               />
