@@ -83,7 +83,8 @@ export default function LookQ() {
       wordBreak:'break-all',
       wordWrap:'break-word'
     }}
-    dangerouslySetInnerHTML={{__html:mdParser.render(questionInfo.content)}}></div>
+    dangerouslySetInnerHTML={{__html:mdParser.render(questionInfo.content)}}>
+    </div>
     <div style={{
       textAlign:'center',
       padding:'10px',
@@ -139,8 +140,8 @@ export default function LookQ() {
       <List.Item>Question ID: {params['id']}</List.Item>
       <List.Item>Created By: <a>{questionInfo.creatorName}</a></List.Item>
       <List.Item><div>Difficulty: <Typography.Text type={whichcolor[questionInfo.levelDescription]}>{questionInfo.levelDescription.toUpperCase()}</Typography.Text></div></List.Item>
-      <List.Item>Time Limit: {questionInfo.timeLimit}</List.Item>
-      <List.Item>Memory Limit: {questionInfo.memoryLimit}</List.Item>
+      <List.Item>Time Limit: {questionInfo.timeLimit}s</List.Item>
+      <List.Item>Memory Limit: {questionInfo.memoryLimit}MB</List.Item>
       <List.Item>
         <div>
           Tags:

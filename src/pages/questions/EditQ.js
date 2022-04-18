@@ -206,14 +206,14 @@ export default function EditQ(props) {
             name="timelimit"
             label="time limit"
             rules={[{ required: true, message: 'Please input timelimit!' }]}>
-            <InputNumber min={0} />
+            <InputNumber min={0} placeholder="seconds"/>
           </Form.Item>
 
           <Form.Item
             name="memorylimit"
             label="memory limit"
             rules={[{ required: true, message: 'Please input memorylimit!' }]}>
-            <InputNumber min={0} />
+            <InputNumber min={0} placeholder="MB"/>
           </Form.Item>
 
           <Form.Item {...tailLayout}>
