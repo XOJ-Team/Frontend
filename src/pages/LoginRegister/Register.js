@@ -16,7 +16,7 @@ import DocumentTitle from 'react-document-title'//动态Title
 
 export default function Register() {
   // 全局共享
-  let farProps=useContext(Auth)
+  let farpropsAuth=useContext(Auth)
   // 表单对象
   const [form]=Form.useForm()
 
@@ -41,12 +41,12 @@ export default function Register() {
         // 信息不对
         message.error(res.data.comment)
       }else{
-        // 把用户名传给Context
-        farProps.setpUsername(res.data.obj.name)
-        // 把权限传给Context
-        farProps.setpAuthority(res.data.obj.authority)
-        // 把用户id传给Context
-        farProps.setpUserid(res.data.obj.id)
+        // 同步用户信息
+        farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
+          pUsername:res.data.obj.name,
+          pUserid:res.data.obj.id,
+          pAuthority:res.data.obj.authority
+        })
         navigate(findRoute('mainpage'));
       }
     }).catch((err)=>{

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import ReactDOM from 'react-dom'
 // utils
-import MarkdownIt from 'markdown-it';
+import MarkdownBox from '../../components/Markdown/MarkdownBox';
 // import ReactMarkdown from 'react-markdown';
 import { useLocation,useNavigate } from 'react-router-dom';
 import qs from 'qs'
@@ -14,7 +14,6 @@ import './LookQ.css';
 import { message,PageHeader,Button,Tag, Row, Col, Divider, List, Typography, Card } from 'antd';
 import {EyeOutlined,EyeInvisibleOutlined} from '@ant-design/icons';
 
-const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export default function LookQ() {
   let navigate=useNavigate()
@@ -69,21 +68,11 @@ export default function LookQ() {
     style={{
       padding:"10px 0px 30px 30px",
     }}
-    >
+    />
     <div style={{padding:"0px 10px"}}>
     {/* <ReactMarkdown children={mdword} /> */}
     <Divider orientation="left">Question Description</Divider>
-    <div 
-    style={{
-      borderRadius:'10px',
-      padding:'0px 20px 0px 10px',
-      overflow:'auto',
-      // 超出长度自动换行
-      tableLayout:'fixed',
-      wordBreak:'break-all',
-      wordWrap:'break-word'
-    }}
-    dangerouslySetInnerHTML={{__html:mdParser.render(questionInfo.content)}}></div>
+    <MarkdownBox content={questionInfo.content}/>
     <div style={{
       textAlign:'center',
       padding:'10px',
@@ -97,7 +86,7 @@ export default function LookQ() {
         Start to write
       </Button>
     </div>
-    <Divider orientation="left">Test Case Example</Divider>
+    {testcases.length>0?<Divider orientation="left">Test Case</Divider>:null}
     {testcases.map((e)=>{return <div style={{
       padding:'0px 30px',
       }}>
@@ -122,7 +111,6 @@ export default function LookQ() {
       </Card.Grid></div>})}
     </div>
     <Divider />
-    </PageHeader>
     </Col>
     <Col></Col>
     <Col className='question_info' span={5}>
@@ -140,8 +128,8 @@ export default function LookQ() {
       <List.Item>Question ID: {params['id']}</List.Item>
       <List.Item>Created By: <a>{questionInfo.creatorName}</a></List.Item>
       <List.Item><div>Difficulty: <Typography.Text type={whichcolor[questionInfo.levelDescription]}>{questionInfo.levelDescription.toUpperCase()}</Typography.Text></div></List.Item>
-      <List.Item>Time Limit: {questionInfo.timeLimit}</List.Item>
-      <List.Item>Memory Limit: {questionInfo.memoryLimit}</List.Item>
+      <List.Item>Time Limit: {questionInfo.timeLimit}s</List.Item>
+      <List.Item>Memory Limit: {questionInfo.memoryLimit}MB</List.Item>
       <List.Item>
         <div>
           Tags:

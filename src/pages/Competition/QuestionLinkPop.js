@@ -21,6 +21,9 @@ export default function QuestionLinkPop(props){
 
     // 同步已经在竞赛里的题目列表
     useEffect(()=>{
+        // 填充搜索框
+        leftsearch("")
+        // 同步竞赛links
         showQofcomp({'competitionId':props.compId}).then((res)=>{
             // 添加key=问题的id
             const result1=copyAttribute(res.data.obj,'key','questionId')
@@ -151,10 +154,6 @@ export default function QuestionLinkPop(props){
 
     // 处理搜索
     const handleSearch=(value)=>{
-        if(value===undefined||value===null||value===""){
-            setsearchq([])
-            return
-        }
         leftsearch(value)
         console.log('search',value)
     }
@@ -175,7 +174,7 @@ export default function QuestionLinkPop(props){
         targetKeys={targetKeys}
         onChange={handleChange}
         render={(item) => {
-                return item.name
+                return item.id+'. '+item.name
         }}
         titles={['search','include']}
         operations={['add','']}

@@ -16,7 +16,7 @@ const { Title, Paragraph } = Typography;
 const mapstatus={
   '-1':{'text':'Ended','status':'error'},
   '0':{'text':'During','status':'warning'},
-  '1':{'text':'Underway','status':'success'}
+  '1':{'text':'Future','status':'success'}
 }
 
 export default function ListCompetition() {
@@ -71,7 +71,10 @@ export default function ListCompetition() {
                 })()}
             >
               <List.Item.Meta
-                avatar={<Avatar size={40} src="https://joeschmoe.io/api/v1/random" />}
+                avatar={<Avatar 
+                  style={{width:'50px',height:'51px'}}
+                  shape="square" 
+                  src="https://s2.loli.net/2022/04/18/amMWX8hCVkFpHyz.png" />}
                 title={<a id='123' onClick={() => { navigate(findRoute('onecompetition') + '?id=' + item.id) }}>{item.name}</a>}
                 description={(<div><Paragraph ellipsis={{ rows: 1 }}>{item.briefIntroduction}</Paragraph><div>{item.startTime}-{item.endTime}</div></div>)}
               />

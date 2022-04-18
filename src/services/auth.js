@@ -46,3 +46,9 @@ export function logoutApi(){
     return post('/logout')
 }
 
+/**
+ * user session id
+ */
+export function getnowsession(){
+    return get('/connect/session')
+}

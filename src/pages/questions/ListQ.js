@@ -107,7 +107,7 @@ export default function ListQ(){
       render: (text) => {return (<a onClick={()=>{
         // console.log(text.split('.')[0])
         navigate(findRoute('questionOnlyOne')+'?id='+text.split('#')[0])
-      }}>{text.split("#")[1]}</a>)},
+      }}>{text.replace("#",". ")}</a>)},
     },
     {
       title: 'Level',

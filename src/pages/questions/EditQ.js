@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import * as ReactDOM from 'react-dom';
 // UI import style manually
 import 'react-markdown-editor-lite/lib/index.css';
-import { Form, Input, Button, Select, Space, Radio, message, Modal, InputNumber, Row, Col,Divider } from 'antd';
+import { Form, Input, Button, Select, Space, Radio, message, Modal, InputNumber, Row, Col, Divider, PageHeader } from 'antd';
 import { MinusCircleOutlined, PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 // utils
 import { useLocation, useNavigate } from 'react-router-dom';
-import MarkdownIt from 'markdown-it';
+import { mdParser } from '../../components/Markdown/MarkdownBox';
 import MdEditor from 'react-markdown-editor-lite';
 import qs from 'qs'
 import { createQuestion, modifyQuestion, selectQuestionId, delQuestion } from '../../services/question';
@@ -20,9 +20,6 @@ import DocumentTitle from 'react-document-title'//动态Title
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
-
-// Initialize a markdown parser
-const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Form
 const { Option } = Select;
@@ -87,7 +84,7 @@ export default function EditQ(props) {
 
   // 表单提交事件
   const onFinish = (values) => {
-    console.log(mdword)
+    // console.log(mdword)
     if (mdword === null || mdword === "" || mdword === undefined) {
       message.error("Content can not be null!")
       return
@@ -145,7 +142,14 @@ export default function EditQ(props) {
 
   return (
     <DocumentTitle title="XOJ | Edit">
-      <div>
+      <div className='componentbox'>
+        <PageHeader
+          title={'Edit question: ' + params['id']}
+          onBack={() => { navigate(-1) }}
+          style={{
+            padding: "10px 0px 30px 30px",
+          }}
+        />
         <MdEditor
           value={mdword}
           style={{ height: '500px', width: '1000px', margin: 'auto' }}
@@ -199,14 +203,14 @@ export default function EditQ(props) {
             name="timelimit"
             label="time limit"
             rules={[{ required: true, message: 'Please input timelimit!' }]}>
-            <InputNumber min={0} />
+            <InputNumber min={0} placeholder="seconds"/>
           </Form.Item>
 
           <Form.Item
             name="memorylimit"
             label="memory limit"
             rules={[{ required: true, message: 'Please input memorylimit!' }]}>
-            <InputNumber min={0} />
+            <InputNumber min={0} placeholder="MB"/>
           </Form.Item>
 
           <Form.Item {...tailLayout}>
@@ -373,18 +377,18 @@ function Testcase(props) {
             placeholder='a test case'
             disabled={theState[0] === 'remove'}
             value={CaseResult.case}
-            onChange={(e) => { setCaseResult({...CaseResult,case: e.target.value}) }}
+            onChange={(e) => { setCaseResult({ ...CaseResult, case: e.target.value }) }}
           /></Col>
         <Col span={1} />
         <Col span={2}>Result:</Col>
         <Col span={9}>
-        <TextArea
-          rows={5}
-          placeholder='result for test case'
-          disabled={theState[0] === 'remove'}
-          value={CaseResult.result}
-          onChange={(e) => { setCaseResult({...CaseResult, result: e.target.value }) }}
-        /></Col>
+          <TextArea
+            rows={5}
+            placeholder='result for test case'
+            disabled={theState[0] === 'remove'}
+            value={CaseResult.result}
+            onChange={(e) => { setCaseResult({ ...CaseResult, result: e.target.value }) }}
+          /></Col>
         <Col span={1} />
       </Row>
 
