@@ -40,9 +40,3 @@ export function insertManagerUser(obj){
     return post("/manager/modify", obj)
 }
 
-/**
- * get now session's user infomation
- */
-export function getUserInfoManager(){
-    return get("/manager/user")
-}

@@ -42,3 +42,10 @@ export const uploadUserPhotourl=getnowBackendUrl()+'user/image'
 export function uploadUserPhotoApi(obj){
     return post("/user/image",obj)
 }
+
+/**
+ * get now session's user infomation
+ */
+ export function getUserInfoMy(){
+    return get("/user/my")
+}

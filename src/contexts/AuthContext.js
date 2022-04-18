@@ -1,6 +1,6 @@
 // React
 import React, {createContext,useEffect,useState} from 'react'
-import {getUserInfoManager} from '../services/manager'
+import {getUserInfoMy} from '../services/userInfo'
 // 跨组件传参父组件
 
 /**
@@ -40,7 +40,7 @@ export function AuthContext({children}){
     useEffect(()=>{
         // 发起网络请求当前Session的用户信息
         console.log("create AuthContext",pUserinfo)
-        getUserInfoManager().then((res)=>{
+        getUserInfoMy().then((res)=>{
             const myinfo=res.data.obj
             console.log("尝试获取当前会话用户的信息",res.data.obj)
             if(myinfo){
