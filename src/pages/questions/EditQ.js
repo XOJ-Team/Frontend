@@ -8,7 +8,7 @@ import { Form, Input, Button, Select, Space, Radio, message, Modal, InputNumber,
 import { MinusCircleOutlined, PlusOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 // utils
 import { useLocation, useNavigate } from 'react-router-dom';
-import MarkdownIt from 'markdown-it';
+import { mdParser } from '../../components/Markdown/MarkdownBox';
 import MdEditor from 'react-markdown-editor-lite';
 import qs from 'qs'
 import { createQuestion, modifyQuestion, selectQuestionId, delQuestion } from '../../services/question';
@@ -20,9 +20,6 @@ import DocumentTitle from 'react-document-title'//动态Title
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
-
-// Initialize a markdown parser
-const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 // Form
 const { Option } = Select;
