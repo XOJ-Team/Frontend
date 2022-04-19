@@ -5,9 +5,9 @@ import MarkdownBox from '../../components/Markdown/MarkdownBox';
 // import ReactMarkdown from 'react-markdown';
 import { useLocation,useNavigate } from 'react-router-dom';
 import qs from 'qs'
-import {findRoute} from '../../routers/config'
 import {selectQuestionId} from '../../services/question'
 import { getTestcase } from '../../services/testcase';
+import { getnowsession } from '../../services/auth';
 // UI
 import DocumentTitle from 'react-document-title'//动态Title
 import './LookQ.css';
@@ -30,6 +30,17 @@ export default function LookQ() {
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
+
+  // 答题
+  const jumpToVSC=()=>{
+    if ('id' in params){
+      getnowsession().then((res)=>{
+        console.log("Response Session ID: "+res.data.obj)
+        window.open('vscode://xoj-team.xoj-playground?sessionId='+res.data.obj+'&questionId='+params['id'])
+        res.data.obj=null
+      })
+    }
+  }
 
   // 模拟组件挂载周期函数
   useEffect(()=>{
@@ -80,16 +91,19 @@ export default function LookQ() {
       <Button 
       type='primary'
       onClick={()=>{
-        // navigate()
+        jumpToVSC()
       }}
       >
-        Start to write
+        Write in VScode
       </Button>
     </div>
     {testcases.length>0?<Divider orientation="left">Test Case</Divider>:null}
-    {testcases.map((e)=>{return <div style={{
+    {testcases.map((e,index)=>{return <div 
+    style={{
       padding:'0px 30px',
-      }}>
+      }}
+      key={index}
+      >
         <Card.Grid 
         style={{
           padding:'10px 20px', 
