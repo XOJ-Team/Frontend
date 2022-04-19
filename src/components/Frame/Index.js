@@ -72,7 +72,10 @@ function Index(props) {
     const DropdownMenu = function(){
         return (
             <SubMenu 
-            style={{position:'absolute',right:'0'}} 
+            style={{ position: 'absolute', width:'150px',
+                        textAlign:'center',
+                        right: '0px', 
+                        paddingRight: '20px' }}
             key="SubMenu" 
             icon={<UserOutlined />} 
             title={farpropsAuth.pUsername}>
@@ -89,7 +92,10 @@ function Index(props) {
     return (
         <Layout className="layout">
             <Header style={{padding:'0'}}>
-                <div className="logo" style={{ position: 'absolute', padding: "0px 30px" }}>
+                <div className="logo" style={{ 
+                    position: 'absolute', 
+                    padding: "0px 30px",
+                    zIndex:'999' }}>
                     <img src='/favicon.ico' />
                 </div>
                 <Menu
@@ -97,7 +103,9 @@ function Index(props) {
                     theme='dark'
                     defaultSelectedKeys={[current]}
                     selectedKeys={[current]}
-                    style={{ paddingLeft: '130px',backgroundColor:farpropsAuth.XJTLUNAVY }}
+                    style={{ paddingLeft: '130px',
+                    backgroundColor:farpropsAuth.XJTLUNAVY,
+                    position:'relative' }}
                 >
                     {menuItems.map((item, index) => {
                         return <Menu.Item
@@ -109,7 +117,10 @@ function Index(props) {
                     {farpropsAuth.pUsername === null ? (
                     <Menu.Item
                         key='userlogin'
-                        style={{ position: 'absolute', width:'150px',textAlign:'center',right: '0px', paddingRight: '20px' }}
+                        style={{ position: 'absolute', width:'150px',
+                        textAlign:'center',
+                        right: '0px', 
+                        paddingRight: '20px' }}
                     >
                         <div onClick={(e) => {
                             navigate(findRoute('userlogin'))
