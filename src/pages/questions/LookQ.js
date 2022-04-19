@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import ReactDOM from 'react-dom'
 // utils
 import MarkdownBox from '../../components/Markdown/MarkdownBox';
+import { Utf8toBase64 } from '../../utils/base64';
 // import ReactMarkdown from 'react-markdown';
 import { useLocation,useNavigate } from 'react-router-dom';
 import qs from 'qs'
@@ -35,9 +36,10 @@ export default function LookQ() {
   const jumpToVSC=()=>{
     if ('id' in params){
       getnowsession().then((res)=>{
-        console.log("Response Session ID: "+res.data.obj)
-        window.open('vscode://xoj-team.xoj-playground?sessionId='+res.data.obj+'&questionId='+params['id'])
+        let base64session=Utf8toBase64(res.data.obj)
+        window.open('vscode://xoj-team.xoj-playground?sessionId='+base64session+'&questionId='+params['id'])
         res.data.obj=null
+        base64session=""
       })
     }
   }
