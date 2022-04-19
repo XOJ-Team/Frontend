@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
+import { Auth } from '../../contexts/AuthContext';
 import ReactDOM from 'react-dom'
 // utils
 import MarkdownBox from '../../components/Markdown/MarkdownBox';
@@ -31,7 +32,7 @@ export default function LookQ() {
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
-
+  const farpropsAuth=useContext(Auth)
   // 答题
   const jumpToVSC=()=>{
     if ('id' in params){
@@ -86,19 +87,31 @@ export default function LookQ() {
     {/* <ReactMarkdown children={mdword} /> */}
     <Divider orientation="left">Question Description</Divider>
     <MarkdownBox content={questionInfo.content}/>
-    <div style={{
-      textAlign:'center',
-      padding:'10px',
+
+    <div 
+      style={{
+        textAlign:'center',
+        padding:'10px',
       }}>
-      <Button 
+      {farpropsAuth['pUsername']!=null?(
+      <Button
       type='primary'
       onClick={()=>{
         jumpToVSC()
-      }}
-      >
+      }}>
         Write in VScode
       </Button>
+      ):(
+      <Button
+      type='primary'
+      disabled={true}
+      >
+        Log in to write
+      </Button>
+      )}
     </div>
+
+    
     {testcases.length>0?<Divider orientation="left">Test Case</Divider>:null}
     {testcases.map((e,index)=>{return <div 
     style={{

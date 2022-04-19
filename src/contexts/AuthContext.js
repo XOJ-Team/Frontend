@@ -8,7 +8,7 @@ import {getUserInfoMy} from '../services/userInfo'
  * 
  * 使用方法：
  * 
- * let farpropsAuth=useContext(Auth)
+ * const farpropsAuth=useContext(Auth)
  * 
  * farpropsAuth.pUsername得到用户名
  * 
