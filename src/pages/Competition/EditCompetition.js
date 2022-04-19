@@ -32,7 +32,7 @@ export default function EditCompetition() {
     // 组件创建，下载竞赛信息
     useEffect(() => {
         if ('id' in params) {
-            console.log("you are editing id=", params['id'])
+            message.success("you are editing competition")
             getcomp(params['id']).then((res) => {
                 const infoOfit = res.data.obj.competitionModel
                 form.setFieldsValue({
@@ -41,6 +41,8 @@ export default function EditCompetition() {
                     time: [Timemoment(infoOfit.startTime), Timemoment(infoOfit.endTime)]
                 })
             })
+        }else{
+            message.success("you are creating competition")
         }
     }, [])
 
@@ -111,7 +113,7 @@ export default function EditCompetition() {
         <DocumentTitle title="XOJ | EditCompetition">
             <div className='componentbox'>
                 <PageHeader
-                    title={'Edit competition: ' + params['id']}
+                    title={'Edit competition'}
                     onBack={() => { navigate(-1) }}
                     style={{
                         padding: "10px 0px 30px 30px",

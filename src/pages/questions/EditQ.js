@@ -144,7 +144,7 @@ export default function EditQ(props) {
     <DocumentTitle title="XOJ | Edit">
       <div className='componentbox'>
         <PageHeader
-          title={'Edit question: ' + params['id']}
+          title={'Edit question'}
           onBack={() => { navigate(-1) }}
           style={{
             padding: "10px 0px 30px 30px",
