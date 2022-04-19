@@ -15,8 +15,8 @@ const { Title, Paragraph } = Typography;
 // 竞赛的status的map
 const mapstatus={
   '-1':{'text':'Ended','status':'error'},
-  '0':{'text':'During','status':'warning'},
-  '1':{'text':'Future','status':'success'}
+  '0':{'text':'During','status':'success'},
+  '1':{'text':'Future','status':'warning'}
 }
 
 export default function ListCompetition() {
