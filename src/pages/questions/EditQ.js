@@ -18,8 +18,7 @@ import { showConfirm } from '../../components/confirm';
 import DocumentTitle from 'react-document-title'//动态Title
 
 
-// Register plugins if required
-// MdEditor.use(YOUR_PLUGINS_HERE);
+
 
 // Form
 const { Option } = Select;
@@ -48,6 +47,26 @@ export default function EditQ(props) {
   let iscreate = 'id' in params ? false : true
   // 是否显示test case
   const [isTestcaseVisible, setIsTestcaseVisible] = useState(false);
+
+  // 更改md编辑器提示语言
+  MdEditor.addLocale('en-US',{
+    btnHeader:'Header',
+    btnBold:'Bold',
+    btnItalic:'Italic',
+    btnClear:'Clear',
+    btnStrikethrough:'Strike',
+    btnUnordered:'Unorder List',
+    btnOrdered:'Order List',
+    btnQuote:'Quote',
+    btnWrap:'Wrap',
+    btnCodeinline:'Code inline',
+    btnCodeblock:'Code block',
+    btnTable:'Table',
+    btnImage:'Image',
+    btnLink:'Link'
+  })
+  MdEditor.useLocale('en-US');
+
   // 模拟组件挂载周期函数
   useEffect(() => {
     if (iscreate) {
@@ -153,6 +172,22 @@ export default function EditQ(props) {
         <MdEditor
           value={mdword}
           style={{ height: '500px', width: '1000px', margin: 'auto' }}
+          table={{maxRow:6,maxCol:8}}
+          plugins={[
+            'header',
+            'font-bold',
+            'font-italic',
+            'font-strikethrough',
+            'list-unordered',
+            'list-ordered',
+            'block-quote',
+            'block-wrap',
+            'block-code-inline',
+            'block-code-block',
+            'table',
+            'image',
+            'link'
+          ]}
           renderHTML={text => mdParser.render(text)}
           onChange={handleEditorChange} />
         <Form {...layout}
