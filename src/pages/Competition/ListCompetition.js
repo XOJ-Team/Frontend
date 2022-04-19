@@ -28,12 +28,14 @@ export default function ListCompetition() {
   const [totalitems, settotalitems] = useState(0)
   // 当前竞赛页里的竞赛信息
   const [complist, setcomplist] = useState([])
+  // 一页放多少条信息
+  const pageSize=10
 
   // 发起请求获取第page页的竞赛信息
   const pageComp=(page)=>{
     listcomp({
       'pageNum':page,
-      'pageSize':10
+      'pageSize':pageSize
     }).then((res)=>{
       if(res.data.status===1){
         settotalitems(res.data.obj.total)
@@ -86,10 +88,10 @@ export default function ListCompetition() {
           <Pagination
             defaultCurrent={1}
             showSizeChanger={false}
-            pageSize={10}
+            pageSize={pageSize}
             total={totalitems}
             style={{ margin: '20px 0' }}
-            onChange={() => { }} />
+            onChange={(e) => {pageComp(e)}} />
         </div>
       </div>
     </DocumentTitle>
