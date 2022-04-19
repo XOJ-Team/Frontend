@@ -42,7 +42,7 @@ export default function ListCompetition() {
   const pageComp=(page)=>{
     navigate(findRoute('competitionList')+"?page="+page)
     listcomp({
-      'pageNum':'page' in params?params['page']:1,
+      'pageNum':page,
       'pageSize':pageSize
     }).then((res)=>{
       if(res.data.status===1){
@@ -95,7 +95,7 @@ export default function ListCompetition() {
         <Divider style={{ margin: '0' }} />
         <div style={{ textAlign: 'center' }}>
           <Pagination
-            defaultCurrent={1}
+            current={pagenow}
             showSizeChanger={false}
             pageSize={pageSize}
             total={totalitems}
