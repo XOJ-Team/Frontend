@@ -4,11 +4,13 @@ import DocumentTitle from 'react-document-title'//动态Title
 import { Pagination, Button, Divider, Typography, message, List, Avatar,Badge } from 'antd';
 import './ListCompetition.css'
 // utils
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { findRoute } from '../../routers/config';
 import { Auth } from '../../contexts/AuthContext';
 import { listcomp } from '../../services/competition';
 import { duringTime } from '../../utils/timeutils';
+import qs from 'qs';
+
 
 const { Title, Paragraph } = Typography;
 
@@ -20,6 +22,11 @@ const mapstatus={
 }
 
 export default function ListCompetition() {
+  // 获取url传来的分页
+  const location = useLocation()
+  const params = qs.parse(location.search.slice(1))
+  // 分页里面的current,请求时用params['page']并跳转url+参数,返回时setpagenow更新
+  const [pagenow,setpagenow]=useState(1)
   // 跳转
   const navigate = useNavigate()
   // 全局变量
@@ -33,13 +40,15 @@ export default function ListCompetition() {
 
   // 发起请求获取第page页的竞赛信息
   const pageComp=(page)=>{
+    navigate(findRoute('competitionList')+"?page="+page)
     listcomp({
-      'pageNum':page,
+      'pageNum':'page' in params?params['page']:1,
       'pageSize':pageSize
     }).then((res)=>{
       if(res.data.status===1){
         settotalitems(res.data.obj.total)
         setcomplist(res.data.obj.list)
+        setpagenow(res.data.obj.pageNum)
       }else{
         message.error('error')
       }
@@ -49,7 +58,7 @@ export default function ListCompetition() {
   }
 
   useEffect(()=>{
-    pageComp(1)
+    pageComp('id' in params?params['id']:1)
   },[])
 
   return (

@@ -1,24 +1,30 @@
 import React,{useContext, useState, useEffect} from 'react';
 // UI
 import {CheckOutlined} from '@ant-design/icons';
-import {Table, Tag, Typography, Layout, Button, List, message,Switch} from 'antd';
+import {Table, Tag, Typography, Layout, Button, List, message,Switch,Input,Pagination} from 'antd';
 // import './ListQ.css';
 
 // utils
-import { useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import {findRoute} from '../../routers/config'
 import { Auth } from '../../contexts/AuthContext';
-import {selectQuestionByPage, selectQuestionNotHidedPaging} from '../../services/question';
+import {selectQuestionByPage, selectQuestionNotHidedPaging,} from '../../services/question';
 import DocumentTitle from 'react-document-title'//动态Title
-
+import qs from 'qs'
 
 
 const { Sider, Content } = Layout;
 const { Text, Title } = Typography;
+const {Search} =Input;
 
 export default function ListQ(){
+  // 获取url传来的分页
+  const location = useLocation()
+  const params = qs.parse(location.search.slice(1))
+  // 分页里面的current,useEffect用params['page']请求并跳url+参数,切换页面用方法入参请求并跳url+参数,返回时setpagenow更新
+  const [pagenow,setpagenow]=useState(1)
   // 页面跳转
-  let navigate=useNavigate()
+  const navigate=useNavigate()
   // 题目的信息
   const [data, setData] = useState([])
   // 总问题数
@@ -44,6 +50,7 @@ export default function ListQ(){
         infolist.push(each)
       }
       setData(infolist)
+      setpagenow(res.data.obj.questionsPage.pageNum)
       setsumOfquestions(res.data.obj.questionsPage.total)
       if(res.data.obj.questionIds){setlistFinished(res.data.obj.questionIds)}
   }
@@ -53,36 +60,42 @@ export default function ListQ(){
     message.error("Network error")
   }
 
-  // 生命周期-组件创建
-  useEffect(() => {
+  // 向服务器请求page页的问题
+  const pageQuestion=(page)=>{
+    // 路径参数，改参数不触发重新渲染
+    navigate(findRoute('questionList')+"?page="+page)
     if(farpropsAuth['pAuthority']===3){
       selectQuestionByPage({
-        pageNum:1,
+        pageNum:page,
         pageSize:10
       }).then(succesResponse).catch(failedResponse);
     }else if (farpropsAuth['pAuthority']===1 || farpropsAuth['pAuthority']===2) {
       selectQuestionNotHidedPaging({
-        pageNum:1,
+        pageNum:page,
         pageSize:10
       }).then(succesResponse).catch(failedResponse);
     }
+  }
 
-
+  // 生命周期-组件创建
+  useEffect(() => {
+    pageQuestion('page' in params?params['page']:1)
   },[]);
+
+  // 搜索框筛选题目
+  const searchQ=(text)=>{
+    if(!text){
+      return
+    }
+    message.warn("This is just a UI")
+  //   searchQuestion({'text':text}).then(succesResponse).catch(()=>{
+  //     message.error("Something error")
+  // })
+  }
 
   //  用户点击页数栏，重新获取题目条目
   const changePage = (page)=>{
-    if(farpropsAuth['pAuthority']===3){
-      selectQuestionByPage({
-        pageNum:page,
-        pageSize:10
-      }).then(succesResponse);
-    }else if (farpropsAuth['pAuthority']===1 || farpropsAuth['pAuthority']===2) {
-      selectQuestionNotHidedPaging({
-        pageNum:page,
-        pageSize:10
-      }).then(succesResponse);
-    }
+    pageQuestion(page)
   }
 
 
@@ -140,7 +153,17 @@ export default function ListQ(){
       }
     },
     {
-      title: 'Tags',
+      title:(
+      <div>
+      Tags : 
+      <Switch 
+      id='tagswitch'
+      style={{marginLeft:'10px'}}
+      checkedChildren={<div>Tags</div>}
+      unCheckedChildren={<div>Tags</div>}
+      checked={showtag}
+      onClick={()=>{setshowtag(!showtag)}} />
+      </div>),
       key: 'id',
       dataIndex: 'tags',
       width:300,
@@ -178,7 +201,8 @@ export default function ListQ(){
     <DocumentTitle title="XOJ | Questions">
       <div className='componentbox'>
       <Title level={2}>Questions</Title>
-      <div id='optionsbox'>
+      <div id='optionsbox' style={{position:'relative',height:'35px',lineHeight:'35px',margin:'10px 0px'}}>
+        {/* 添加问题按钮 */}
         {farpropsAuth['pAuthority']===3?(
         <Button
         onClick={()=>{
@@ -189,31 +213,34 @@ export default function ListQ(){
         </Button>
         ):null}
 
-        <Switch 
-        checkedChildren="Tags" 
-        unCheckedChildren="Tags" 
-        checked={showtag}
-        onClick={()=>{setshowtag(!showtag)
-        }} 
-        style={{float:'right'}}
-        >
-          show/hide tags
-        </Switch>
+        <div style={{position:'absolute',right:'0',top:'0'}}>
+          <Search 
+          onSearch={searchQ}
+          style={{display:'inline-block',
+          width:'300px'}}
+          placeholder="search id/title/tag"
+          />
+          
+        </div>
       </div>
+      {/* 问题列表 */}
       <Table 
           columns={columns} 
           dataSource={data} 
           bordered 
-          pagination={{
-            position:["bottomCenter"],
-            // 每页条数
-            pageSize: 10,
-            // 条目总数
-            total:sumOfquestions,
-            // 用户切换页数
-            onChange:changePage
-          }}
-          />
+          pagination={false}
+      />
+      {/* 分页 */}
+      <div style={{ textAlign: 'center' }}>
+          <Pagination
+            current={pagenow}
+            showSizeChanger={false}
+            pageSize={10}
+            total={sumOfquestions}
+            style={{ margin: '20px 0' }}
+            onChange={changePage} />
+      </div>
+
       </div>
     </DocumentTitle>
   )
