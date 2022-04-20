@@ -96,3 +96,12 @@ export function showQuestionId(obj){
 export function searchQuestion(obj){
     return get('/question/search',obj)
 }
+
+/**
+ * 上传图片作为题目插图(only manager)
+ * @param obj.smfile formData file
+ */
+export function uploadPicinQ(obj){
+    return post('/upload',
+    obj,{'Content-Type':'multipart/form-data'})
+}

@@ -22,7 +22,7 @@ const instance=axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(config=>{
 	// config 请求配置
-	
+ 
 	// 请求成功拦截
     console.log("utils/request.js: 请求成功, 请求地址: "+config.url+"\n请求内容: ",config)
     return config
@@ -55,11 +55,12 @@ export function get(url,data={}){
 
 /**
  * post
- * @param {*} url    请求地址
- * @param {*} data   数据
+ * @param {*} url     请求地址
+ * @param {*} data    数据
+ * @param {*} headers 请求头
  */
-export function post(url,data={}){
-    return instance.post(url,data)
+export function post(url,data={},headers={}){
+    return instance.post(url,data,{headers:headers})
 }
 
 /**

@@ -5,20 +5,7 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 //utils
 import { uploadUserPhotourl } from '../services/userInfo';
-
-
-function beforeUpload(file) {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
-  } else {
-    if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
-    }
-  }
-  return (isJpgOrPng && isLt2M) || Upload.LIST_IGNORE;
-}
+import {beforeUploadPic} from '../utils/checkPic'
 
 /**
  * 图片上传，获得图片的url,样式修改要修改其下的.ant-upload-select-picture-card
@@ -54,7 +41,7 @@ export default function UploadProfilePic(props) {
       action={uploadUserPhotourl}
       method='post'
       withCredentials={true}
-      beforeUpload={beforeUpload}
+      beforeUpload={beforeUploadPic}
       onChange={handleChange}
     >
       {loading ? <LoadingOutlined /> : (
