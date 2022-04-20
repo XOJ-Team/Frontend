@@ -47,9 +47,7 @@ export default function Modify() {
       }else{
         // 同步用户信息
         farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
-          pUsername:res.data.obj.name,
-          pUserid:res.data.obj.id,
-          pAuthority:res.data.obj.authority,
+          pUsername:res.data.obj.name
         })
         navigate(findRoute('userpage')+"?id="+farpropsAuth.pUserid);
       }

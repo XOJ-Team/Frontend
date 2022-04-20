@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 // UI
-import { Layout, Avatar, Divider, Typography, Row, Col, List, Card, Tooltip, Progress, message } from 'antd';
+import { Layout, Divider, Typography, Row, Col, List, Card,Button } from 'antd';
 import { UserOutlined, TrophyOutlined, SmileOutlined, CheckCircleOutlined, CheckSquareOutlined } from '@ant-design/icons';
 import './UserPage.css';
 //utils
 import { getUserInfo } from '../../services/userInfo';
 import { showUserRecord } from '../../services/submitRecord';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import qs from 'qs'
+import { findRoute } from '../../routers/config';
 // component
 import UploadProfilePicButton from '../../components/UploadProfilePicButton'
 // 全局变量
@@ -24,7 +25,7 @@ export default function UserPage() {
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
-
+  const navigate=useNavigate()
 
   const authoritylist={1:'user',2:'super user',3:'manager'}
   // 获取跨组件传来的信息
@@ -111,14 +112,10 @@ export default function UserPage() {
                 <Text type='secondary' style={{fontSize:14}}> Authority: {authoritylist[userInfo.authority].toUpperCase()} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {userInfo.email}</Text>
               </Title>
-              {/* <Paragraph
-                editable={{
-                  onChange: ,
-                  maxLength: 50,
-                  autoSize: { maxRows: 5, minRows: 3 },
-                }}> */}
+              <Paragraph>
                 {userInfo.userSelfDescribe}
-              {/* </Paragraph> */}
+              </Paragraph>
+              <Button onClick={()=>{navigate(findRoute('editUserInfo'))}}>Modify my info</Button>
             </div>
           </Col>
           <Col flex={0.5} />
