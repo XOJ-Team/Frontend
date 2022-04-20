@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "ant-design-pro": "^2.3.2",
     "antd": "^4.19.1",
     "axios": "^0.26.1",
     "craco-less": "^2.0.0",
