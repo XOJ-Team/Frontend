@@ -18,15 +18,11 @@ export function getUserInfo(obj){
 
 /**
  * user modify itself
- * @param obj.id(Long)
  * @param obj.verificationNumber(str)
  * @param obj.name(str)
  * @param obj.mail(str)
  * @param obj.phoneNumber(str)
  * @param obj.password(str)
- * @param obj.score(str)
- * @param obj.ranking(str)
- * @param obj.authority(str)
  */
 export function modifyUserInfo(obj){
     return post("/user/modify", obj)
@@ -48,4 +44,13 @@ export function uploadUserPhotoApi(obj){
  */
  export function getUserInfoMy(){
     return get("/user/my")
+}
+
+
+/**
+ * modify users' self introduction
+ * @param obj.text
+ */
+export function modifyUserIntro(obj){
+    return post("/user/intro", obj)
 }

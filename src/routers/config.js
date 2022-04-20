@@ -9,6 +9,7 @@ import NotFound from '../pages/NotFound';
 import Register from '../pages/LoginRegister/Register';
 import EditQ from '../pages/questions/EditQ';
 import UserPage from '../pages/userpages/UserPage';
+import ModifyInfo from "../pages/userpages/ModifyInfo";
 import Aboutus from '../pages/About/Aboutus';
 import ViewCompetition from '../pages/Competition/ViewCompetition'
 import ListCompetition from '../pages/Competition/ListCompetition'
@@ -109,6 +110,11 @@ export const allroutes=[
                 path:'',
                 element:<UserPage />
             },
+            {
+                id:'editUserInfo',
+                path:'edit',
+                element:<ModifyInfo />
+            }
         ]
     },
     {
