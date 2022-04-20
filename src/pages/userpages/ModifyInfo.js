@@ -1,18 +1,14 @@
 import React,{useState,useContext, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 // UI
-//import './Register.less'
 import { Form, Input, Button,message,PageHeader} from 'antd';
-import { SendcodeButton } from '../../components/emailcode/EmailcodeButton';
 import { MailOutlined, LockOutlined,NumberOutlined,SmileOutlined } from '@ant-design/icons';
 // utils
 import pattern from '../../utils/regexp';
 import { getUserInfo, modifyUserInfo, modifyUserIntro} from '../../services/userInfo';
-import {registerApi} from '../../services/auth'
 import {findRoute} from '../../routers/config'
 import {Auth} from '../../contexts/AuthContext'
 import DocumentTitle from 'react-document-title'//动态Title
-// import { setUsername,getUsername } from '../utils/auth';
 
 
 export default function Modify() {
