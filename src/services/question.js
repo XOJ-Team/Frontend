@@ -99,9 +99,8 @@ export function searchQuestion(obj){
 
 /**
  * 上传图片作为题目插图(only manager)
- * @param obj.smfile formData file
+ * @param obj.smfile formData picfile
  */
 export function uploadPicinQ(obj){
-    return post('/upload',
-    obj,{'Content-Type':'multipart/form-data'})
+    return post('/upload',obj)
 }

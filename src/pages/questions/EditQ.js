@@ -10,11 +10,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { mdParser } from '../../components/Markdown/MarkdownBox';
 import MdEditor from 'react-markdown-editor-lite';
 import qs from 'qs'
-import { createQuestion, modifyQuestion, selectQuestionId, delQuestion } from '../../services/question';
+import { createQuestion, modifyQuestion, selectQuestionId, delQuestion,uploadPicinQ } from '../../services/question';
 import { findRoute } from '../../routers/config'
 import { showConfirm } from '../../components/confirm';
 import DocumentTitle from 'react-document-title'//动态Title
 import Testcase from './Testcase';
+import { beforeUploadPicNormal } from '../../utils/checkPic';
 
 
 
@@ -33,7 +34,7 @@ const tailLayout = {
 
 export default function EditQ(props) {
   // 跳转
-  let navigate = useNavigate()
+  const navigate = useNavigate()
   // Form
   const [form] = Form.useForm();
   // 编辑markdown内容的双向绑定
@@ -97,6 +98,15 @@ export default function EditQ(props) {
     // markdown编辑区改动会触发此函数
     // console.log('handleEditorChange',html, text);
     setmdword(text)
+  }
+  // 编辑器上传图片
+  function handleImageUpload(file,callback){
+    if(beforeUploadPicNormal(file)){
+      // 包装成formData格式,上传
+      let formData=new FormData()
+      formData.append('smfile',file)
+      return uploadPicinQ(formData).then(res=>{return res.data.obj}).catch(e=>{message.error("error")})
+    }
   }
 
   // 表单提交事件
@@ -171,6 +181,7 @@ export default function EditQ(props) {
           value={mdword}
           style={{ height: '500px', width: '1000px', margin: 'auto' }}
           table={{maxRow:6,maxCol:8}}
+          onImageUpload={handleImageUpload}
           plugins={[
             'header',
             'font-bold',
