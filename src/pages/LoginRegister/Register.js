@@ -41,13 +41,14 @@ export default function Register() {
         // 信息不对
         message.error(res.data.comment)
       }else{
-        // 同步用户信息
-        farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
-          pUsername:res.data.obj.name,
-          pUserid:res.data.obj.id,
-          pAuthority:res.data.obj.authority
-        })
-        navigate(findRoute('mainpage'));
+        // 注册的话没返回id，这里要强制用户登录一下
+        // farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
+        //   pUsername:res.data.obj.name,
+        //   pUserid:res.data.obj.id,
+        //   pAuthority:res.data.obj.authority
+        // })
+        message.success('success register')
+        navigate(findRoute('userlogin'));
       }
     }).catch((err)=>{
       message.error("server error")

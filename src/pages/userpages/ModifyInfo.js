@@ -23,6 +23,8 @@ export default function Modify() {
 
   const navigate=useNavigate();
 
+  const [changePassword,setchangePassword]=useState(false)
+
   // 表单提交
   const onFinish = (values) => {
     modifyUserIntro({
@@ -56,15 +58,16 @@ export default function Modify() {
     })
   };
 
+  // 组件创建周期执行
   useEffect(() => {
     getUserInfo({id:farpropsAuth.pUserid}).then((res)=>{
         if(res.data.status === -1){
-            message.error(res.data.comment)
+            navigate(findRoute('homepage'))
         }else{
             form.setFieldsValue({
             "username":res.data.obj.name,
             "email":res.data.obj.mail,
-            "password":res.data.obj.password,
+            'password':null,
             "introduction":res.data.obj.intro
             })
         }
@@ -134,12 +137,18 @@ export default function Modify() {
           prefix={<SmileOutlined />}/>
         </Form.Item>
 
+        <Button 
+        style={{marginBottom:'20px'}}
+        onClick={()=>{setchangePassword(!changePassword)}}>
+          {changePassword?'hide password':'change password'}
+        </Button>
 
+        {changePassword?
         <Form.Item
           name="password"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your new password!',
             },
           ]}
@@ -147,7 +156,8 @@ export default function Modify() {
           <Input
           placeholder="Password"
           prefix={<LockOutlined />}/>
-        </Form.Item>
+        </Form.Item>:null}
+        
 
         <Form.Item
           name="introduction"
