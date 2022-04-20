@@ -2,7 +2,7 @@ import React,{useState,useContext, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 // UI
 //import './Register.less'
-import { Form, Input, Button,message} from 'antd';
+import { Form, Input, Button,message,PageHeader} from 'antd';
 import { SendcodeButton } from '../../components/emailcode/EmailcodeButton';
 import { MailOutlined, LockOutlined,NumberOutlined,SmileOutlined } from '@ant-design/icons';
 // utils
@@ -62,7 +62,7 @@ export default function Modify() {
             message.error(res.data.comment)
         }else{
             form.setFieldsValue({
-            "usename":res.data.obj.name,
+            "username":res.data.obj.name,
             "email":res.data.obj.mail,
             "password":res.data.obj.password,
             "introduction":res.data.obj.intro
@@ -82,6 +82,13 @@ export default function Modify() {
   return (
     <DocumentTitle title="XOJ | Modify Information">
     <div id="XOJ-components-form-modify-information" className='componentbox'>
+    <PageHeader
+    title="Edit my infomation"
+    onBack={()=>{navigate(-1)}}
+    style={{
+      padding:"10px 0px 30px 30px",
+    }}
+    />
       <Form
         name="basic"
         labelCol={{
@@ -95,8 +102,23 @@ export default function Modify() {
         className='modify-form'
         form={form}
       >
-      <div className='title'>Modify Information</div>
-        
+      <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your new email!'
+            },
+            pattern('email')
+          ]}
+        >
+        <Input 
+        placeholder="Email"
+        disabled={true}
+        prefix={
+          <MailOutlined className="site-form-item-icon" />
+         } />
+        </Form.Item>
 
         <Form.Item
           name="username"
@@ -110,23 +132,6 @@ export default function Modify() {
           <Input 
           placeholder="Username"
           prefix={<SmileOutlined />}/>
-        </Form.Item>
-
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your new email!'
-            },
-            pattern('email')
-          ]}
-        >
-        <Input 
-        placeholder="Email"
-        prefix={
-          <MailOutlined className="site-form-item-icon" />
-         } />
         </Form.Item>
 
 
