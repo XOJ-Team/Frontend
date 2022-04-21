@@ -1,12 +1,9 @@
 # Introduction 
 This's the repo of XOJ frontend.
 
-# Api文档
-把Swagger页面搬运到了[这里](https://sanmusen.top/projectapi/Swagger.html)
-
 # 运行项目
 必须：安装Node.js, 安装yarn
-在XOJ_F工作目录下使用yarn或npm install下载模块,
+在XOJ_F工作目录下使用yarn下载模块,
 使用yarn start或npm start启动项目
 
 # 项目部署
@@ -21,7 +18,36 @@ This's the repo of XOJ frontend.
    - 或者把build目录改个名丢到Nginx里-[Nginx配合Jenkins发布React](https://www.cnblogs.com/mazhaokeng/p/9581835.html)-注意SPA配置```try_files $uri $uri/ /index.html;```
    - 或者使用Tomcat，依旧注意SPA配置，[参阅Stackoverflow](https://stackoverflow.com/questions/41246261/react-routing-is-able-to-handle-different-url-path-but-tomcat-returns-404-not-av/41249464#41249464)
 
+You can access [https://xoj.codes/](https://xoj.codes/) to visit deployed website.
 
+Process to develop in Development env：
+
+1. Install Node.js, and add it to your environment variables.
+2. Select a plain folder, open the terminal located on this folder, run ```git clone https://XOJ-Team@dev.azure.com/XOJ-Team/CPT202 Team B-3/_git/XOJ_F``` in your terminal.
+3. cd to the folder XOJ_F.
+4. run ```npm install yarn``` and run```yarn``` to download dependencies.
+5. run project: run ```npm start``` to run local develop server, then open the browser and visit  ```localhost:3000```.
+
+Process to deploy Production env:
+
+1. After build a Dev env.
+2. open the terminal and cd to the folder XOJ_F.
+3. run ```npm run build```, then a folder 'build' is created.
+4. Move this ‘build’ folder to cloud server.
+5. the simplest way to deploy is install Node in server, paste runserver.js in project with ‘build’ folder, then run ```node runserver.js```, 
+    
+    or you can use nginx: copy folder 'build' into folder like '/usr/local/var/www', install nginx, then add this in nginx.conf then run ```nginx -s reload```.
+    
+
+```jsx
+location {
+    alias /usr/local/var/www/build;
+    index index.html;
+    try_files $uri /index.html;
+}
+```
+
+1. then you can visit [http://YourIP/](http://YourIP/).
 # 代码目录结构说明
 
 ## /
