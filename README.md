@@ -53,19 +53,19 @@ Context variable sharing component.
 Mainrouters.js config main routes.
 
 ### /src/components
-Contains components and layouts
+Contains components and layouts.
 
 ### /src/services
-Encapsulate request services.
+Encapsulate requests to API.
 
 ### /src/pages
 Main pages in application.
 
 ### /src/utils
-Store all tools like timeutils.
+Store all tools like timeutils and axios.
 
 ### /src/locales
-Store international language package.
+Store international language packages.
 
 
 # Design specification
@@ -73,7 +73,7 @@ react-router-dom: v6
 
 Use stateless components declared functionally whenever possible
 
-# Common problem
+# Common problems
 
 ## Can not push
 Need to add your ssh public key to repository.
@@ -82,7 +82,9 @@ Need to add your ssh public key to repository.
 Check your remote target url.
 `kex_exchange_identification: Connection closed by remote host` do not using network proxy.
 
-## Judge whether there is a value
+# Develop questions
+
+## How to judge whether there is a value
 
 url params：
 ```
