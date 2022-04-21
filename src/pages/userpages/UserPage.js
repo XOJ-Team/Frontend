@@ -115,7 +115,8 @@ export default function UserPage() {
               <Paragraph>
                 {userInfo.userSelfDescribe}
               </Paragraph>
-              <Button onClick={()=>{navigate(findRoute('editUserInfo'))}}>Modify my info</Button>
+              {params['id']===farpropsAuth.pUserid?<Button onClick={()=>{navigate(findRoute('editUserInfo'))}}>Modify my info</Button>:null}
+              
             </div>
           </Col>
           <Col flex={0.5} />
