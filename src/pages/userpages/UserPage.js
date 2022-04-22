@@ -115,7 +115,8 @@ export default function UserPage() {
               <Paragraph>
                 {userInfo.userSelfDescribe}
               </Paragraph>
-              {params['id']===farpropsAuth.pUserid?<Button onClick={()=>{navigate(findRoute('editUserInfo'))}}>Modify my info</Button>:null}
+              {/* 使用==号，一个是数字，一个是字符串 */}
+              {params['id']==farpropsAuth.pUserid?<Button onClick={()=>{navigate(findRoute('editUserInfo'))}}>Modify my info</Button>:null}
               
             </div>
           </Col>
