@@ -60,7 +60,7 @@ export default function ViewCompetition() {
           <Col span={18} className='competContext'>
             <PageHeader
               ghost={false}
-              onBack={() => window.history.back()}
+              onBack={() => navigate(-1)}
               title={compinfo['name']}
               subTitle={"Competition ID:" + params['id']}
               style={{
