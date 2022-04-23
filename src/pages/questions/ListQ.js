@@ -8,7 +8,7 @@ import {Table, Tag, Typography, Layout, Button, List, message,Switch,Input,Pagin
 import { useLocation,useNavigate } from 'react-router-dom';
 import {findRoute} from '../../routers/config'
 import { Auth } from '../../contexts/AuthContext';
-import {selectQuestionByPage, selectQuestionNotHidedPaging,} from '../../services/question';
+import {selectQuestionByPage, selectQuestionNotHidedPaging,essearchQuestion} from '../../services/question';
 import DocumentTitle from 'react-document-title'//动态Title
 import qs from 'qs'
 
@@ -77,25 +77,71 @@ export default function ListQ(){
     }
   }
 
+  // 向服务器请求第page页的搜索查询结果
+  const pageSearchQuestion=(page,text)=>{
+    // 路径参数，改参数不触发重新渲染
+    navigate(findRoute('questionList')+"?page="+page+"&search="+text)
+    // 处理搜索返回值
+    essearchQuestion({
+      'text':text,
+      'from':10*(page-1),
+      'size':10
+    }).then((res)=>{
+      if(! res.data.obj){
+        message.warn("no result!")
+        return
+      }
+      let infolist=[]
+      for (let each of res.data.obj){
+        // 拼接name以支持点击题目名跳转
+        each.name=each.id+"#"+each.name
+        each.key=each.id//解决Each element in list should have a key警告
+        infolist.push(each)
+      }
+      setData(infolist)
+      setpagenow(page)
+      setsumOfquestions(10*page+1)
+    }).catch(()=>{
+      message.error("Something error")
+    })
+  }
+
   // 生命周期-组件创建
   useEffect(() => {
-    pageQuestion('page' in params?params['page']:1)
+    if('search' in params){
+      // 有search关键词就search
+      pageSearchQuestion('page' in params?params['page']:1,params['search'])
+    }else{
+      pageQuestion('page' in params?params['page']:1)
+    }
   },[]);
 
   // 搜索框筛选题目
+  // id,name,levelDescription,total,rate,tags
   const searchQ=(text)=>{
-    if(!text){
-      return
+    if(text===''){
+      pageQuestion(1)
+    }else{
+      message.success("you will search: "+text)
+      pageSearchQuestion(1,text)
     }
-    message.warn("This is just a UI")
-  //   searchQuestion({'text':text}).then(succesResponse).catch(()=>{
-  //     message.error("Something error")
-  // })
+    
+  }
+
+  const changeSearch=(e)=>{
+    if(e.target.value===''){
+      pageQuestion(1)
+    }
   }
 
   //  用户点击页数栏，重新获取题目条目
   const changePage = (page)=>{
-    pageQuestion(page)
+    if('search' in params){
+      // 有search关键词就search
+      pageSearchQuestion(page,params['search'])
+    }else{
+      pageQuestion(page)
+    }
   }
 
 
@@ -216,8 +262,10 @@ export default function ListQ(){
         <div style={{position:'absolute',right:'0',top:'0'}}>
           <Search 
           onSearch={searchQ}
+          onChange={changeSearch}
           style={{display:'inline-block',
           width:'300px'}}
+          defaultValue={params['search']}
           placeholder="search id/title/tag"
           />
           

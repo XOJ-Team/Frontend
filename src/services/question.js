@@ -90,11 +90,21 @@ export function showQuestionId(obj){
 }
 
 /**
- * search a question (id/name)
+ * simply search question (id/name)
  * @param obj.text
  */
 export function searchQuestion(obj){
     return get('/question/search',obj)
+}
+
+/**
+ * details search questions
+ * @param obj.text
+ * @param obj.from
+ * @param obj.size
+ */
+export function essearchQuestion(obj){
+    return post('/question/search/es/limit',obj)
 }
 
 /**
