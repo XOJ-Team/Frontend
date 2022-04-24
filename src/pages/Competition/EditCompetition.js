@@ -10,7 +10,7 @@ import { createcomp, getcomp, deletecomp, updatecomp } from '../../services/comp
 // 路由寻找
 import { findRoute } from '../../routers/config'
 // 日期工具类
-import { Timemoment, nowTimemoment, Timeformat, nowTimeformat } from '../../utils/timeutils'
+import { Timemoment, Timeformat, nowTimeformat } from '../../utils/timeutils'
 // 窗口工具类
 import { showConfirm } from '../../components/confirm';
 // 弹出窗口
@@ -131,7 +131,7 @@ export default function EditCompetition() {
                     autoComplete="off"
                     form={form}
                     initialValues={{
-                        time: [nowTimemoment(), nowTimemoment()]
+                        time: [Timemoment(nowTimeformat().substring(0,14)+"00:00"), Timemoment(nowTimeformat().substring(0,14)+"00:00")]
                     }}
                 >
                     <Form.Item
@@ -175,7 +175,7 @@ export default function EditCompetition() {
                         ]}
                     >
                         <RangePicker
-                            showTime={{ format: 'YYYY-MM-DD HH:mm:ss' }}
+                            showTime={{ format: 'YYYY-MM-DD HH' }}
                             format="YYYY-MM-DD HH:mm:ss"
                             onChange={onChange}
                         />
