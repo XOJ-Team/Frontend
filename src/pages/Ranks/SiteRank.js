@@ -55,7 +55,44 @@ const config = {
   },
 };
 
-
+// 表格设置
+const columns = [
+  {
+    title:'Name',
+    dataIndex:'name',
+    key:'name',
+    width:10,
+    render: (name)=><div>{name}</div>
+  },
+  {
+    title: 'Ranking',
+    dataIndex: 'ranking',
+    key: 'name',
+    width:50,
+    render: text => <div>{text}</div>
+  },
+  {
+    title: 'Score',
+    dataIndex: 'score',
+    key: 'name',
+    width: 50,
+    render: (text) => <div>{text}</div>,
+  },
+  {
+    title:'Solved number',
+    key:'name',
+    dataIndex:'solvedNumber',
+    width:50,
+    render: data=><div>{data}</div>
+  },
+  {
+    title:'Introduction',
+    key:'name',
+    dataIndex:'intro',
+    width:550,
+    render: data=><div>{data}</div>
+  },
+];
 
   // 函数，请求第page页的排名
   const getrankpage = (page) => {
@@ -88,26 +125,16 @@ const config = {
     <DocumentTitle title="XOJ | rank">
       <div className='componentbox' >
         <Title level={2}>Rank</Title>
-        {/* 排名 */}
+        {/* 排名图 */}
         <Bar {...config} />
-        <Row style={{textAlign:'center'}}>
-          <Col span={4}>Name</Col>
-          <Col span={2}>Score</Col>
-          <Col span={2}>Ranking</Col>
-          <Col span={4}>SolvedNumber</Col>
-          <Col span={12}>Intro</Col>
-        </Row>
-        {ranklist.map((each, index) => {
-          return (
-            <Row style={{textAlign:'center'}}>
-              <Col span={4}>{each.name}</Col>
-              <Col span={2}>{each.score}</Col>
-              <Col span={2}>{each.ranking}</Col>
-              <Col span={4}>{each.solvedNumber}</Col>
-              <Col span={12}>{each.intro}</Col>
-            </Row>
-          )
-        })}
+        <div style={{height:'20px'}}></div>
+        {/* 排名列表 */}
+        <Table 
+          columns={columns} 
+          dataSource={ranklist} 
+          bordered 
+          pagination={false}
+        />
         {/* 分页 */}
         <div style={{ textAlign: 'center' }}>
           <Pagination
