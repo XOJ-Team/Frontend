@@ -55,9 +55,7 @@ export default function UserPage() {
       userId:inputUserid
     }).then(
       resa => {
-        setQuestionlistData([resa.data.obj.map((e)=>{return {
-          name:e.questionName
-        }})])
+        setQuestionlistData(resa.data.obj)
       }
     )
     getUserInfo({
@@ -180,13 +178,27 @@ export default function UserPage() {
               </Col>
             </Row>
             <Divider />
-            <List
-              header={<div><CheckSquareOutlined />&nbsp;<b>Recent AC</b></div>}
-              bordered
-              dataSource={questionlistData}
-              style={{marginBottom:'24px'}}
-              renderItem={item => <List.Item>{item.name}</List.Item>}
-            />
+
+            {/* 最近的提交记录 */}
+            <Row>
+                <Col span={6} offset={2}>Title</Col>
+                <Col span={4}>Result</Col>
+                <Col span={4}>TimeCost</Col>
+                <Col span={4}>MemoryCost</Col>
+                <Col span={4}>Language</Col>
+            </Row>
+            <div style={{height:'350px',overflow:'auto'}}>
+            {questionlistData.map((item) => 
+                <Row style={{height:'50px',lineHeight:'50px'}}>
+                  <Col span={6} offset={2}><a onClick={()=>{navigate(findRoute('questionOnlyOne')+"?id="+item.questionId)}}>{item.questionName}</a></Col>
+                  <Col span={4}>{item.resultDescription}</Col>
+                  <Col span={4}>{item.timeCost}s</Col>
+                  <Col span={4}>{item.memoryCost}MB</Col>
+                  <Col span={4}>{item.lang}</Col>
+
+                </Row>
+            )}
+            </div>
           </Col>
           <Col flex={1} />
         </Row>
