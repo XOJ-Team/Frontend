@@ -59,10 +59,13 @@ const config = {
 const columns = [
   {
     title:'Name',
-    dataIndex:'name',
+    dataIndex:'userIdName',
     key:'name',
     width:10,
-    render: (name)=><div>{name}</div>
+    render: (data)=><a onClick={()=>{navigate(findRoute('userpage')+"?id="+data.slice(0,data.indexOf('#')))}}>
+      {data.slice(data.indexOf('#')+1)}
+      {farpropsAuth.pUserid==data.slice(0,data.indexOf('#'))?" (you)":null}
+    </a>
   },
   {
     title: 'Ranking',
@@ -102,7 +105,7 @@ const columns = [
       pageSize: pageSize,
     }).then((res) => {
       if (res.data.status === 1) {
-        setranklist(res.data.obj.list)
+        setranklist(res.data.obj.list.map((each)=>{return {...each,userIdName:each.userId+"#"+each.name}}))
         settotal(res.data.obj.total)
         setpagenow(res.data.obj.pageNum)
       }
