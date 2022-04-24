@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://20.222.12.161/",
   "dependencies": {
+    "@ant-design/charts": "^1.3.6",
     "@babel/core": "^7.17.5",
     "@babel/plugin-transform-react-jsx": "7.17.3",
     "@craco/craco": "^6.4.3",
