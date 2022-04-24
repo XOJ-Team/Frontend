@@ -60,16 +60,16 @@ export default function EditCompetition() {
                 'id': params['id'],
                 'name': values.name,
                 'briefIntroduction': values.introduction,
-                'startTime': Timeformat(values.time[0]),
-                'endTime': Timeformat(values.time[1])
+                'startTime': Timeformat(values.time[0]).substring(0,14)+"00:00",
+                'endTime': Timeformat(values.time[1]).substring(0,14)+"00:00"
             }).then(successres).catch(failedres)
         } else {
             // create
             createcomp({
                 'name': values.name,
                 'briefIntroduction': values.introduction,
-                'startTime': Timeformat(values.time[0]),
-                'endTime': Timeformat(values.time[1])
+                'startTime': Timeformat(values.time[0]).substring(0,14)+"00:00",
+                'endTime': Timeformat(values.time[1]).substring(0,14)+"00:00"
             }).then(successres).catch(failedres)
         }
     };
