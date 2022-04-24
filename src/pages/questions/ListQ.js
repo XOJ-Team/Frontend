@@ -83,16 +83,20 @@ export default function ListQ(){
     navigate(findRoute('questionList')+"?page="+page+"&search="+text)
     // 处理搜索返回值
     essearchQuestion({
-      'text':text,
+      'value':text,
       'from':10*(page-1),
       'size':10
     }).then((res)=>{
-      if(! res.data.obj){
+      if(res.data.status!==1){
+        message.error("server error")
+        return 
+      }
+      if(! res.data.obj.res){
         message.warn("no result!")
         return
       }
       let infolist=[]
-      for (let each of res.data.obj){
+      for (let each of res.data.obj.res){
         // 拼接name以支持点击题目名跳转
         each.name=each.id+"#"+each.name
         each.key=each.id//解决Each element in list should have a key警告
@@ -100,7 +104,7 @@ export default function ListQ(){
       }
       setData(infolist)
       setpagenow(page)
-      setsumOfquestions(10*page+1)
+      setsumOfquestions(res.data.obj.total)
     }).catch(()=>{
       message.error("Something error")
     })
@@ -122,7 +126,7 @@ export default function ListQ(){
     if(text===''){
       pageQuestion(1)
     }else{
-      message.success("you will search: "+text)
+      // message.success("you will search: "+text)
       pageSearchQuestion(1,text)
     }
     
@@ -266,7 +270,7 @@ export default function ListQ(){
           style={{display:'inline-block',
           width:'300px'}}
           defaultValue={params['search']}
-          placeholder="search id/title/tag"
+          placeholder="search keywords"
           />
           
         </div>
