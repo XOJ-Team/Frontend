@@ -15,6 +15,7 @@ import ViewCompetition from '../pages/Competition/ViewCompetition'
 import ListCompetition from '../pages/Competition/ListCompetition'
 import SiteRank from '../pages/Ranks/SiteRank';
 import EditCompetition from '../pages/Competition/EditCompetition';
+import Managepage from "../pages/Management/Managepage";
 
 // 路由配置
 // id应当唯一,最好不要更改id
@@ -114,6 +115,16 @@ export const allroutes=[
                 id:'editUserInfo',
                 path:'edit',
                 element:<ModifyInfo />
+            }
+        ]
+    },
+    {
+        path:'manage',
+        children:[
+            {
+                id:'manageusers',
+                path:'',
+                element:<Managepage />
             }
         ]
     },

@@ -115,6 +115,9 @@ export default function UserPage() {
               </Paragraph>
               {/* 使用==号，一个是数字，一个是字符串 */}
               {params['id']==farpropsAuth.pUserid?<Button onClick={()=>{navigate(findRoute('editUserInfo'))}}>Modify my info</Button>:null}
+              {farpropsAuth.pAuthority===3?<Button onClick={()=>{
+                navigate(findRoute('manageusers'))
+              }}>Manage users</Button>:null}
               
             </div>
           </Col>
