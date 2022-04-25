@@ -1,5 +1,5 @@
 import {get, post, put, del} from '../utils/request'
-
+import qs from 'qs'
 /**
  * delete account
  * @param obj.mail(str)
@@ -21,7 +21,7 @@ import {get, post, put, del} from '../utils/request'
  * @param obj.authority(str)
  */
 export function insertManagerUser(obj){
-    return post("/manager/insert", obj)
+    return post("/manager/insert?"+qs.stringify(obj),{})
 }
 
 /**
@@ -37,6 +37,6 @@ export function insertManagerUser(obj){
  * @param obj.authority(str)
  */
  export function modifyManagerUser(obj){
-    return post("/manager/modify", obj)
+    return post("/manager/modify?"+qs.stringify(obj),{})
 }
 

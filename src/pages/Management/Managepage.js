@@ -51,6 +51,7 @@ export default function Managepage() {
             } else {
                 form.setFieldsValue({
                     'name': res.data.obj.name,
+                    'id':res.data.obj.id,
                     'mail': res.data.obj.mail,
                     'score': res.data.obj.score,
                     'ranking': res.data.obj.ranking,
@@ -87,6 +88,7 @@ export default function Managepage() {
         console.log(values)
         if(nowstate==='modify'){
             modifyManagerUser({
+                'id':values.id,
                 'name':values.name,
                 'mail':values.mail,
                 'score':values.score,
@@ -169,6 +171,21 @@ export default function Managepage() {
                     >
                         <Input />
                     </Form.Item>
+
+                    {nowstate==='modify'?
+                    <Form.Item
+                        label="ID"
+                        name='id'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input id!',
+                            },
+                        ]}
+                    >
+                        <Input disabled={true}/>
+                    </Form.Item>:null}
+                    
 
                     <Form.Item
                         label="Email"
