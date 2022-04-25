@@ -41,12 +41,12 @@ module.exports = {
     webpack: {
         plugins: [
             // bundle size analyzer & visualization
-            new BundleAnalyzerPlugin({
-                analyzerMode: 'server',
-                analyzerHost: '127.0.0.1',
-                analyzerPort: 8888,
-                openAnalyzer: true
-            }),
+            // new BundleAnalyzerPlugin({
+            //     analyzerMode: 'server',
+            //     analyzerHost: '127.0.0.1',
+            //     analyzerPort: 8888,
+            //     openAnalyzer: true
+            // }),
             // specify production build
             new webpack.DefinePlugin({ // <-- key to reducing React's size
                 'process.env': {
