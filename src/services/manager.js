@@ -5,7 +5,7 @@ import qs from 'qs'
  * @param obj.mail(str)
  */
  export function delManagerAccount(obj){
-    return post("/manager/delete", obj)
+    return post("/manager/delete?"+qs.stringify(obj),{})
 }
 
 /**

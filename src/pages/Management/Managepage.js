@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 // UI
 import { Form, Input, Button, message, InputNumber, PageHeader, Divider, Radio, Avatar } from 'antd';
 import DocumentTitle from 'react-document-title';
-import showConfirm from 'antd/lib/modal/confirm';
+import { showConfirm } from '../../components/confirm';
 // utils
 import qs from 'qs'
 import { getUserInfo } from '../../services/userInfo';
