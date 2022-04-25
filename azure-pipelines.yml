@@ -19,7 +19,7 @@ steps:
 - script: |
     yarn config set network-timeout 300000
     yarn install
-    yarn run build
+    yarn run build-prod
   displayName: 'Run yarn install and build'
 
 - task: PublishPipelineArtifact@1
