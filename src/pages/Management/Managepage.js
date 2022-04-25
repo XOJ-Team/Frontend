@@ -284,7 +284,11 @@ export default function Managepage() {
                         style={{marginLeft:'80px'}}
                         onClick={()=>{
                             showConfirm(()=>{
-                            console.log(form.getFieldValue('mail'))
+                                delManagerAccount({mail:form.getFieldValue('mail')}).then(onres).then(()=>{
+                                    setnowstate('create')
+                                    setavataurl("")
+                                    form.resetFields()
+                                }).catch(onerr)
                         })
                         }}
                         >
