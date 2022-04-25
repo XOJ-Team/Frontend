@@ -40,8 +40,6 @@ export default function Managepage() {
             message.error("must have id")
             return
         }
-        // url更改，不会引起重新渲染
-        navigate(findRoute('manageusers') + "?id=" + id)
         setavataurl("")
         getUserInfo({ id: id }).then((res) => {
             if (res.data.status === -1) {
@@ -128,16 +126,17 @@ export default function Managepage() {
                 <Button onClick={() => {
                     setnowstate('modify')
                     setshowpassword(false)
+                    // url更改，不会引起重新渲染
+                    navigate(findRoute('manageusers') + "?id=" + userid)
                     loadinfo(userid)
                 }}>View</Button>
                 <br />
                 {/* 创建新用户 */}
                 <Button onClick={() => {
-                    navigate(findRoute('manageusers'))
                     setnowstate('create')
                     setavataurl("")
                     form.resetFields()
-                }}>Add new one</Button>
+                }}>Add new user account</Button>
                 <div>you are {nowstate}</div>
                 <Divider />
                 {/* 表单 */}
