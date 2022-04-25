@@ -26,7 +26,10 @@ export default function ViewCompetition() {
   let params = qs.parse(location.search.slice(1))
 
   // competition的信息
-  const [compinfo, setcompinfo] = useState({})
+  const [compinfo, setcompinfo] = useState({
+    'startTime':'',
+    'endTime':''
+  })
   // question links 的信息
   const [qlinkinfo, setqlinkinfo] = useState([])
   // 组件创建，下载竞赛信息
