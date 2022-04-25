@@ -67,7 +67,9 @@ module.exports = {
             // duplicate package checker
             new DuplicatePackageCheckerPlugin(),
             // webpack bundling progress visualizer
-            new SimpleProgressWebpackPlugin()
+            new SimpleProgressWebpackPlugin(),
+            // pack en-us only for moment.js
+            new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en-us/)
         ],
         optimization: {
             minimize: true,
@@ -76,6 +78,9 @@ module.exports = {
                 new UglifyJsPlugin()
             ],
         },
+        // configure: (webpackConfig, { env, paths }) =>{
+        //     webpackConfig.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en-us/));
+        // }
     },
     babel: {
         plugins: [
@@ -86,6 +91,18 @@ module.exports = {
     optimization: {
         splitChunks: {
             cacheGroups: {
+                common: {
+                    name: 'chunk-common',
+                    chunks: 'all',
+                    test: /[\\/]node_modules[\\/](react|react-dom|react-router|redux-saga|dva|react-router-dom|draft-js\/lib|core-js|@antv\/data-set\/build|)[\\/]/,
+                    priority: -10,
+                },
+                antd: {
+                    name: 'chunk-antd',
+                    chunks: 'all',
+                    test: /[\\/]node_modules[\\/](@ant-design|antd|moment|immutable\/dist|rc-calendar\/es|braft-finder\/dist|lodash|rc-tree\/es)[\\/]/,
+                    priority: -11,
+                },
                 commons: {
                     chunks: 'initial',
                     minChunks: 2, maxInitialRequests: 5,
