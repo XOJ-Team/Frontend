@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 // UI
-import { PageHeader, Button, Card, List, Tabs, Timeline, Row, Col, Divider, Badge } from 'antd'
+import { PageHeader, Button, Card, List, Tabs, Timeline, Row, Col, Tooltip, Badge } from 'antd'
 import CountDown from 'ant-design-pro/lib/CountDown'
 import { duringTime } from '../../utils/timeutils';
 import { CalendarOutlined } from '@ant-design/icons';
@@ -56,7 +56,7 @@ export default function ViewCompetition() {
   return (
     <DocumentTitle title="XOJ | Competition">
       <div className='componentbox'>
-        <Row>
+      <Row>
           <Col span={18} className='competContext'>
             <PageHeader
               ghost={false}
@@ -70,15 +70,19 @@ export default function ViewCompetition() {
               <div style={{
                 textAlign: "center",
                 fontSize: "16px",
-              }}>
-                The contest will start in: <CountDown target={compinfo['startTime']} />
+              }}>{compstatus==-1?(
+                <div>The compeition is ended.</div>
+              ):(
+                <div>The compeition will start in: <CountDown target={compinfo['startTime']} /></div>
+              )}
               </div>
 
               <Tabs defaultActiveKey="1">
-                <TabPane tab="Announcements" key="1">
-                  <div style={{ textAlign: "center", color: "rgba(0,0,0,0.5)" }}>The creator has not made any announcements yet.</div>
+                <TabPane tab="Competition Introcution" key="1">
+                  <div style={{ textAlign: "center"}}>{compinfo['briefIntroduction']}</div>
+                  {/* <div style={{ textAlign: "center", color: "rgba(0,0,0,0.5)" }}>The creator has not made any announcements yet.</div> */}
                 </TabPane>
-                <TabPane tab="Questions list" key="2">
+                <TabPane tab={<Tooltip title="Available after the competition starts">Questions list</Tooltip>} key="2">
                 <List
                   itemLayout="horizontal"
                   style={{ padding: "0px 0px 0px 15px" }}
@@ -117,23 +121,32 @@ export default function ViewCompetition() {
                 }} size="small">
                 <br />
                 <Timeline mode={'alternate'}>
-                  <Timeline.Item label={compinfo['startTime']}>Start Time</Timeline.Item>
-                  <Timeline.Item label={compinfo['endTime']}>End Time</Timeline.Item>
+                  <Timeline.Item label='Start Time'>
+                    <p>{compinfo['startTime'].split(' ')[0]}</p>
+                    <p>{compinfo['startTime'].split(' ')[1]}</p>
+                    </Timeline.Item>
+                  <Timeline.Item label='End Time'>
+                    <p>{compinfo['endTime'].split(' ')[0]}</p>
+                    <p>{compinfo['endTime'].split(' ')[1]}</p>
+                    </Timeline.Item>
                 </Timeline>
                 <div
                   style={{
                     textAlign: 'center',
                     padding: '10px',
-                  }}>
+                  }}>{compstatus == 1?(
                   <Button type="primary" shape='round'>
                     Join
                   </Button>
+                  ):(
+                  <Button type="primary" shape='round' disabled>
+                    Join
+                  </Button>)}
                 </div>
               </Card>
             </Badge.Ribbon>
           </Col>
         </Row>
-
       </div>
     </DocumentTitle>
   )
