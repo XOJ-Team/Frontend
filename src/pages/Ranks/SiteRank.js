@@ -7,7 +7,7 @@ import { getranklist } from '../../services/rank'
 import qs from 'qs';
 import { Auth } from '../../contexts/AuthContext';
 // UI
-import { Table, Tag, Typography, Layout, Button, List, message, Switch, Input, Pagination, Row, Col } from 'antd';
+import { Table, Typography, message, Pagination} from 'antd';
 import { Bar } from '@ant-design/plots';
 
 const { Title } = Typography
