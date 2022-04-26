@@ -31,6 +31,7 @@
     "react-markdown-editor-lite": "^1.3.2",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "source-map-explorer": "^2.5.2",
     "web-vitals": "^2.1.4",
     "webpack": "5.70.0"
   },
@@ -38,6 +39,7 @@
     "start": "craco start",
     "build": "craco build",
     "build-prod": "env GENERATE_SOURCEMAP=false craco build",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
