@@ -38,6 +38,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build-win-nomap":"set GENERATE_SOURCEMAP=false&&craco build",
     "build-prod": "env GENERATE_SOURCEMAP=false craco build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
