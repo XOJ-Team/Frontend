@@ -8,6 +8,7 @@ import Frame from "../components/Frame/Index";
 import {allroutes} from './config.js'
 import { createBrowserHistory } from "history";
 
+// 路由
 function MyRoutes(){
   let element=useRoutes(allroutes)
   return element
@@ -17,7 +18,10 @@ export default function Mainrouter(){
     return (
       <Router history={createBrowserHistory()}>
         <Frame>
+          {/* 懒加载时显示loading字样 */}
+          <React.Suspense fallback={<div>Loading...</div>}>
           <MyRoutes />
+          </React.Suspense>
         </Frame>
       </Router>
     )

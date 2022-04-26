@@ -20,23 +20,25 @@ module.exports = {
         },
     ],
     //抽离公用模块
-    // optimization: {
-    //     splitChunks: {
-    //         cacheGroups: {
-    //             commons: {
-    //                 chunks: 'initial',
-    //                 minChunks: 2, maxInitialRequests: 5,
-    //                 minSize: 0
-    //             },
-    //             vendor: {
-    //                 test: /node_modules/,
-    //                 chunks: 'initial',
-    //                 name: 'vendor',
-    //                 priority: 10,
-    //                 enforce: true
-
-    //             }
-    //         }
-    //     }
-    // }
+    optimization: {
+        splitChunks: {
+            chunks:'all',
+            name:true,
+            automaticNameDelimiter:'-',
+            cacheGroups: {
+                vendor: {
+                    test: /node_modules/,
+                    chunks: 'initial',
+                    name: 'vendor',
+                    priority: -10,
+                    enforce: true
+                },
+                default:{
+                    minChunks:2,
+                    priority:-20,
+                    reuseExistingChink:true,
+                }
+            }
+        }
+    }
 };

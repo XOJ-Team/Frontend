@@ -7,8 +7,8 @@ import { getranklist } from '../../services/rank'
 import qs from 'qs';
 import { Auth } from '../../contexts/AuthContext';
 // UI
-import { Table, Tag, Typography, Layout, Button, List, message, Switch, Input, Pagination, Row, Col } from 'antd';
-import { Bar } from '@ant-design/plots';
+import { Table, Typography, message, Pagination} from 'antd';
+import BarPic from '../../components/chart/BarPic';
 
 const { Title } = Typography
 
@@ -27,33 +27,7 @@ export default function SiteRank() {
   // 当前页信息
   const [ranklist, setranklist] = useState([])
 
-// 条形图设置
-// https://charts.ant.design/zh/examples/bar/stacked#basic
-const config = {
-  data: ranklist,
-  xField: 'ranking',
-  yField: 'name',
-  seriesField:'name',
-  // color:farpropsAuth.XJTLUPURPLE,
-  label: {
-    // 可手动配置 label 数据标签位置
-    position: 'middle',
-    // 'left', 'middle', 'right'
-    // 可配置附加的布局方法
-    layout: [
-      // 柱形图数据标签位置自动调整
-      {
-        type: 'interval-adjust-position',
-      }, // 数据标签防遮挡
-      {
-        type: 'interval-hide-overlap',
-      }, // 数据标签文颜色自动调整
-      {
-        type: 'adjust-color',
-      },
-    ],
-  },
-};
+
 
 // 表格设置
 const columns = [
@@ -105,7 +79,7 @@ const columns = [
       pageSize: pageSize,
     }).then((res) => {
       if (res.data.status === 1) {
-        setranklist(res.data.obj.list.map((each)=>{return {...each,userIdName:each.userId+"#"+each.name}}))
+        setranklist(res.data.obj.list.map((each)=>{return {...each,userIdName:each.userId+"#"+each.name,key:each.userId}}))
         settotal(res.data.obj.total)
         setpagenow(res.data.obj.pageNum)
       }
@@ -129,7 +103,7 @@ const columns = [
       <div className='componentbox' >
         <Title level={2}>Rank</Title>
         {/* 排名图 */}
-        <Bar {...config} />
+        <BarPic ranklist={ranklist} />
         <div style={{height:'20px'}}></div>
         {/* 排名列表 */}
         <Table 
