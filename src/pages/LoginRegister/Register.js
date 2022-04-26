@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 // UI
 import './Register.less'
@@ -15,16 +15,11 @@ import DocumentTitle from 'react-document-title'//动态Title
 
 
 export default function Register() {
-  // 全局共享
-  let farpropsAuth=useContext(Auth)
   // 表单对象
   const [form]=Form.useForm()
 
   const navigate=useNavigate();
 
-  const onValuesChange=(e)=>{
-
-  }
 
   const getemail=(e)=>{
     return form.getFieldValue('email')
@@ -65,17 +60,16 @@ export default function Register() {
       <Form
         name="basic"
         labelCol={{
-          span: 0,
+          span: 6,
         }}
         wrapperCol={{
-          span: 24,
+          span: 18,
         }}
         initialValues={{
           remember: true,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        onValuesChange={onValuesChange}
         className='register-form'
         form={form}
       >

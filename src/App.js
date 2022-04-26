@@ -1,6 +1,5 @@
 // UI
 import './App.less';
-import 'antd/dist/antd.less';
 // React
 import React from 'react';
 // 路由
