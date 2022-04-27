@@ -26,7 +26,7 @@ export default function Mainpage() {
               </div>
             </div> */}
             <div>
-              <div className='headphoto' style={{ backgroundImage: 'url(https://img-blog.csdnimg.cn/93f66b0b503447549d11467a25fa3d77.png?x-oss-process=image,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAc2FubXVzZW5fd3U=,size_20,color_FFFFFF,t_70,g_se,x_16)' }}>
+              <div className='headphoto' style={{ backgroundImage: 'url("headphoto.webp")' }}>
               </div>
             </div>
             {/* <div>
