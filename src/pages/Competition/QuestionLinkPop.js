@@ -3,6 +3,8 @@ import { message, Transfer,Input } from 'antd';
 import { addQtocomp,removeQofcomp,showQofcomp } from '../../services/competition';
 import { searchQuestion } from '../../services/question';
 
+
+const {Search}=Input
 /**
  * 问题选择穿梭框
  * @param props.compId 
@@ -160,13 +162,13 @@ export default function QuestionLinkPop(props){
 
     return (
         <div>
-        Search Left and Select to Right
-        <div>
-            <Input onChange={(e)=>{
-                handleSearch(e.target.value)
-            }} style={{width:'180px'}} />
+        <div style={{marginLeft:'88px'}}>
+            <Search 
+            placeholder='Seach here and add to right'
+            onSearch={handleSearch}
+            style={{width:'500px'}} />
         </div>
-        
+        <div>
         <Transfer
         oneWay={true}
         dataSource={mergelist(incompq,searchq)}
@@ -178,7 +180,15 @@ export default function QuestionLinkPop(props){
         }}
         titles={['search','include']}
         operations={['add','']}
+        style={{
+            justifyContent:'center'
+        }}
+        listStyle={{
+            width:500,
+            height:500
+        }}
         />
+        </div>
         </div>
         
     )
