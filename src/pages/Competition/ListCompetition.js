@@ -26,7 +26,7 @@ export default function ListCompetition() {
   const location = useLocation()
   const params = qs.parse(location.search.slice(1))
   // 分页里面的current,请求时用params['page']并跳转url+参数,返回时setpagenow更新
-  const [pagenow,setpagenow]=useState(1)
+  const [pagenow,setpagenow]=useState('page' in params?params['page']:1)
   // 跳转
   const navigate = useNavigate()
   // 全局变量
@@ -58,7 +58,7 @@ export default function ListCompetition() {
   }
 
   useEffect(()=>{
-    pageComp('id' in params?params['id']:1)
+    pageComp('page' in params?params['page']:1)
   },[])
 
   return (
