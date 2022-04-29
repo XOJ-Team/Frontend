@@ -38,6 +38,12 @@ export default function Testcase(props) {
     getUpdateInfo()
   }, [props.visible])
 
+  // 清除输入框,回到创建题目状态
+  const resetInput=()=>{
+    settheState(["create", -1])
+    setCaseResult({ case:"", result: ""})
+  }
+
   // 提交testcase
   const submitTestcase = () => {
     switch (theState[0]) {
@@ -49,9 +55,9 @@ export default function Testcase(props) {
         }).then((res) => {
           if (res.data.status === 1) {
             message.success(`success ${theState[0]}`)
-            // 强制重新打开case界面
-            props.setvisible(false)
-            props.setvisible(true)
+            // 重新获取case
+            getUpdateInfo()
+            resetInput()
           }
         })
         return
@@ -63,8 +69,8 @@ export default function Testcase(props) {
         }).then((res) => {
           if (res.data.status === 1) {
             message.success(`success ${theState[0]}`)
-            props.setvisible(false)
-            props.setvisible(true)
+            getUpdateInfo()
+            resetInput()
           }
         })
         return
@@ -74,8 +80,8 @@ export default function Testcase(props) {
         }).then((res) => {
           if (res.data.status === 1) {
             message.success(`success ${theState[0]}`)
-            props.setvisible(false)
-            props.setvisible(true)
+            getUpdateInfo()
+            resetInput()
           }
         })
         return

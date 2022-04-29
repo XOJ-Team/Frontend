@@ -20,9 +20,8 @@ export default function QuestionLinkPop(props){
     // 指定在右边的数据的keys
     const [targetKeys,settargetKeys]=useState([])
 
-
-    // 同步已经在竞赛里的题目列表
-    useEffect(()=>{
+    // 从服务器同步当前状态
+    const getUpdateLinks=()=>{
         // 填充搜索框
         leftsearch("")
         // 同步竞赛links
@@ -36,6 +35,11 @@ export default function QuestionLinkPop(props){
             // 已经在竞赛里，放右边
             settargetKeys(result1.keys)
         })
+    }
+
+    // 同步已经在竞赛里的题目列表
+    useEffect(()=>{
+        getUpdateLinks()
     },[])
 
     // 合并两个列表里的东西，key不重复
@@ -111,10 +115,10 @@ export default function QuestionLinkPop(props){
                     }else{
                         message.error(res.data.comment)
                     }
-                    props.reopen()
+                    getUpdateLinks()
                 }).catch(()=>{
                     message.error("Server error")
-                    props.reopen()
+                    getUpdateLinks()
                 })
             })(data)
         }
@@ -135,10 +139,10 @@ export default function QuestionLinkPop(props){
                     }else{
                         message.error(res.data.comment)
                     }
-                    props.reopen()
+                    getUpdateLinks()
                 }).catch(()=>{
                     message.error("Server error")
-                    props.reopen()
+                    getUpdateLinks()
                 })
             })(data)
         }
