@@ -28,14 +28,38 @@ const compilerIntro=[{
 }]
 
 const resultexplain=[
-  'Pending & Judging : You solution will be judged soon, please wait for result.',
-  "Compile Error : Failed to compile your source code. Click on the link to see compiler's output.",
-  'Accepted : Congratulations. Your solution is correct.',
-  "Wrong Answer : Your program's output doesn't match judger's answer.",
-  'Runtime Error : Your program terminated abnormally. Possible reasons are: segment fault, divided by zero or exited with code other than 0.',
-  'Time Limit Exceeded : The CPU time your program used has exceeded limit.',
-  'Memory Limit Exceeded : The memory your program actually used has exceeded limit.',
-  'System Error : Oops, something has gone wrong with the judger. Please report this to administrator.'
+  {
+    name: "Pending & Judging",
+    des: "You solution will be judged soon, please wait for result."
+  },
+  {
+    name:"Compile Error",
+    des:"Failed to compile your source code. Click on the link to see compiler's output."
+  },
+  {
+    name:"Accepted",
+    des:"Congratulations. Your solution is correct."
+  },
+  {
+    name:"Wrong Answer",
+    des:"Your program's output doesn't match judger's answer."
+  },
+  {
+    name:"Runtime Error",
+    des:"Your program terminated abnormally. Possible reasons are: segment fault, divided by zero or exited with code other than 0."
+  },
+  {
+    name:"Time Limit Exceeded",
+    des:"The CPU time your program used has exceeded limit."
+  },
+  {
+    name:"Memory Limit Exceeded",
+    des:"The memory your program actually used has exceeded limit."
+  },
+  {
+    name:"System Error",
+    des:"Oops, something has gone wrong with the judger. Please report this to administrator."
+  }
 ]
 
 export default function Aboutus() {
@@ -47,7 +71,9 @@ export default function Aboutus() {
           <Paragraph className="typopara">
             <ul style={{ fontSize: '1.1em' }}>
               {compilerIntro.map((item)=>{return(
-                              <li className='onecodeIntro' 
+                              <li 
+                              key={item.lang}
+                              className='onecodeIntro' 
                               style={{marginTop:'20px'}}>
                               <Text>{item.lang}</Text><br />
                               <Text className='codeblock'>{item.code}</Text>
@@ -62,8 +88,8 @@ export default function Aboutus() {
           <Paragraph className="typopara">
             <ul style={{ fontSize: '1.1em' }}>
               {resultexplain.map((item)=>{return(
-                              <li style={{marginTop:'10px'}}>
-                              <Text strong>{item.split(':')[0]}</Text>:<Text>{item.split(':')[1]}</Text>
+                              <li key={item.name} style={{marginTop:'10px'}}>
+                              <Text strong>{item.name}</Text> : <Text>{item.des}</Text>
                               </li>
               )})}
             </ul>

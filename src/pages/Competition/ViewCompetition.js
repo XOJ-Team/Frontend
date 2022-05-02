@@ -137,13 +137,13 @@ export default function ViewCompetition() {
                   style={{
                     textAlign: 'center',
                     padding: '10px',
-                  }}>{compstatus == 1?(
+                  }}>{compstatus >= 0?(
                   <Button type="primary" shape='round'>
                     Join
                   </Button>
                   ):(
                   <Button type="primary" shape='round' disabled>
-                    Join
+                    Finished
                   </Button>)}
                 </div>
               </Card>
