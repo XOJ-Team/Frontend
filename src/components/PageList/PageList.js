@@ -10,7 +10,7 @@ import { Table, Pagination } from 'antd';
             title:'Question Name',
             dataIndex:'name',
             key:'name',
-            render:(e)=>{return <div>e</div>}
+            render:(e)=>{return <div>{e}</div>}
         }
     ]}
     // axios service 请求函数
@@ -45,7 +45,7 @@ export default function PageList(props) {
     // 值初始化
     let {columns,request,requestPageName,requestParams,response}=props
     if(!request){request=(e)=>{return new Promise((resolve,reject)=>{resolve("no request service")})}}
-    if(!requestPageName){requestPageName='pageName'}
+    if(!requestPageName){requestPageName='nopageName'}
     if(!requestParams){requestParams={};requestParams[requestPageName]='1'}
     if(!response){response=(e)=>{return e}}
     // console.log({'columns':columns,'request':request,'requestPageName':requestPageName,'requestParams':requestParams,'response':response})
