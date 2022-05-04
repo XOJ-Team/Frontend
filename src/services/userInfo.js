@@ -18,7 +18,6 @@ export function getUserInfo(obj){
 
 /**
  * user modify itself
- * @param obj.verificationNumber(str)
  * @param obj.name(str)
  * @param obj.mail(str)
  * @param obj.phoneNumber(str)

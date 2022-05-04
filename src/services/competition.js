@@ -42,16 +42,16 @@ export function listcomp(obj){
 
 /**
  * get one competition
- * @param compeitionId
+ * @param competitionId
  */
-export function getcomp(compeitionId){
-    return get('/competition/'+compeitionId)
+export function getcomp(competitionId){
+    return get('/competition/'+competitionId)
 }
 
 /**
  * link a question to a competition
  * @param obj.questionId
- * @param obj.compeitionId
+ * @param obj.competitionId
  * @param obj.questionName
  * @param obj.score 先不填score of this question in this comp 
  */ 
@@ -82,4 +82,29 @@ export function modifyQofcomp(obj){
  */
 export function removeQofcomp(obj){
     return del('/question_competition',obj)
+}
+
+/**
+ * user quit a competition
+ * @param obj.competitionId(long)
+ */
+export function quitComp(obj){
+    return del('/user_competition/', obj)
+}
+
+/**
+ * user register a competition
+ * @param obj.competitionId(long)
+ */
+ export function registerComp(obj){
+    return post('/user_competition/', obj)
+}
+
+/**
+ * get user ranking list in a competition
+ * @param obj.pageNum
+ * @param obj.pageSize
+ */
+export function getRankComp(obj){
+    return get('/user_competition/user_list')
 }

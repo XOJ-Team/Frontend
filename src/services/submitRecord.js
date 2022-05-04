@@ -24,3 +24,25 @@ export function modifyRecordComment(obj){
 export function showUserRecord(obj){
     return get("/submit_records/user_records", obj)
 }
+
+/**
+ * create submit record
+ * @param obj.codes
+ * @param obj.lang
+ * @param obj.memoryCost
+ * @param obj.questionId
+ * @param obj.questionName
+ * @param obj.result
+ * @param obj.timeCost
+ */
+export function createSubmitRecord(obj){
+    return post('/submit_records/', obj)
+}
+
+/**
+ * oneRecord
+ * @param obj.recordId
+ */
+export function oneRecord(recordId){
+    return get('/submit_records/' + recordId)
+}

@@ -52,3 +52,35 @@ export function logoutApi(){
 export function getnowsession(){
     return get('/connect/session')
 }
+
+/**
+ * get user Authentiate
+ */
+export function getNoAuthentication(obj){
+    return get('/noAuthentication', obj)
+}
+
+/**
+ * post user Authentiate
+ */
+ export function postNoAuthentication(obj){
+    return post('/noAuthentication', obj)
+}
+
+/**
+ * send verification code
+ * @param obj.from(str)
+ * @param obj.mail(str)
+ */
+export function sendPassword(obj){
+    return post("/send/password", obj)
+}
+
+/**
+ * send verification code
+ * @param obj.from(str)
+ * @param obj.mail(str)
+ */
+ export function verify(obj){
+    return post("/verify", obj)
+}
