@@ -43,6 +43,6 @@ export function createSubmitRecord(obj){
  * oneRecord
  * @param obj.recordId
  */
-export function oneRecord(recordId){
-    return get('/submit_records/' + recordId)
+export function oneRecord(obj){
+    return get('/submit_records/' + obj.recordId)
 }
