@@ -102,9 +102,10 @@ export function quitComp(obj){
 
 /**
  * get user ranking list in a competition
+ * @param obj.compId
  * @param obj.pageNum
  * @param obj.pageSize
  */
 export function getRankComp(obj){
-    return get('/user_competition/user_list')
+    return get('/user_competition/'+obj.compId,obj)
 }
