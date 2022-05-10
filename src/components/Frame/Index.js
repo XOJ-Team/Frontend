@@ -81,8 +81,6 @@ function Index(props) {
             title={farpropsAuth.pUsername}>
                 <Menu.Item key="profile" icon={<UserOutlined />}>
                     <a onClick={() => { 
-                        navigate(findRoute('mainpage'))
-                        navigate(-1)
                         navigate(findRoute('userpage')+"?id="+farpropsAuth.pUserid)
                         }}>Profile</a>
                 </Menu.Item>

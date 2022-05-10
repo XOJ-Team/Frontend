@@ -25,6 +25,17 @@ export default function UserPage() {
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
+  const paramsid=params['id']
+
+  // 监听params里id值的变化，达到url参数更新时页面能够刷新的效果
+  useEffect(()=>{
+    if('id' in params){
+      compcreate(params.id)
+    }else{
+      compcreate(farpropsAuth.pUserid)
+    }
+  },[paramsid])
+
   const navigate=useNavigate()
 
   const authoritylist={1:'user',2:'super user',3:'manager'}
