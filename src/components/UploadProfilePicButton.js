@@ -11,9 +11,11 @@ import {beforeUploadPic} from '../utils/checkPic'
  * 图片上传，获得图片的url,样式修改要修改其下的.ant-upload-select-picture-card
  * @param props.photourl 图片的url
  * @param props.setphotourl 更改图片的url的回调
+ * @param props.enabled 是否可更改
  */
 export default function UploadProfilePic(props) {
   const [loading, setloading] = useState(false)
+  const enabled=props.enabled||false
 
   console.log("now photo url is:", props.photourl)
 
@@ -43,6 +45,7 @@ export default function UploadProfilePic(props) {
       withCredentials={true}
       beforeUpload={beforeUploadPic}
       onChange={handleChange}
+      disabled={!enabled}
     >
       {loading ? <LoadingOutlined /> : (
         <div>

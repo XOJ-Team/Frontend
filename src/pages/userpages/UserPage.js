@@ -104,7 +104,11 @@ export default function UserPage() {
           <Col flex={0.5} />
           <Col flex={1} style={{minWidth:'300px'}}>
             <div className='avatarItem'>
-              <UploadProfilePicButton photourl={userInfo.avatarUrl} setphotourl={(data)=>{setuserInfo({...userInfo,avatarUrl:data})}}/>
+              <UploadProfilePicButton 
+              photourl={userInfo.avatarUrl} 
+              setphotourl={(data)=>{setuserInfo({...userInfo,avatarUrl:data})}}
+              enabled={params['id']==farpropsAuth.pUserid}
+              />
               <Title level={3}>{userInfo.name}<br />
                 <Text type="secondary" style={{ fontSize: 14 }}> XID: {userInfo.id} </Text><br />
                 <Text type='secondary' style={{fontSize:14}}> Authority: {authoritylist[userInfo.authority].toUpperCase()} </Text><br />
