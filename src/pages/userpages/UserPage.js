@@ -27,6 +27,15 @@ export default function UserPage() {
   let params = qs.parse(location.search.slice(1))
   const navigate=useNavigate()
 
+  // url参数变化时重新渲染
+  useEffect(()=>{
+    if('id' in params){
+      compcreate(params.id)
+    }else{
+      compcreate(farpropsAuth.pUserid)
+    }
+  },params)
+
   const authoritylist={1:'user',2:'super user',3:'manager'}
   // 获取跨组件传来的信息
   const farpropsAuth = useContext(Auth)
