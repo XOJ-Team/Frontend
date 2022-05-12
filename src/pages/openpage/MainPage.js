@@ -51,15 +51,21 @@ export default function Mainpage() {
           </div>
 
           <div style={{ width: '50%', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center',fontSize:'1.3rem' }}>
-            <div>
-            Some Describe. Lorem ipsum dolor sit amet,<br /> consectetur adipisicing elit,<br />sed do eiusmod tempor incididunt ut labore et doloremagna aliqua.<br />
-            Ut enim ad minim veniam,<br /> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br />
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br />
-            Excepteur sint occaecat cupidatat non proident,<br /> sunt in culpa qui officia deserunt mollit anim id est laborum.<br />
+            <div style={{marginRight:"30px"}}>
+            XJTLU Online Judge system (XOJ) aims to provide an effective platform
+            <br />
+            for XJTLU students to improve their coding ability and assist faculty 
+            <br />in the computer science department carry out teaching work.
+            <br />
+            Meanwhile, one significant intention is to ameliorate the 
+            <br />
+            ICPC/CCPC contests atmosphere of XJTLU and 
+            <br />
+            encourage more students to participate. 
+            <br />
             </div>
           </div>
         </div>
-
       </div>
     </DocumentTitle>
   )
