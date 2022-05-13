@@ -75,6 +75,7 @@ export function put(url,data={}){
 /**
  * delete
  * @param {*} url    请求地址
+ * @param {*} data   数据
  */
 export function del(url,data={}){
     return instance.delete(url,{params:data})

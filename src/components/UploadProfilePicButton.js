@@ -17,11 +17,10 @@ export default function UploadProfilePic(props) {
   const [loading, setloading] = useState(false)
   const enabled=props.enabled||false
 
-  console.log("now photo url is:", props.photourl)
+  // console.log("now photo url is:", props.photourl)
 
   function handleChange(info) {
     if (info.file.status === 'uploading') {
-      message.success("upploading...")
       setloading(true)
       return;
     }

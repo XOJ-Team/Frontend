@@ -36,13 +36,13 @@ export function AuthContext({children}){
     const XJTLUNAVY="#010544"
     const XJTLUPURPLE="#CE57C1"
 
-    console.log("rerender AuthContext",pUserinfo)
+    // console.log("rerender AuthContext",pUserinfo)
     useEffect(()=>{
         // 发起网络请求当前Session的用户信息
-        console.log("create AuthContext",pUserinfo)
+        // console.log("create AuthContext",pUserinfo)
         getUserInfoMy().then((res)=>{
             const myinfo=res.data.obj
-            console.log("尝试获取当前会话用户的信息",res.data.obj)
+            // console.log("尝试获取当前会话用户的信息",res.data.obj)
             if(myinfo){
                 setpUserinfo({...pUserinfo,
                     pUsername:myinfo.name,
