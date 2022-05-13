@@ -24,7 +24,7 @@ export default function Managepage() {
     // 是否改密码
     const [showpassword, setshowpassword] = useState(false)
     // 页面加载时的默认userId
-    const firstuserId='id' in params?params['id']:farpropsAuth.pUserid
+    let firstuserId='id' in params?params['id']:farpropsAuth.pUserid
     // 当前查看的用户id
     const [userid,setuserid]=useState(firstuserId)
     // 用户头像
@@ -32,7 +32,10 @@ export default function Managepage() {
     // 当前状态,create,modify
     const [nowstate,setnowstate]=useState('modify')
 
-
+    // 根据url param里的id变化来解决回撤后不会刷新信息的问题
+    useEffect(()=>{
+        loadinfo(firstuserId)
+    },[firstuserId])
 
     // 加载id用户信息
     const loadinfo = (id) => {
