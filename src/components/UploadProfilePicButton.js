@@ -21,12 +21,14 @@ export default function UploadProfilePic(props) {
 
   function handleChange(info) {
     if (info.file.status === 'uploading') {
+      message.success("upploading...")
       setloading(true)
       return;
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       if(info.file.response){
+        message.success("success update avator")
         setloading(false)
         props.setphotourl(info.file.response.obj)
         console.log("photo url has set to: ",info.file.response)

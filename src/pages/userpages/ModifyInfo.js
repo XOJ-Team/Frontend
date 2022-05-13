@@ -29,9 +29,11 @@ export default function Modify() {
         if(res.data.status === -1){
             // 信息不对
             message.error(res.data.comment)
+        }else if(res.data.status===1){
+          message.success("success update introduction")
         }
     }).catch((err)=>{
-        message.error("server error")
+        message.error("error")
     })
     
     modifyUserInfo({
@@ -47,10 +49,11 @@ export default function Modify() {
         farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
           pUsername:res.data.obj.name
         })
+        message.success("success uppdate account/password")
         navigate(findRoute('userpage')+"?id="+farpropsAuth.pUserid);
       }
     }).catch((err)=>{
-      message.error("server error")
+      message.error("error")
     })
   };
 
