@@ -94,6 +94,7 @@ export default function LookQ() {
     onBack={()=>{navigate(-1)}}
     style={{
       padding:"10px 0px 30px 30px",
+      backgroundColor:'rgb(249,250,251)',
     }}
     />
     <div style={{padding:"0px 10px"}}>

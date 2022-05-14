@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 // UI
 import DocumentTitle from 'react-document-title'
-import { PageHeader } from 'antd'
+import { PageHeader, Descriptions, Divider,Card } from 'antd'
 // utils
 import { findRoute } from '../../routers/config'
 import { Auth } from '../../contexts/AuthContext'
@@ -35,48 +35,33 @@ export default function SubmissionPage() {
 
     return (
         <DocumentTitle title="XOJ | Submissions">
-            <div class="componentbox">
+            <div class="componentbox" style={{width:"70%", marginLeft:"15%"}}>
                 <PageHeader
                     title="Submission Record"
-                    subTitle={info.questionName}
+                    subTitle={<a onClick={() => { navigate(findRoute('questionOnlyOne') + "?id=" + info.questionId) }}>{info.questionName}</a>}
                     onBack={() => { navigate(-1) }}
                     style={{
-                        padding: "10px 0px 30px 30px",
+                        padding: "0px 0px 0px 5px",
                     }}
-                />
-                <div>
-                    codes:
-                    {Base64toUtf8(info.codes)}
-                </div>
-                <div>
-                    createTime:
+                >
+                    <Descriptions size="small" column={3} style={{padding: "0px 0px 10px 15px",}}>
+                    <Descriptions.Item label="Time Cost">{info.timeCost + " MS"}</Descriptions.Item>
+                    <Descriptions.Item label="Create Time">
                     {
                         info.createTime ?
                             info.createTime.substring(0, 19).replace("T", " ") : null
                     }
-                </div>
-                <div>
-                    question name:
-                    <a onClick={() => { navigate(findRoute('questionOnlyOne') + "?id=" + info.questionId) }}>{info.questionName}</a>
-                </div>
-                <div>
-                    resultDescription:
-                    {info.resultDescription}
-                </div>
-                <div>
-                    time cost:
-                    {info.timeCost + "MS"}
-                </div>
-                <div>
-                    memory cost:
-                    {info.memoryCost + "KB"}
-                </div>
-                <div>
-                    language:
-                    {info.lang}
-                </div>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="State">{info.resultDescription}</Descriptions.Item>
+                    <Descriptions.Item label="Memory Cost">{info.memoryCost + " KB"}</Descriptions.Item>
+                    </Descriptions>
+                </PageHeader>
+                <Card title={<>Submitted codes:<br />Language: {info.lang}</>} bordered={false}>
+                    <div className='codeblock'>
+                    <pre class="language-css box"><code>{Base64toUtf8(info.codes)}</code></pre>
+                    </div>
+                </Card>
             </div>
         </DocumentTitle>
-
     )
 }
