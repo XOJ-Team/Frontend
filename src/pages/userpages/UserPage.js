@@ -66,7 +66,9 @@ export default function UserPage() {
       userId: inputUserid
     }).then(
       resa => {
-        setQuestionlistData(resa.data.obj)
+        setQuestionlistData(resa.data.obj.map((each)=>{
+          return {...each,questionName:each.questionId+"#"+each.questionName,resultDescription:each.id+"#"+each.resultDescription}
+        }))
       }
     )
     getUserInfo({
@@ -202,28 +204,36 @@ export default function UserPage() {
             <Table
               columns={[
                 {
-                  title: 'question',
-                  dataIndex: 'questionName',
-                  key: 'id',
-                  render: (e) => (<div>{e}</div>)
+                  title:'question',
+                  dataIndex:'questionName',
+                  key:'id',
+                  render:(e)=>(<a onClick={()=>{navigate(findRoute('questionOnlyOne')+"?id="+e.substring(0,e.indexOf('#')))}}>{e?e.substring(0,e.indexOf('#'))+". "+e.substring(e.indexOf("#")+1):null}</a>)
                 },
                 {
-                  title: 'result',
-                  dataIndex: 'resultDescription',
-                  key: 'id',
-                  render: (e) => (<div>{e}</div>)
+                  title:'result',
+                  dataIndex:'resultDescription',
+                  key:'id',
+                  render:(e)=>(<a onClick={()=>{
+                    navigate(findRoute('submission')+"?id="+e.substring(0,e.indexOf('#')))
+                  }}>{e?e.substring(e.indexOf("#")+1):null}</a>)
                 },
                 {
                   title: 'Time Cost',
                   dataIndex: 'timeCost',
                   key: 'id',
-                  render: (e) => (<div>{e}</div>)
+                  render: (e) => (<div>{e+" MS"}</div>)
                 },
                 {
                   title: 'Memory Cost',
                   dataIndex: 'memoryCost',
                   key: 'id',
-                  render: (e) => (<div>{e}</div>)
+                  render: (e) => (<div>{e+" KB"}</div>)
+                },
+                {
+                  title:"language",
+                  dataIndex:"lang",
+                  key:'id',
+                  render:(e)=>(<div>{e}</div>)
                 },
                 {
                   title: "Create Time",
