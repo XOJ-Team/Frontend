@@ -213,9 +213,16 @@ export default function UserPage() {
                   title:'result',
                   dataIndex:'resultDescription',
                   key:'id',
-                  render:(e)=>(<a onClick={()=>{
-                    navigate(findRoute('submission')+"?id="+e.substring(0,e.indexOf('#')))
-                  }}>{e?e.substring(e.indexOf("#")+1):null}</a>)
+                  render:(e)=>(
+                    params['id'] == farpropsAuth.pUserid?
+                    (
+                      <a onClick={()=>{
+                        navigate(findRoute('submission')+"?id="+e.substring(0,e.indexOf('#')))
+                        }}>
+                        {e?e.substring(e.indexOf("#")+1):null}
+                      </a>
+                    )
+                    :null)
                 },
                 {
                   title: 'Time Cost',
