@@ -10,6 +10,7 @@ export function Utf8toBase64(text){
         return crypto.enc.Base64.stringify(wordArray)
     }catch(err){
         console.warn(err)
+        return ""
     }
 }
 
@@ -22,6 +23,7 @@ export function Base64toUtf8(text){
         return crypto.enc.Utf8.stringify(wordArray)
     }catch(err){
         console.warn(err)
+        return ""
     }
 
 }

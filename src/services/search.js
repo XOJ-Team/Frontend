@@ -39,3 +39,10 @@ export function delDocumentName(obj){
  export function insertDocument(obj){
     return post("/es/update", obj)
 }
+
+/**
+ * synchronize the mysql and elasticsearch
+ */
+export function refreshES(){
+    return get("/es/synchronization")
+}
