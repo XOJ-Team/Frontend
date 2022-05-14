@@ -52,6 +52,8 @@ const SiteRank=React.lazy(()=>SiteRankPromise)
 const ManagepagePromise = import(/* webpackChunkName: 'Managepage' */ '../pages/Management/Managepage')
 const Managepage=React.lazy(()=>ManagepagePromise)
 
+const SubmisstionPagePromise=import('../pages/Submission/SubmissionPage')
+const SubmissionPage=React.lazy(()=>SubmisstionPagePromise)
 
 // 路由配置
 // id应当唯一,最好不要更改id
@@ -161,6 +163,16 @@ export const allroutes=[
                 id:'manageusers',
                 path:'',
                 element:<Managepage />
+            }
+        ]
+    },
+    {
+        path:'submissions',
+        children:[
+            {
+                id:'submission',
+                path:'detail',
+                element:<SubmissionPage />
             }
         ]
     },

@@ -36,13 +36,13 @@ export function AuthContext({children}){
     const XJTLUNAVY="#010544"
     const XJTLUPURPLE="#CE57C1"
 
-    console.log("rerender AuthContext",pUserinfo)
-    useEffect(()=>{
-        // 发起网络请求当前Session的用户信息
-        console.log("create AuthContext",pUserinfo)
+    /** 
+     * 刷新全局变量中 当前用户的信息
+     * */ 
+    const pgetNewestMyInfo=()=>{
         getUserInfoMy().then((res)=>{
             const myinfo=res.data.obj
-            console.log("尝试获取当前会话用户的信息",res.data.obj)
+            // console.log("尝试获取当前会话用户的信息",res.data.obj)
             if(myinfo){
                 setpUserinfo({...pUserinfo,
                     pUsername:myinfo.name,
@@ -51,6 +51,13 @@ export function AuthContext({children}){
                 })
             }
         })
+    }
+
+    // console.log("rerender AuthContext",pUserinfo)
+    useEffect(()=>{
+        // 发起网络请求当前Session的用户信息
+        // console.log("create AuthContext",pUserinfo)
+        pgetNewestMyInfo()
     },[])
 
     return (
@@ -62,6 +69,7 @@ export function AuthContext({children}){
         pUserid:pUserinfo.pUserid,
         pUserinfo,
         setpUserinfo,
+        pgetNewestMyInfo,
         XJTLUNAVY,XJTLUPURPLE
         }}>
         {children}

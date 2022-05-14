@@ -82,8 +82,29 @@ export default function Aboutus() {
   return (
     <DocumentTitle title='XOJ | About'>
       <div style={{ margin: '20px 40px' }}>
+
+      <Typography className='typobox'>
+          <Title level={3} className='typotitle'>About XOJ</Title>
+          <Paragraph className="typopara" style={{fontSize:'1rem'}}>
+          XJTLU Online Judge system (XOJ) aims to provide an effective platform for XJTLU students to improve their coding ability and assist faculty in the computer science department carry out teaching work. Administrators have the authority to create questions and competitions according to their preferences with freedom. Students will have the opportunity to practice and compete with their classmates. Meanwhile, one significant intention is to ameliorate the ICPC/CCPC contests atmosphere of XJTLU and encourage more students to participate. Apart from these purposes, for the sake of convenience in writing codes, XOJ Playground will provide a fully-functional Web IDE on which users can easily write run, test, and debug their code, which enables the auto-complete feature.
+          </Paragraph>
+        </Typography>
+
         <Typography className='typobox'>
-          <Title level={3} className='typotitle'>Compiler & Judger</Title>
+          <Title level={3} className='typotitle'>Result Explanation</Title>
+          <Paragraph className="typopara">
+            <ul style={{ fontSize: '1.1em' }}>
+              {resultexplain.map((item)=>{return(
+                              <li key={item.name} style={{marginTop:'10px'}}>
+                              <Text strong>{item.name}</Text> : <br /><Text>{item.des}</Text>
+                              </li>
+              )})}
+            </ul>
+          </Paragraph>
+        </Typography>
+
+        <Typography className='typobox'>
+          <Title level={3} className='typotitle'>{"Compiler & Judger"}</Title>
           <Paragraph className="typopara">
             <ul style={{ fontSize: '1.1em' }}>
               {compilerIntro.map((item) => {
@@ -94,21 +115,6 @@ export default function Aboutus() {
                     style={{ marginTop: '20px' }}>
                     <Text>{item.lang}</Text><br />
                     <Text className='codeblock'>{item.code}</Text>
-                  </li>
-                )
-              })}
-            </ul>
-          </Paragraph>
-        </Typography>
-
-        <Typography className='typobox'>
-          <Title level={3} className='typotitle'>Result Explanation</Title>
-          <Paragraph className="typopara">
-            <ul style={{ fontSize: '1.1em' }}>
-              {resultexplain.map((item) => {
-                return (
-                  <li key={item.name} style={{ marginTop: '10px' }}>
-                    <Text strong>{item.name}:</Text> <Text>{item.des}</Text>
                   </li>
                 )
               })}

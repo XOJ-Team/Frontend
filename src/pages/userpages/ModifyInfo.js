@@ -1,5 +1,5 @@
 import React,{useState,useContext, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 // UI
 import { Form, Input, Button,message,PageHeader} from 'antd';
 import { MailOutlined, LockOutlined,NumberOutlined,SmileOutlined } from '@ant-design/icons';
@@ -9,7 +9,7 @@ import { getUserInfo, modifyUserInfo, modifyUserIntro} from '../../services/user
 import {findRoute} from '../../routers/config'
 import {Auth} from '../../contexts/AuthContext'
 import DocumentTitle from 'react-document-title'//动态Title
-
+import qs from 'qs';
 
 export default function Modify() {
   // 全局共享
@@ -29,9 +29,11 @@ export default function Modify() {
         if(res.data.status === -1){
             // 信息不对
             message.error(res.data.comment)
+        }else if(res.data.status===1){
+          message.success("success update introduction")
         }
     }).catch((err)=>{
-        message.error("server error")
+        message.error("error")
     })
     
     modifyUserInfo({
@@ -47,10 +49,11 @@ export default function Modify() {
         farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
           pUsername:res.data.obj.name
         })
+        message.success("success uppdate account/password")
         navigate(findRoute('userpage')+"?id="+farpropsAuth.pUserid);
       }
     }).catch((err)=>{
-      message.error("server error")
+      message.error("error")
     })
   };
 

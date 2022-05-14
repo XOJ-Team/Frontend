@@ -10,11 +10,13 @@ import qs from 'qs'
 import {selectQuestionId} from '../../services/question'
 import { getTestcase } from '../../services/testcase';
 import { getnowsession } from '../../services/auth';
+import { showQuestionRecord } from '../../services/submitRecord';
 // UI
 import DocumentTitle from 'react-document-title'//动态Title
 import './LookQ.css';
-import { message,PageHeader,Button,Tag, Row, Col, Divider, List, Typography, Card } from 'antd';
+import { message,PageHeader,Button,Tag, Row, Col, Table,Divider, List, Typography, Card } from 'antd';
 import {EyeOutlined,EyeInvisibleOutlined} from '@ant-design/icons';
+import { findRoute } from '../../routers/config';
 
 
 export default function LookQ() {
@@ -22,7 +24,7 @@ export default function LookQ() {
 
   const [questionInfo,setquestionInfo]=useState({name:'',levelDescription:'',tags:"",content:'',creatorName:''})
   const [testcases,settestcases]=useState([])
-
+  const [subrecords,setsubrecords]=useState([])
   const [showtags,setshowtags]=useState(false)
   // 困难标签的颜色
   // const whichcolor={'easy':'green','medium':'orange','hard':'red'}
@@ -64,6 +66,17 @@ export default function LookQ() {
           settestcases(res.data.obj)
         }
       })
+      // 这道题的提交记录
+      showQuestionRecord({
+        'questionId':params['id']
+      }).then((res)=>{
+        if(res.data.status===1){
+          // 联立问题与问题id，记录与记录id
+          setsubrecords(res.data.obj.map((each)=>{
+            return {...each,questionName:each.questionId+"#"+each.questionName,resultDescription:each.id+"#"+each.resultDescription}
+          }))
+        }
+      })
     }else{
       message.warn("should have a id in url")
     }
@@ -81,6 +94,7 @@ export default function LookQ() {
     onBack={()=>{navigate(-1)}}
     style={{
       padding:"10px 0px 30px 30px",
+      backgroundColor:'rgb(249,250,251)',
     }}
     />
     <div style={{padding:"0px 10px"}}>
@@ -140,6 +154,54 @@ export default function LookQ() {
       </Card.Grid></div>})}
     </div>
     <Divider />
+
+    <Divider orientation="left">Submit Records</Divider>
+    <Table
+      columns={[
+        {
+          title:'question',
+          dataIndex:'questionName',
+          key:'id',
+          render:(e)=>(<a onClick={()=>{navigate(findRoute('questionOnlyOne')+"?id="+e.substring(0,e.indexOf('#')))}}>{e?e.substring(0,e.indexOf('#'))+". "+e.substring(e.indexOf("#")+1):null}</a>)
+        },
+        {
+          title:'result',
+          dataIndex:'resultDescription',
+          key:'id',
+          render:(e)=>(<a onClick={()=>{
+            navigate(findRoute('submission')+"?id="+e.substring(0,e.indexOf('#')))
+          }}>{e?e.substring(e.indexOf("#")+1):null}</a>)
+        },
+        {
+          title:'Time Cost',
+          dataIndex:'timeCost',
+          key:'id',
+          render:(e)=>(<div>{e+" MS"}</div>)
+        },
+        {
+          title:'Memory Cost',
+          dataIndex:'memoryCost',
+          key:'id',
+          render:(e)=>(<div>{e+" KB"}</div>)
+        },
+        {
+          title:"language",
+          dataIndex:"lang",
+          key:'id',
+          render:(e)=>(<div>{e}</div>)
+        },
+        {
+          title:"Create Time",
+          dataIndex:'createTime',
+          key:'id',
+          render:(e)=>(<div>{e&&e.substring(0,19).replace("T"," ")}</div>)
+        },
+      ]}
+      dataSource={subrecords}
+      bordered
+      pagination={false}
+    />
+
     </Col>
     <Col></Col>
     <Col className='question_info' span={5}>
@@ -157,8 +219,8 @@ export default function LookQ() {
       <List.Item>Question ID: {params['id']}</List.Item>
       <List.Item>Created By: <a>{questionInfo.creatorName}</a></List.Item>
       <List.Item><div>Difficulty: <Typography.Text type={whichcolor[questionInfo.levelDescription]}>{questionInfo.levelDescription.toUpperCase()}</Typography.Text></div></List.Item>
-      <List.Item>Time Limit: {questionInfo.timeLimit}s</List.Item>
-      <List.Item>Memory Limit: {questionInfo.memoryLimit}MB</List.Item>
+      <List.Item>Time Limit: {questionInfo.timeLimit+" MS"}</List.Item>
+      <List.Item>Memory Limit: {questionInfo.memoryLimit+" KB"}</List.Item>
       <List.Item>
         <div>
           Tags:

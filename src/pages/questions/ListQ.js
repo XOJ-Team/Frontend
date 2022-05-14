@@ -10,6 +10,7 @@ import {findRoute} from '../../routers/config'
 import { Auth } from '../../contexts/AuthContext';
 import {selectQuestionByPage, selectQuestionNotHidedPaging,essearchQuestion} from '../../services/question';
 import DocumentTitle from 'react-document-title'//动态Title
+import { refreshES } from '../../services/search';
 import qs from 'qs'
 
 
@@ -254,6 +255,7 @@ export default function ListQ(){
       <div id='optionsbox' style={{position:'relative',height:'35px',lineHeight:'35px',margin:'10px 0px'}}>
         {/* 添加问题按钮 */}
         {farpropsAuth['pAuthority']===3?(
+          <>
         <Button
         onClick={()=>{
           navigate(findRoute('questionEdit'))
@@ -261,6 +263,19 @@ export default function ListQ(){
         >
           Add
         </Button>
+
+        <Button
+        onClick={()=>{
+          refreshES().then((res)=>{
+            if(res.data.status==1){
+              message.success("success update ES")
+            }
+          })
+        }}
+        >
+          Update ES
+        </Button>
+        </>
         ):null}
 
         <div style={{position:'absolute',right:'0',top:'0'}}>

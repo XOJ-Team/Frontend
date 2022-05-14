@@ -1,0 +1,31 @@
+.codeblock {
+    padding: 1.5em 2em;
+    width: 500px;
+}
+
+pre.box {
+    padding: 1.5em 2em;
+  }
+  
+  /* Demo styles */
+  
+  pre.box {
+    border: 4px solid #ccc;
+    border-radius: 0.15em;
+    margin: 1em auto;
+  }
+  
+  body {
+    font: 125% / 1.45 sans-serif;
+    padding: 1em;
+  }
+  
+  h1 {
+    font-size: 1.2em;
+    text-align: center;
+  }
+  
+  pre > code {
+    display: block;
+  }
+  

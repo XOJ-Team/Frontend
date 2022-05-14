@@ -12,7 +12,7 @@ const {confirm}=Modal;
  */
 export function showConfirm(onOkfunc) {
     confirm({
-      title: 'Do you Want to delete?',
+      title: 'Are you sure about that?',
       icon: <ExclamationCircleOutlined />,
       okType:'danger',
       onOk() {

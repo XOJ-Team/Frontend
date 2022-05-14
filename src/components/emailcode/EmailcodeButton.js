@@ -1,5 +1,5 @@
 import React, {useState,useEffect,PureComponent } from 'react'
-import { Form, Button,message } from 'antd';
+import { Form, Button,message,Tooltip } from 'antd';
 import { sendCodeApi } from '../../services/auth';
 import { reg } from '../../utils/regexp';
 /**
@@ -25,7 +25,7 @@ export function SendcodeButton(props) {
     // 验证码按钮点击事件
     const onCodeSend = (value) => {
         let email=props.getemail()
-        console.log("now email in button is ",email)
+        // console.log("now email in button is ",email)
         if(email === null || email===undefined || email===""){
             message.error("please reinput your email or refresh the page!")
             return
@@ -58,8 +58,8 @@ export function SendcodeButton(props) {
                 span: span
             }}>
             {hasSendCode?(
-            <div>
-                {"a code has send to email"}<Button onClick={()=>sethasSendCode(false)}>resend</Button></div>
+                <Tooltip title="Check your junk mail box?">
+                {"a code will send to email, you can "}<Button onClick={()=>sethasSendCode(false)}>resend</Button></Tooltip>
                 ):(<Button
                 type="primary"
                 onClick={onCodeSend}>

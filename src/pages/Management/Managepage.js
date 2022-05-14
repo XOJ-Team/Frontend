@@ -25,6 +25,7 @@ export default function Managepage() {
     const [showpassword, setshowpassword] = useState(false)
     // 页面加载时的默认userId
     const firstuserId='id' in params?params['id']:farpropsAuth.pUserid
+    const paramsid=params['id']
     // 当前查看的用户id
     const [userid,setuserid]=useState(firstuserId)
     // 用户头像
@@ -32,7 +33,12 @@ export default function Managepage() {
     // 当前状态,create,modify
     const [nowstate,setnowstate]=useState('modify')
 
-
+    // 根据url param里的id变化来解决回撤后不会刷新信息的问题
+    useEffect(()=>{
+        if('id' in params){
+            loadinfo(params['id'])
+        }
+    },[paramsid])
 
     // 加载id用户信息
     const loadinfo = (id) => {
@@ -72,6 +78,7 @@ export default function Managepage() {
     const onres=(res)=>{
         if(res.data.status===1){
             message.success("success")
+            farpropsAuth.pgetNewestMyInfo()
         }else{
             message.error("error")
         }
@@ -85,14 +92,28 @@ export default function Managepage() {
     const onFinish=(values)=>{
         console.log(values)
         if(nowstate==='modify'){
-            modifyManagerUser({
-                'id':values.id,
-                'name':values.name,
-                'mail':values.mail,
-                'score':values.score,
-                'ranking':values.ranking,
-                'authority':values.authority,
-            }).then(onres).catch(onerr)
+            if(showpassword){
+                // 改密码
+                modifyManagerUser({
+                    'id':values.id,
+                    'name':values.name,
+                    'mail':values.mail,
+                    'password':values.password,
+                    'score':values.score,
+                    'ranking':values.ranking,
+                    'authority':values.authority,
+                }).then(onres).catch(onerr)
+            }else{
+                // 不改密码
+                modifyManagerUser({
+                    'id':values.id,
+                    'name':values.name,
+                    'mail':values.mail,
+                    'score':values.score,
+                    'ranking':values.ranking,
+                    'authority':values.authority,
+                }).then(onres).catch(onerr)
+            }
         }else if(nowstate==='create'){
             insertManagerUser({
                 'name':values.name,
