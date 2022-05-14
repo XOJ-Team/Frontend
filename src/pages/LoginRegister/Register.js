@@ -34,7 +34,12 @@ export default function Register() {
     }).then((res)=>{
       if(res.data.status===-1){
         // 信息不对
-        message.error(res.data.comment)
+        if(res.data.comment){
+          message.error(res.data.comment)
+        }else{
+          message.error("error in register(can not using same mail twice)!")
+        }
+
       }else{
         // 注册的话没返回id，这里要强制用户登录一下
         // farpropsAuth.setpUserinfo({...farpropsAuth.pUserinfo,
