@@ -96,7 +96,7 @@ export default function Aboutus() {
             <ul style={{ fontSize: '1.1em' }}>
               {resultexplain.map((item)=>{return(
                               <li key={item.name} style={{marginTop:'10px'}}>
-                              <Text strong>{item.name}</Text> : <br /><Text>{item.des}</Text>
+                              <Text strong>{item.name}:</Text> <br /><Text>{item.des}</Text>
                               </li>
               )})}
             </ul>
