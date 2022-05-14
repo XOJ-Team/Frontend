@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 // UI
-import { Layout, Divider, Typography, Row, Col, List, Card,Button } from 'antd';
+import { Layout, Table,Divider, Typography, Row, Col, List, Card, Button } from 'antd';
 import { UserOutlined, TrophyOutlined, SmileOutlined, CheckCircleOutlined, CheckSquareOutlined } from '@ant-design/icons';
 import './UserPage.css';
 //utils
 import { getUserInfo } from '../../services/userInfo';
 import { showUserRecord } from '../../services/submitRecord';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import qs from 'qs'
 import { findRoute } from '../../routers/config';
 // component
@@ -25,45 +25,45 @@ export default function UserPage() {
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
-  const paramsid=params['id']
+  const paramsid = params['id']
 
   // 监听params里id值的变化，达到url参数更新时页面能够刷新的效果
-  useEffect(()=>{
-    if('id' in params){
+  useEffect(() => {
+    if ('id' in params) {
       compcreate(params.id)
-    }else{
+    } else {
       compcreate(farpropsAuth.pUserid)
     }
-  },[paramsid])
+  }, [paramsid])
 
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
-  const authoritylist={1:'user',2:'super user',3:'manager'}
+  const authoritylist = { 1: 'user', 2: 'super user', 3: 'manager' }
   // 获取跨组件传来的信息
   const farpropsAuth = useContext(Auth)
   // 用户信息
-  const [userInfo,setuserInfo]=useState({
-    name:"",
-    id:0,
-    authority:1,
-    ranking:0,
-    score:0,
-    solvedProblems:0,
-    avatarUrl:"",
-    email:"",
-    userSelfDescribe:"",
-    easyNumber:0,
-    mediumNumber:0,
-    hardNumber:0
+  const [userInfo, setuserInfo] = useState({
+    name: "",
+    id: 0,
+    authority: 1,
+    ranking: 0,
+    score: 0,
+    solvedProblems: 0,
+    avatarUrl: "",
+    email: "",
+    userSelfDescribe: "",
+    easyNumber: 0,
+    mediumNumber: 0,
+    hardNumber: 0
   })
-  
+
   // 用户最近提交记录
-  const [questionlistData,setQuestionlistData]=useState([])
+  const [questionlistData, setQuestionlistData] = useState([])
 
   // 同步数据
-  const compcreate=(inputUserid)=>{
+  const compcreate = (inputUserid) => {
     showUserRecord({
-      userId:inputUserid
+      userId: inputUserid
     }).then(
       resa => {
         setQuestionlistData(resa.data.obj)
@@ -73,21 +73,22 @@ export default function UserPage() {
       id: inputUserid
     }).then(
       res => {
-        if (res.data.status===1){
-          const resdata=res.data.obj
-          setuserInfo({...userInfo,
-            name:resdata.name,
-            id:resdata.id,
-            authority:resdata.authority,
-            ranking:resdata.ranking,
-            score:resdata.score,
-            solvedProblems:resdata.solvedNumber,
-            avatarUrl:resdata.profilePhoto,
-            email:resdata.mail,
-            userSelfDescribe:resdata.intro,
-            easyNumber:resdata.easyNumber,
-            mediumNumber:resdata.mediumNumber,
-            hardNumber:resdata.hardNumber
+        if (res.data.status === 1) {
+          const resdata = res.data.obj
+          setuserInfo({
+            ...userInfo,
+            name: resdata.name,
+            id: resdata.id,
+            authority: resdata.authority,
+            ranking: resdata.ranking,
+            score: resdata.score,
+            solvedProblems: resdata.solvedNumber,
+            avatarUrl: resdata.profilePhoto,
+            email: resdata.mail,
+            userSelfDescribe: resdata.intro,
+            easyNumber: resdata.easyNumber,
+            mediumNumber: resdata.mediumNumber,
+            hardNumber: resdata.hardNumber
           })
         }
       }
@@ -96,9 +97,9 @@ export default function UserPage() {
 
 
   useEffect(() => {
-    if('id' in params){
+    if ('id' in params) {
       compcreate(params.id)
-    }else{
+    } else {
       compcreate(farpropsAuth.pUserid)
     }
   }, []);
@@ -109,31 +110,31 @@ export default function UserPage() {
 
   return (
     <DocumentTitle title="XOJ | UserInfo">
-      <div style={{margin:'20px 40px'}}>
+      <div style={{ margin: '20px 40px' }}>
         <Header className='headerAbove'></Header>
         <Row className='main_layour'>
           <Col flex={0.5} />
-          <Col flex={1} style={{minWidth:'300px'}}>
+          <Col flex={1} style={{ minWidth: '300px' }}>
             <div className='avatarItem'>
-              <UploadProfilePicButton 
-              photourl={userInfo.avatarUrl} 
-              setphotourl={(data)=>{setuserInfo({...userInfo,avatarUrl:data})}}
-              enabled={params['id']==farpropsAuth.pUserid}
+              <UploadProfilePicButton
+                photourl={userInfo.avatarUrl}
+                setphotourl={(data) => { setuserInfo({ ...userInfo, avatarUrl: data }) }}
+                enabled={params['id'] == farpropsAuth.pUserid}
               />
               <Title level={3}>{userInfo.name}<br />
                 <Text type="secondary" style={{ fontSize: 14 }}> XID: {userInfo.id} </Text><br />
-                <Text type='secondary' style={{fontSize:14}}> Authority: {authoritylist[userInfo.authority].toUpperCase()} </Text><br />
+                <Text type='secondary' style={{ fontSize: 14 }}> Authority: {authoritylist[userInfo.authority].toUpperCase()} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {userInfo.email}</Text>
               </Title>
               <Paragraph>
                 {userInfo.userSelfDescribe}
               </Paragraph>
               {/* 使用==号，一个是数字，一个是字符串 */}
-              {params['id']==farpropsAuth.pUserid?<Button onClick={()=>{navigate(findRoute('editUserInfo'))}}>Modify my info</Button>:null}
-              {farpropsAuth.pAuthority===3?<Button onClick={()=>{
-                navigate(findRoute('manageusers')+"?id="+params['id'])
-              }}>Manage users</Button>:null}
-              
+              {params['id'] == farpropsAuth.pUserid ? <Button onClick={() => { navigate(findRoute('editUserInfo')) }}>Modify my info</Button> : null}
+              {farpropsAuth.pAuthority === 3 ? <Button onClick={() => {
+                navigate(findRoute('manageusers') + "?id=" + params['id'])
+              }}>Manage users</Button> : null}
+
             </div>
           </Col>
           <Col flex={0.5} />
@@ -185,10 +186,10 @@ export default function UserPage() {
                   renderItem={item => (
                     <List.Item>
                       <Card
-                      title={item.title}
-                      headStyle={{ color: item.color }}
-                      bodyStyle={{fontSize: 18}}
-                      hoverable="true"
+                        title={item.title}
+                        headStyle={{ color: item.color }}
+                        bodyStyle={{ fontSize: 18 }}
+                        hoverable="true"
                       ><b>{item.context}</b></Card>
                     </List.Item>
                   )}
@@ -198,25 +199,43 @@ export default function UserPage() {
             <Divider />
 
             {/* 最近的提交记录 */}
-            <Row>
-                <Col span={6} offset={2}>Title</Col>
-                <Col span={4}>Result</Col>
-                <Col span={4}>TimeCost</Col>
-                <Col span={4}>MemoryCost</Col>
-                <Col span={4}>Language</Col>
-            </Row>
-            <div style={{height:'350px',overflow:'auto'}}>
-            {questionlistData.map((item) => 
-                <Row style={{height:'50px',lineHeight:'50px'}}>
-                  <Col span={6} offset={2}><a onClick={()=>{navigate(findRoute('questionOnlyOne')+"?id="+item.questionId)}}>{item.questionName}</a></Col>
-                  <Col span={4}>{item.resultDescription}</Col>
-                  <Col span={4}>{item.timeCost}s</Col>
-                  <Col span={4}>{item.memoryCost}MB</Col>
-                  <Col span={4}>{item.lang}</Col>
-
-                </Row>
-            )}
-            </div>
+            <Table
+              columns={[
+                {
+                  title: 'question',
+                  dataIndex: 'questionName',
+                  key: 'id',
+                  render: (e) => (<div>{e}</div>)
+                },
+                {
+                  title: 'result',
+                  dataIndex: 'resultDescription',
+                  key: 'id',
+                  render: (e) => (<div>{e}</div>)
+                },
+                {
+                  title: 'Time Cost',
+                  dataIndex: 'timeCost',
+                  key: 'id',
+                  render: (e) => (<div>{e}</div>)
+                },
+                {
+                  title: 'Memory Cost',
+                  dataIndex: 'memoryCost',
+                  key: 'id',
+                  render: (e) => (<div>{e}</div>)
+                },
+                {
+                  title: "Create Time",
+                  dataIndex: 'createTime',
+                  key: 'id',
+                  render: (e) => (<div>{e && e.substring(0, 19).replace("T", " ")}</div>)
+                }
+              ]}
+              dataSource={questionlistData}
+              bordered
+              pagination={false}
+            />
           </Col>
           <Col flex={1} />
         </Row>

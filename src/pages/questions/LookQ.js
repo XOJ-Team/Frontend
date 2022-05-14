@@ -10,10 +10,11 @@ import qs from 'qs'
 import {selectQuestionId} from '../../services/question'
 import { getTestcase } from '../../services/testcase';
 import { getnowsession } from '../../services/auth';
+import { showQuestionRecord } from '../../services/submitRecord';
 // UI
 import DocumentTitle from 'react-document-title'//动态Title
 import './LookQ.css';
-import { message,PageHeader,Button,Tag, Row, Col, Divider, List, Typography, Card } from 'antd';
+import { message,PageHeader,Button,Tag, Row, Col, Table,Divider, List, Typography, Card } from 'antd';
 import {EyeOutlined,EyeInvisibleOutlined} from '@ant-design/icons';
 
 
@@ -22,7 +23,7 @@ export default function LookQ() {
 
   const [questionInfo,setquestionInfo]=useState({name:'',levelDescription:'',tags:"",content:'',creatorName:''})
   const [testcases,settestcases]=useState([])
-
+  const [subrecords,setsubrecords]=useState([])
   const [showtags,setshowtags]=useState(false)
   // 困难标签的颜色
   // const whichcolor={'easy':'green','medium':'orange','hard':'red'}
@@ -62,6 +63,14 @@ export default function LookQ() {
       }).then((res)=>{
         if(res.data.status===1){
           settestcases(res.data.obj)
+        }
+      })
+      // 这道题的提交记录
+      showQuestionRecord({
+        'questionId':params['id']
+      }).then((res)=>{
+        if(res.data.status===1){
+          setsubrecords(res.data.obj)
         }
       })
     }else{
@@ -140,6 +149,46 @@ export default function LookQ() {
       </Card.Grid></div>})}
     </div>
     <Divider />
+
+    <Divider orientation="left">Submit Records</Divider>
+    <Table
+      columns={[
+        {
+          title:'question',
+          dataIndex:'questionName',
+          key:'id',
+          render:(e)=>(<div>{e}</div>)
+        },
+        {
+          title:'result',
+          dataIndex:'resultDescription',
+          key:'id',
+          render:(e)=>(<div>{e}</div>)
+        },
+        {
+          title:'Time Cost',
+          dataIndex:'timeCost',
+          key:'id',
+          render:(e)=>(<div>{e}</div>)
+        },
+        {
+          title:'Memory Cost',
+          dataIndex:'memoryCost',
+          key:'id',
+          render:(e)=>(<div>{e}</div>)
+        },
+        {
+          title:"Create Time",
+          dataIndex:'createTime',
+          key:'id',
+          render:(e)=>(<div>{e&&e.substring(0,19).replace("T"," ")}</div>)
+        }
+      ]}
+      dataSource={subrecords}
+      bordered
+      pagination={false}
+    />
+
     </Col>
     <Col></Col>
     <Col className='question_info' span={5}>
