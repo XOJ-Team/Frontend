@@ -125,7 +125,7 @@ export default function UserPage() {
               />
               <Title level={3}>{userInfo.name}<br />
                 <Text type="secondary" style={{ fontSize: 14 }}> XID: {userInfo.id} </Text><br />
-                <Text type='secondary' style={{ fontSize: 14 }}> Authority: {authoritylist[userInfo.authority].toUpperCase()} </Text><br />
+                <Text type='secondary' style={{ fontSize: 14 }}> Authority: {authoritylist[userInfo.authority]?authoritylist[userInfo.authority].toUpperCase():null} </Text><br />
                 <Text type="secondary" style={{ fontSize: 14 }}> Email Address: {userInfo.email}</Text>
               </Title>
               <Paragraph>
