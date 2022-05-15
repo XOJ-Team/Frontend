@@ -221,8 +221,10 @@ export default function UserPage() {
                         }}>
                         {e?e.substring(e.indexOf("#")+1):null}
                       </a>
+                    ):(
+                    <div>{e?e.substring(e.indexOf("#")+1):null}</div>
                     )
-                    :null)
+                    )
                 },
                 {
                   title: 'Time Cost',
