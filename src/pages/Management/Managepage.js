@@ -174,7 +174,7 @@ export default function Managepage() {
                     onFinish={onFinish}
                 >
                     <Form.Item 
-                    label="Avarar"
+                    label="Avatar"
                     >
                         <Avatar size={80} src={avatarurl}/>
                     </Form.Item>
