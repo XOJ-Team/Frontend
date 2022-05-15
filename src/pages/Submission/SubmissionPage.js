@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 // UI
 import DocumentTitle from 'react-document-title'
 import { PageHeader, Descriptions, Divider,Card } from 'antd'
+import MarkdownBox from '../../components/Markdown/MarkdownBox'
 // utils
 import { findRoute } from '../../routers/config'
 import { Auth } from '../../contexts/AuthContext'
@@ -35,7 +36,7 @@ export default function SubmissionPage() {
 
     return (
         <DocumentTitle title="XOJ | Submissions">
-            <div class="componentbox" style={{width:"70%", marginLeft:"15%"}}>
+            <div class="componentbox" id="subbox" style={{width:"70%", marginLeft:"15%"}}>
                 <PageHeader
                     title="Submission Record"
                     subTitle={<a onClick={() => { navigate(findRoute('questionOnlyOne') + "?id=" + info.questionId) }}>{info.questionName}</a>}
@@ -56,10 +57,12 @@ export default function SubmissionPage() {
                     <Descriptions.Item label="Memory Cost">{info.memoryCost + " KB"}</Descriptions.Item>
                     </Descriptions>
                 </PageHeader>
-                <Card title={<>Submitted codes:<br />Language: {info.lang}</>} bordered={false}>
-                    <div className='codeblock'>
-                    <pre class="language-css box"><code>{Base64toUtf8(info.codes)}</code></pre>
-                    </div>
+                <Card title={<>Language: {info.lang}<br /></>} bordered={false}>
+                {/* 用Markdown实现代码高亮 */}
+                <MarkdownBox 
+                content={"```"+`${info.lang}\n`+Base64toUtf8(info.codes)+"\n```"}
+                style={{padding:'0'}}
+                />
                 </Card>
             </div>
         </DocumentTitle>

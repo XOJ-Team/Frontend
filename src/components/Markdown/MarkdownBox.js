@@ -13,11 +13,20 @@ import 'highlight.js/styles/github.css'
 // 引入自定义css
 import './style.css'
 // 注册语言包
-hljs.registerLanguage('c',c)
-hljs.registerLanguage('cpp',cpp)
-hljs.registerLanguage('java',java)
-hljs.registerLanguage('python',python)
-hljs.registerLanguage('golang',golang)
+const langmap={ 'c':c,
+                'C':c,
+                'cpp':cpp,
+                'C++':cpp,
+                'java':java,
+                'Java':java,
+                'python':python,
+                'Python':python,
+                'golang':golang,
+                'Golang':golang
+                }
+for(const k in langmap){
+    hljs.registerLanguage(k,langmap[k])
+}
 
 export const mdParser = new MarkdownIt({
     html: true,
@@ -26,7 +35,7 @@ export const mdParser = new MarkdownIt({
     highlight: function (str, lang) {
         if(lang!==""){
             // return hljs.highlightAuto(str).value
-            if(['c','cpp','java','python','golang'].includes(lang)){
+            if(Object.keys(langmap).includes(lang)){
                 return hljs.highlight(lang,str).value
             }
             
@@ -47,7 +56,8 @@ export default function MarkdownBox(props) {
                 // 超出长度自动换行
                 tableLayout: 'fixed',
                 wordBreak: 'break-all',
-                wordWrap: 'break-word'
+                wordWrap: 'break-word',
+                ...props.style
             }}
             dangerouslySetInnerHTML={{ __html: mdParser.render(props.content) }}>
         </div>
