@@ -7,6 +7,8 @@ import { reg } from '../../utils/regexp';
  * @param props.getemail 调用这个函数来得到外层函数的最新的email
  * @param props.offset(int),position
  * @param props.span(int),position
+ * @param props.afterClickSend callback
+ * @param props.afterClickResend callback
  */
 export function SendcodeButton(props) {
     let offset=props.offset
@@ -33,6 +35,9 @@ export function SendcodeButton(props) {
         // 如果邮箱有效
         if (reg('email').test(email)) {
             sethasSendCode(true)
+            if(props.afterClickSend){
+                props.afterClickSend()
+            }
             sendCodeApi({
                 'mail': email
             }).then((res) => {
@@ -59,7 +64,13 @@ export function SendcodeButton(props) {
             }}>
             {hasSendCode?(
                 <Tooltip title="Check your junk mail box?">
-                {"a code will send to email, you can "}<Button onClick={()=>sethasSendCode(false)}>resend</Button></Tooltip>
+                {"a code will send to email, you can "}<Button onClick={
+                    ()=>{
+                        sethasSendCode(false)
+                        if(props.afterClickResend){
+                            props.afterClickResend()
+                        }}
+                }>resend</Button></Tooltip>
                 ):(<Button
                 type="primary"
                 onClick={onCodeSend}>
