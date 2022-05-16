@@ -16,6 +16,12 @@ steps:
     versionSpec: '14.17'
   displayName: 'Install Node.js'
 
+- bash: |
+    git push --prune https://$(GITHUB_PAT)@github.com/$(REPO_PATH) \
+        +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
+  displayName: 'Mirror to GitHub'
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+
 - script: |
     yarn config set network-timeout 300000
     yarn install
