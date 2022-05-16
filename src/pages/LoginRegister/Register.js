@@ -17,7 +17,7 @@ import DocumentTitle from 'react-document-title'//动态Title
 export default function Register() {
   // 表单对象
   const [form]=Form.useForm()
-
+  const [emailenable,setemailenable]=useState(true)
   const navigate=useNavigate();
 
 
@@ -92,6 +92,7 @@ export default function Register() {
         >
         <Input 
         placeholder="Email"
+        disabled={!emailenable}
         prefix={
           <MailOutlined className="site-form-item-icon" />
          } />
@@ -102,6 +103,8 @@ export default function Register() {
         style={{textAlign:'center'}}
         offset={0}
         span={24}
+        afterClickSend={()=>{setemailenable(false)}}
+        afterClickResend={()=>{setemailenable(true)}}
         />
 
         <Form.Item
