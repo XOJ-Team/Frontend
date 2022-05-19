@@ -40,14 +40,16 @@ import { Table, Pagination } from 'antd';
  * @param props.requestPageName (必)String,请求参数中页的属性名字，如'pageNum'
  * @param props.requestParams (必)json,请求参数及其默认值，如{'pageSize':10,'pageNum':1}
  * @param props.response (必)function,响应后的拦截器,函数要接受网络相应结果，然后 把总结果数映射到结果的total变量，把当前页结果列表映射到datalist变量。返回内容如{total:20,datalist:[{},{},{}]}
+ * @param props.control (可选) control参数变化时重新请求并渲染这个组件
  */
 export default function PageList(props) {
     // 值初始化
-    let {columns,request,requestPageName,requestParams,response}=props
+    let {columns,request,requestPageName,requestParams,response,control}=props
     if(!request){request=(e)=>{return new Promise((resolve,reject)=>{resolve("no request service")})}}
     if(!requestPageName){requestPageName='nopageName'}
     if(!requestParams){requestParams={};requestParams[requestPageName]='1'}
     if(!response){response=(e)=>{return e}}
+    if(!control){control=''}
     // console.log({'columns':columns,'request':request,'requestPageName':requestPageName,'requestParams':requestParams,'response':response})
     // 变量
     const [data,setdata]=useState([])
@@ -59,6 +61,10 @@ export default function PageList(props) {
         getpage(pagenow)
     },[])
 
+    // 监听control
+    useEffect(()=>{
+        getpage(pagenow)
+    },[control])
     // 点击页数栏
     const changePage=(page)=>{
         getpage(page)
