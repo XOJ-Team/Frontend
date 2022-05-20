@@ -39,7 +39,8 @@ export default function EditQ(props) {
   const [form] = Form.useForm();
   // 编辑markdown内容的双向绑定
   let [mdword, setmdword] = useState()
-
+  // 手动绑定时间内存限制
+  const [TMtime,setTMtime]=useState({'t':100,'m':100})
   // 获取url传来的题目id
   let location = useLocation()
   let params = qs.parse(location.search.slice(1))
@@ -77,6 +78,7 @@ export default function EditQ(props) {
       selectQuestionId(params['id']).then((e) => {
         if (e.data.status === 1) {
           setmdword(e.data.obj.content)
+          setTMtime({'t':e.data.obj.timeLimit,'m':e.data.obj.memoryLimit})
           form.setFieldsValue({
             "switch": e.data.obj.isHide,
             "title": e.data.obj.name,
@@ -111,7 +113,7 @@ export default function EditQ(props) {
 
   // 表单提交事件
   const onFinish = (values) => {
-    // console.log(mdword)
+    console.log(values)
     if (mdword === null || mdword === "" || mdword === undefined) {
       message.error("Content can not be null!")
       return
@@ -124,8 +126,8 @@ export default function EditQ(props) {
         "name": values.title,
         "questionLevel": values.hard,
         "tags": values.tags.join("#"),
-        "timeLimit": values.timelimit,
-        "memoryLimit": values.memorylimit
+        "timeLimit": TMtime.t,
+        "memoryLimit": TMtime.m
       }).then((e) => {
         if (e.data.status === 1) {
           message.success("success add")
@@ -143,8 +145,8 @@ export default function EditQ(props) {
         "name": values.title,
         "questionLevel": values.hard,
         "tags": values.tags.join("#"),
-        "timeLimit": values.timelimit,
-        "memoryLimit": values.memorylimit
+        "timeLimit": TMtime.t,
+        "memoryLimit": TMtime.m
       }).then((e) => {
         if (e.data.status === 1) {
           message.success("complete edit")
@@ -247,14 +249,26 @@ export default function EditQ(props) {
             name="timelimit"
             label="time limit"
             rules={[{ required: true, message: 'Please input timelimit!' }]}>
-            <InputNumber min={0}/>{" MS"}
+            <InputNumber 
+            value={TMtime.t} 
+            onChange={(e)=>{
+              setTMtime({...TMtime,t:e})
+              form.setFieldsValue({'timelimit':e})
+            }}
+            min={0}/>{" MS"}
           </Form.Item>
 
           <Form.Item
             name="memorylimit"
             label="memory limit"
             rules={[{ required: true, message: 'Please input memorylimit!' }]}>
-            <InputNumber min={0}/>{" KB"}
+            <InputNumber 
+            value={TMtime.m} 
+            onChange={(e)=>{
+              form.setFieldsValue({'memorylimit':e})
+              setTMtime({...TMtime,m:e})
+            }}
+            min={0}/>{" KB"}
           </Form.Item>
 
           <Form.Item {...tailLayout}>
