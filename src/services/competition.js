@@ -107,5 +107,12 @@ export function quitComp(obj){
  * @param obj.pageSize
  */
 export function getRankComp(obj){
-    return get('/user_competition/'+obj.compId,obj)
+    return get('/user_competition/'+obj.compId,{'pageNum':obj.pageNum,'pageSize':obj.pageSize})
+}
+
+/**
+ * @param obj.competitionId
+ */
+export function getReged(obj){
+    return get('/user_competition/registered',obj)
 }
