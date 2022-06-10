@@ -15,7 +15,7 @@ import { showQuestionRecord } from '../../services/submitRecord';
 import DocumentTitle from 'react-document-title'//动态Title
 import './LookQ.css';
 import { message,PageHeader,Button,Tag, Row, Col, Table,Divider, List, Typography, Card } from 'antd';
-import {EyeOutlined,EyeInvisibleOutlined} from '@ant-design/icons';
+import {EyeOutlined,EyeInvisibleOutlined,EditOutlined,LoginOutlined} from '@ant-design/icons';
 import { findRoute } from '../../routers/config';
 
 
@@ -41,6 +41,16 @@ export default function LookQ() {
       getnowsession().then((res)=>{
         let base64session=Utf8toBase64(res.data.obj)
         window.open('vscode://xoj-team.xoj-playground?sessionId='+base64session+'&questionId='+params['id'])
+        res.data.obj=null
+        base64session=""
+      })
+    }
+  }
+  const jumpToWebIde=()=>{
+    if ('id' in params){
+      getnowsession().then((res)=>{
+        let base64session=Utf8toBase64(res.data.obj)
+        window.open('https://playground.xoj.codes/login?auth='+base64session+'&questionId='+params['id'])
         res.data.obj=null
         base64session=""
       })
@@ -113,14 +123,31 @@ export default function LookQ() {
       onClick={()=>{
         jumpToVSC()
       }}>
-        Write in VScode
+        <EditOutlined /> Desktop VSCode
       </Button>
       ):(
       <Button
       type='primary'
       disabled={true}
       >
-        Log in to write
+        <LoginOutlined /> Login Required
+      </Button>
+      )}
+      &nbsp;
+      {farpropsAuth['pUsername']!=null?(
+      <Button
+      type='primary'
+      onClick={()=>{
+        jumpToWebIde()
+      }}>
+        <EditOutlined /> Web IDE
+      </Button>
+      ):(
+      <Button
+      type='primary'
+      disabled={true}
+      >
+        <LoginOutlined /> Login Required
       </Button>
       )}
     </div>
